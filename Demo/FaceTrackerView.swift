@@ -96,54 +96,61 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     // MARK: <FaceTrackerViewControllerDelegate>
     
     func faceTrackerDidUpdate(_ points: FacePoints?) {
-        if let points = points {
-            // Allocate some views for the points if needed
-            if (pointViews.count == 0) {
-                let numPoints = points.getTotalNumberOFPoints()
-                for _ in 0...numPoints {
-                    let view = UIView()
-                    view.backgroundColor = UIColor.green
-                    self.view.addSubview(view)
-                    
-                    pointViews.append(view)
-                }
-            }
-            
-            // Set frame for each point view
-            points.enumeratePoints({ (point, index) -> Void in
-                let pointView = self.pointViews[index]
-                let pointSize: CGFloat = 4
-                
-                pointView.isHidden = false
-                pointView.frame = CGRect(x: point.x - pointSize / 2, y: point.y - pointSize / 2, width: pointSize, height: pointSize).integral
-            })
-            
-            // Compute the hat frame
-            let eyeCornerDist = sqrt(pow(points.leftEye[0].x - points.rightEye[5].x, 2) + pow(points.leftEye[0].y - points.rightEye[5].y, 2))
-            let eyeToEyeCenter = CGPoint(x: (points.leftEye[0].x + points.rightEye[5].x) / 2, y: (points.leftEye[0].y + points.rightEye[5].y) / 2)
-            
-            let hatWidth = 2.0 * eyeCornerDist
-            let hatHeight = (hatView.image!.size.height / hatView.image!.size.width) * hatWidth
-            
-            hatView.transform = CGAffineTransform.identity
-            
-            hatView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2, y: eyeToEyeCenter.y - 1.3 * hatHeight, width: hatWidth, height: hatHeight)
-            hatView.isHidden = false
-            
-            setAnchorPoint(CGPoint(x: 0.5, y: 1.0), forView: hatView)
-            
-            let angle = atan2(points.rightEye[5].y - points.leftEye[0].y, points.rightEye[5].x - points.leftEye[0].x)
-            hatView.transform = CGAffineTransform(rotationAngle: angle)
-        }
-        else {
-            hatView.isHidden = true
-            
-            for view in pointViews {
-                view.isHidden = true
-            }
-        }
+        self.presenter.didReceiveFacePoints(points)
     }
     
     // MARK: <FaceTrackerViewOps>
+    
+    func showFacePoints(_ points:FacePoints) {
+        // Allocate some views for the points if needed
+        if (pointViews.count == 0) {
+            let numPoints = points.getTotalNumberOFPoints()
+            for _ in 0...numPoints {
+                let view = UIView()
+                view.backgroundColor = UIColor.green
+                self.view.addSubview(view)
+                
+                pointViews.append(view)
+            }
+        }
+        
+        // Set frame for each point view
+        points.enumeratePoints({ (point, index) -> Void in
+            let pointView = self.pointViews[index]
+            let pointSize: CGFloat = 4
+            
+            pointView.isHidden = false
+            pointView.frame = CGRect(x: point.x - pointSize / 2, y: point.y - pointSize / 2, width: pointSize, height: pointSize).integral
+        })
+    }
+    
+    func repositionHatViewForPoints(_ points:FacePoints) {
+        // Compute the hat frame
+        let eyeCornerDist = sqrt(pow(points.leftEye[0].x - points.rightEye[5].x, 2) + pow(points.leftEye[0].y - points.rightEye[5].y, 2))
+        let eyeToEyeCenter = CGPoint(x: (points.leftEye[0].x + points.rightEye[5].x) / 2, y: (points.leftEye[0].y + points.rightEye[5].y) / 2)
+        
+        let hatWidth = 2.0 * eyeCornerDist
+        let hatHeight = (hatView.image!.size.height / hatView.image!.size.width) * hatWidth
+        
+        hatView.transform = CGAffineTransform.identity
+        
+        hatView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2, y: eyeToEyeCenter.y - 1.3 * hatHeight, width: hatWidth, height: hatHeight)
+        hatView.isHidden = false
+        
+        setAnchorPoint(CGPoint(x: 0.5, y: 1.0), forView: hatView)
+        
+        let angle = atan2(points.rightEye[5].y - points.leftEye[0].y, points.rightEye[5].x - points.leftEye[0].x)
+        hatView.transform = CGAffineTransform(rotationAngle: angle)
+    }
+    
+    func hideFacePoints() {
+        for view in pointViews {
+            view.isHidden = true
+        }
+    }
+    
+    func hideHatView() {
+        hatView.isHidden = true
+    }
     
 }

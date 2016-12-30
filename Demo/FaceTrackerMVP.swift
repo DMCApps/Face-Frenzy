@@ -7,14 +7,23 @@
 //
 
 import Foundation
+import FaceTracker
 
 protocol FaceTrackerViewOps: NSObjectProtocol {
+    
+    func showFacePoints(_ points:FacePoints)
+    func repositionHatViewForPoints(_ points:FacePoints)
+    
+    func hideFacePoints()
+    func hideHatView()
     
 }
 
 protocol FaceTrackerViewPresenterOps {
     
     func viewDidLoad(withView view:FaceTrackerViewOps)
+    
+    func didReceiveFacePoints(_ points:FacePoints?)
     
 }
 

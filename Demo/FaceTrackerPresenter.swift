@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FaceTracker
 
 class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresenterOps {
     
@@ -18,6 +19,18 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func viewDidLoad(withView view:FaceTrackerViewOps) {
         self.view = view
         self.model = FaceTrackerModel(presenter: self)
+    }
+    
+    // TODO: Should FacePoints be passed or just the raw values so that we don't have to import FaceTracker?
+    func didReceiveFacePoints(_ points:FacePoints?) {
+        if let points = points {
+            self.view?.showFacePoints(points)
+            self.view?.repositionHatViewForPoints(points)
+        }
+        else {
+            self.view?.hideFacePoints()
+            self.view?.hideHatView()
+        }
     }
     
     // Mark: FaceTrackerModelPresenterOps
