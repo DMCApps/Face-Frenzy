@@ -29,6 +29,15 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="u2c-sA-lHZ">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kg-hm-NTD">
+                                <rect key="frame" x="0.0" y="637" width="375" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="uA1-Yq-zw9"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="A57-he-e5a" kind="embed" identifier="embedActionsViewController" id="D2x-Zu-qRH"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -38,6 +47,9 @@
                             <constraint firstAttribute="trailing" secondItem="4WN-gv-Ukf" secondAttribute="trailing" id="DSW-cY-PG3"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4WN-gv-Ukf" secondAttribute="bottom" id="Dvd-OC-nPE"/>
                             <constraint firstItem="u2c-sA-lHZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RJh-yA-D8b"/>
+                            <constraint firstItem="1kg-hm-NTD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VDd-T6-35N"/>
+                            <constraint firstAttribute="trailing" secondItem="1kg-hm-NTD" secondAttribute="trailing" id="jDf-eQ-DfB"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1kg-hm-NTD" secondAttribute="top" constant="30" id="m0Z-Tg-PV4"/>
                             <constraint firstItem="4WN-gv-Ukf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="m7T-Yr-OKR"/>
                         </constraints>
                         <variation key="default">
@@ -49,10 +61,12 @@
                     <connections>
                         <outlet property="activityIndicator" destination="u2c-sA-lHZ" id="XEv-pU-hmz"/>
                         <outlet property="faceTrackerContainerView" destination="4WN-gv-Ukf" id="cU8-tV-Dqp"/>
+                        <outlet property="ibActionMenuTopToContainerConstraint" destination="m0Z-Tg-PV4" id="QQJ-eP-RcI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
         <!--Face Tracker View Controller-->
         <scene sceneID="tMQ-vQ-PVF">
@@ -70,7 +84,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b4S-Y2-CdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="910" y="137"/>
+            <point key="canvasLocation" x="954" y="-223"/>
+        </scene>
+        <!--Actions View-->
+        <scene sceneID="OI3-Sw-ACT">
+            <objects>
+                <viewController id="A57-he-e5a" customClass="ActionsView" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" alpha="0.84999999999999998" contentMode="scaleToFill" id="dtS-9J-OLv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYR-t9-xSj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="cJy-U0-8ti"/>
+                                </constraints>
+                                <state key="normal" title="Open"/>
+                                <connections>
+                                    <action selector="openCloseClick:" destination="A57-he-e5a" eventType="touchUpInside" id="Sr9-bt-9lR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EYR-t9-xSj" secondAttribute="trailing" id="1H0-aN-PB8"/>
+                            <constraint firstItem="EYR-t9-xSj" firstAttribute="leading" secondItem="dtS-9J-OLv" secondAttribute="leading" id="GqL-tA-cAr"/>
+                            <constraint firstItem="EYR-t9-xSj" firstAttribute="top" secondItem="dtS-9J-OLv" secondAttribute="top" id="XLw-En-fUg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ibOpenCloseButton" destination="EYR-t9-xSj" id="LJW-yv-Lee"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SL0-zt-hEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925.60000000000002" y="343.62818590704649"/>
         </scene>
     </scenes>
 </document>

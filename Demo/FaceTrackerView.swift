@@ -1,16 +1,19 @@
 import UIKit
 import FaceTracker
 
-class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewControllerDelegate {
+class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewControllerDelegate, ActionsDelegate {
     
     // MARK: Properties
     
-    var hatView = UIImageView()
-    var faceTrackerViewController: FaceTrackerViewController?
-    var pointViews = [UIView]()
-    
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var faceTrackerContainerView: UIView!
+    @IBOutlet weak var ibActionMenuTopToContainerConstraint: NSLayoutConstraint!
+    
+    var faceTrackerViewController: FaceTrackerViewController?
+    var actionsView: ActionsView?
+    
+    var hatView = UIImageView()
+    var pointViews = [UIView]()
     
     private var presenter:FaceTrackerViewPresenterOps!
     
@@ -59,9 +62,13 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     // MARK: Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "embedFaceTrackerViewController") {
+        if segue.identifier == "embedFaceTrackerViewController" {
             faceTrackerViewController = segue.destination as? FaceTrackerViewController
             faceTrackerViewController!.delegate = self
+        }
+        else if segue.identifier == "embedActionsViewController" {
+            actionsView = segue.destination as? ActionsView
+            actionsView!.delegate = self
         }
     }
     
@@ -92,6 +99,24 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     // MARK: <NameOfProtocol>
+    
+    // MARK: <ActionsDelegate>
+    
+    func openActionsMenu() {
+        self.ibActionMenuTopToContainerConstraint.constant = 190
+        
+        UIView.animate(withDuration: 0.33) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func closeActionsMenu() {
+        self.ibActionMenuTopToContainerConstraint.constant = 30
+        
+        UIView.animate(withDuration: 0.33) {
+            self.view.layoutIfNeeded()
+        }
+    }
     
     // MARK: <FaceTrackerViewControllerDelegate>
     
@@ -149,7 +174,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
         hatView.anchorTo(point: CGPoint(x: 0.5, y: 1.0))
         
-        let angle = rightEyeEnd.angleTo(point: leftEyeStart)
+        let angle = leftEyeStart.angleTo(point: rightEyeEnd)
         hatView.transform = CGAffineTransform(rotationAngle: angle)
     }
     
