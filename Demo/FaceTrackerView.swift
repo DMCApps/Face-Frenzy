@@ -120,26 +120,36 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             let pointSize: CGFloat = 4
             
             pointView.isHidden = false
-            pointView.frame = CGRect(x: point.x - pointSize / 2, y: point.y - pointSize / 2, width: pointSize, height: pointSize).integral
+            pointView.frame = CGRect(x: point.x - pointSize / 2,
+                                     y: point.y - pointSize / 2,
+                                     width: pointSize,
+                                     height: pointSize).integral
         })
     }
     
     func repositionHatViewForPoints(_ points:FacePoints) {
         // Compute the hat frame
-        let eyeCornerDist = sqrt(pow(points.leftEye[0].x - points.rightEye[5].x, 2) + pow(points.leftEye[0].y - points.rightEye[5].y, 2))
-        let eyeToEyeCenter = CGPoint(x: (points.leftEye[0].x + points.rightEye[5].x) / 2, y: (points.leftEye[0].y + points.rightEye[5].y) / 2)
+        let leftEyeStart = points.leftEye[0]
+        let rightEyeEnd = points.rightEye[5]
+        
+        let eyeCornerDist = leftEyeStart.distanceTo(point: rightEyeEnd)
+        let eyeToEyeCenter = leftEyeStart.centerTo(point: rightEyeEnd)
         
         let hatWidth = 2.0 * eyeCornerDist
         let hatHeight = (hatView.image!.size.height / hatView.image!.size.width) * hatWidth
         
         hatView.transform = CGAffineTransform.identity
         
-        hatView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2, y: eyeToEyeCenter.y - 1.3 * hatHeight, width: hatWidth, height: hatHeight)
+        hatView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2,
+                               y: eyeToEyeCenter.y - 1.3 * hatHeight,
+                               width: hatWidth,
+                               height: hatHeight)
+        
         hatView.isHidden = false
         
-        setAnchorPoint(CGPoint(x: 0.5, y: 1.0), forView: hatView)
+        hatView.anchorTo(point: CGPoint(x: 0.5, y: 1.0))
         
-        let angle = atan2(points.rightEye[5].y - points.leftEye[0].y, points.rightEye[5].x - points.leftEye[0].x)
+        let angle = rightEyeEnd.angleTo(point: leftEyeStart)
         hatView.transform = CGAffineTransform(rotationAngle: angle)
     }
     
