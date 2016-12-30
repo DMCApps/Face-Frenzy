@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		176699331E16C07C0026F471 /* UIAlertController+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176699321E16C07C0026F471 /* UIAlertController+Builder.swift */; };
 		176699391E16C28D0026F471 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 176699371E16C28D0026F471 /* Localizable.strings */; };
+		1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766993E1E16C5410026F471 /* FaceTrackerPresenter.swift */; };
+		176699411E16C54C0026F471 /* FaceTrackerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176699401E16C54C0026F471 /* FaceTrackerModel.swift */; };
+		176699431E16C57A0026F471 /* FaceTrackerMVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176699421E16C57A0026F471 /* FaceTrackerMVP.swift */; };
 		CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81041C7E17E6007345D1 /* AppDelegate.swift */; };
 		CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */; };
 		CECE810A1C7E17E6007345D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE81081C7E17E6007345D1 /* Main.storyboard */; };
@@ -35,6 +38,9 @@
 /* Begin PBXFileReference section */
 		176699321E16C07C0026F471 /* UIAlertController+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Builder.swift"; sourceTree = "<group>"; };
 		176699381E16C28D0026F471 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1766993E1E16C5410026F471 /* FaceTrackerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTrackerPresenter.swift; sourceTree = "<group>"; };
+		176699401E16C54C0026F471 /* FaceTrackerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTrackerModel.swift; sourceTree = "<group>"; };
+		176699421E16C57A0026F471 /* FaceTrackerMVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTrackerMVP.swift; sourceTree = "<group>"; };
 		CECE81011C7E17E6007345D1 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE81041C7E17E6007345D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackerView.swift; sourceTree = "<group>"; };
@@ -86,6 +92,9 @@
 			isa = PBXGroup;
 			children = (
 				CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */,
+				1766993E1E16C5410026F471 /* FaceTrackerPresenter.swift */,
+				176699401E16C54C0026F471 /* FaceTrackerModel.swift */,
+				176699421E16C57A0026F471 /* FaceTrackerMVP.swift */,
 			);
 			name = "Face Tracker";
 			sourceTree = "<group>";
@@ -196,9 +205,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				176699411E16C54C0026F471 /* FaceTrackerModel.swift in Sources */,
+				1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */,
 				CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */,
 				CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */,
 				176699331E16C07C0026F471 /* UIAlertController+Builder.swift in Sources */,
+				176699431E16C57A0026F471 /* FaceTrackerMVP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

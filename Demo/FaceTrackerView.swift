@@ -1,7 +1,7 @@
 import UIKit
 import FaceTracker
 
-class FaceTrackerView: UIViewController, FaceTrackerViewControllerDelegate {
+class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewControllerDelegate {
     
     // MARK: Properties
     
@@ -10,8 +10,13 @@ class FaceTrackerView: UIViewController, FaceTrackerViewControllerDelegate {
     var pointViews = [UIView]()
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var optionsButton: UIButton!
     @IBOutlet var faceTrackerContainerView: UIView!
+    
+    private var presenter:FaceTrackerViewPresenterOps!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
     // MARK: Object Lifecycle
     
@@ -19,10 +24,16 @@ class FaceTrackerView: UIViewController, FaceTrackerViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.presenter = FaceTrackerPresenter()
+        self.presenter.viewDidLoad(withView:self)
         
         self.view.insertSubview(hatView, aboveSubview: faceTrackerContainerView)
         hatView.image = UIImage(named: "hat")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,10 +43,17 @@ class FaceTrackerView: UIViewController, FaceTrackerViewControllerDelegate {
             self.activityIndicator.stopAnimating()
         }
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: Segues
@@ -125,5 +143,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewControllerDelegate {
             }
         }
     }
+    
+    // MARK: <FaceTrackerViewOps>
+    
 }
-
