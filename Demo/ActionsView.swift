@@ -14,6 +14,10 @@ protocol ActionsDelegate {
     func openActionsMenu()
     func closeActionsMenu()
     
+    func didBeginTranslation()
+    func didTranslateBy(_ translation:CGFloat)
+    func didEndTranslation()
+    
 }
 
 class ActionsView: UIViewController, ActionsViewOps {
@@ -41,6 +45,9 @@ class ActionsView: UIViewController, ActionsViewOps {
         self.presenter.viewDidLoad(withView:self)
         
         self.view.layer.cornerRadius = 12
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(onDrag))
+        self.ibOpenCloseButton.addGestureRecognizer(panGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +83,21 @@ class ActionsView: UIViewController, ActionsViewOps {
     // MARK: Public
     
     // MARK: Private
+    
+    func onDrag(gesture:UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self.view)
+        
+        switch gesture.state {
+        case .began:
+            self.delegate.didBeginTranslation()
+        case .changed:
+            self.delegate.didTranslateBy(-1 * translation.y)
+        case .ended:
+            self.delegate.didEndTranslation()
+        default:
+            break
+        }
+    }
     
     // MARK: <NameOfProtocol>
     

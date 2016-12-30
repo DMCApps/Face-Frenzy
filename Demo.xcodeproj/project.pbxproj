@@ -18,6 +18,7 @@
 		1766994C1E16DBF20026F471 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766994B1E16DBF20026F471 /* ActionsView.swift */; };
 		1766994E1E16DC210026F471 /* ActionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766994D1E16DC210026F471 /* ActionsPresenter.swift */; };
 		176699501E16DC3B0026F471 /* ActionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766994F1E16DC3B0026F471 /* ActionsModel.swift */; };
+		176699521E16EAFA0026F471 /* Comparable+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176699511E16EAFA0026F471 /* Comparable+Clamp.swift */; };
 		CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81041C7E17E6007345D1 /* AppDelegate.swift */; };
 		CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */; };
 		CECE810A1C7E17E6007345D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE81081C7E17E6007345D1 /* Main.storyboard */; };
@@ -53,6 +54,7 @@
 		1766994B1E16DBF20026F471 /* ActionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
 		1766994D1E16DC210026F471 /* ActionsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsPresenter.swift; sourceTree = "<group>"; };
 		1766994F1E16DC3B0026F471 /* ActionsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsModel.swift; sourceTree = "<group>"; };
+		176699511E16EAFA0026F471 /* Comparable+Clamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comparable+Clamp.swift"; sourceTree = "<group>"; };
 		CECE81011C7E17E6007345D1 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE81041C7E17E6007345D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackerView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				176699321E16C07C0026F471 /* UIAlertController+Builder.swift */,
 				176699441E16D71C0026F471 /* CGPoint+Calculations.swift */,
 				176699461E16D8F70026F471 /* UIView+Anchor.swift */,
+				176699511E16EAFA0026F471 /* Comparable+Clamp.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				176699411E16C54C0026F471 /* FaceTrackerModel.swift in Sources */,
 				1766994A1E16DBDA0026F471 /* ActionsMVP.swift in Sources */,
 				1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */,
+				176699521E16EAFA0026F471 /* Comparable+Clamp.swift in Sources */,
 				1766994E1E16DC210026F471 /* ActionsPresenter.swift in Sources */,
 				176699451E16D71C0026F471 /* CGPoint+Calculations.swift in Sources */,
 				CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */,

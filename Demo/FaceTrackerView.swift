@@ -15,6 +15,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var hatView = UIImageView()
     var pointViews = [UIView]()
     
+    var startTranslationConstraintConstant:CGFloat?
+    
     private var presenter:FaceTrackerViewPresenterOps!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -80,22 +82,12 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     // MARK: Private
     
-    func setAnchorPoint(_ anchorPoint: CGPoint, forView view: UIView) {
-        var newPoint = CGPoint(x: view.bounds.size.width * anchorPoint.x, y: view.bounds.size.height * anchorPoint.y)
-        var oldPoint = CGPoint(x: view.bounds.size.width * view.layer.anchorPoint.x, y: view.bounds.size.height * view.layer.anchorPoint.y)
+    func animateActionMenuTo(_ value:CGFloat, withDuration duration:TimeInterval = 0.33) {
+        self.ibActionMenuTopToContainerConstraint.constant = value
         
-        newPoint = newPoint.applying(view.transform)
-        oldPoint = oldPoint.applying(view.transform)
-        
-        var position = view.layer.position
-        position.x -= oldPoint.x
-        position.x += newPoint.x
-        
-        position.y -= oldPoint.y
-        position.y += newPoint.y
-        
-        view.layer.position = position
-        view.layer.anchorPoint = anchorPoint
+        UIView.animate(withDuration: duration) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: <NameOfProtocol>
@@ -103,19 +95,29 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     // MARK: <ActionsDelegate>
     
     func openActionsMenu() {
-        self.ibActionMenuTopToContainerConstraint.constant = 190
-        
-        UIView.animate(withDuration: 0.33) {
-            self.view.layoutIfNeeded()
-        }
+        animateActionMenuTo(190)
     }
     
     func closeActionsMenu() {
-        self.ibActionMenuTopToContainerConstraint.constant = 30
-        
-        UIView.animate(withDuration: 0.33) {
-            self.view.layoutIfNeeded()
+        animateActionMenuTo(30)
+    }
+    
+    func didBeginTranslation() {
+        self.startTranslationConstraintConstant = self.ibActionMenuTopToContainerConstraint.constant
+    }
+    
+    func didTranslateBy(_ translation: CGFloat) {
+        guard let startTranslationConstraintConstant = self.startTranslationConstraintConstant else {
+            return
         }
+        
+        var newConstraintConstant = startTranslationConstraintConstant + translation
+        newConstraintConstant = newConstraintConstant.clamp(to: (30 ... 190))
+        animateActionMenuTo(newConstraintConstant, withDuration: 0.05)
+    }
+    
+    func didEndTranslation() {
+        self.startTranslationConstraintConstant = nil
     }
     
     // MARK: <FaceTrackerViewControllerDelegate>
