@@ -12,7 +12,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var faceTrackerViewController: FaceTrackerViewController?
     var actionsView: ActionsView?
     
-    var hatView = UIImageView()
+    var headView = UIImageView()
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
@@ -32,8 +32,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
         self.presenter.viewDidLoad(withView:self)
         
-        self.view.insertSubview(hatView, aboveSubview: faceTrackerContainerView)
-        hatView.image = UIImage(named: "hat")
+        self.view.insertSubview(headView, aboveSubview: faceTrackerContainerView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,28 +124,30 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         })
     }
     
-    func showHeadViewWithImageNamed(_ name: String) {
-        hatView.image = UIImage(named: name)
+    func showHeadViewWithFaceItem(_ faceItem: FaceItem) {
+        headView.image = UIImage(named: faceItem.imageName)
+        headView.anchorTo(point: faceItem.anchorPoint)
     }
     
     func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
-        let hatWidth = 2.0 * faceAnalyzer.outterEyeDistance()
-        let hatHeight = (hatView.image!.size.height / hatView.image!.size.width) * hatWidth
-        
-        hatView.transform = CGAffineTransform.identity
-        
-        let eyeToEyeCenter = faceAnalyzer.eyeToEyeCenter()
-        hatView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2,
-                               y: eyeToEyeCenter.y - 1.3 * hatHeight,
-                               width: hatWidth,
-                               height: hatHeight)
-        
-        hatView.isHidden = false
-        
-        hatView.anchorTo(point: CGPoint(x: 0.5, y: 1.0))
-        
-        let angle = faceAnalyzer.leftToRightEyeAngle()
-        hatView.transform = CGAffineTransform(rotationAngle: angle)
+        if faceAnalyzer.isReady(),
+            !headView.isHidden,
+            let image = headView.image {
+            
+            let hatWidth = 2.0 * faceAnalyzer.outterEyeDistance()
+            let hatHeight = (image.size.height / image.size.width) * hatWidth
+            
+            headView.transform = CGAffineTransform.identity
+            
+            let eyeToEyeCenter = faceAnalyzer.eyeToEyeCenter()
+            headView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2,
+                                   y: eyeToEyeCenter.y - (hatHeight + 75),
+                                   width: hatWidth,
+                                   height: hatHeight)
+            
+            let angle = faceAnalyzer.leftToRightEyeAngle()
+            headView.transform = CGAffineTransform(rotationAngle: angle)
+        }
     }
     
     func hideFacePoints() {
@@ -155,8 +156,12 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         }
     }
     
+    func showHeadView() {
+        headView.isHidden = false
+    }
+    
     func hideHeadView() {
-        hatView.isHidden = true
+        headView.isHidden = true
     }
     
     func openActionsMenu() {

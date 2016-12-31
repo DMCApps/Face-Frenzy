@@ -17,6 +17,8 @@ protocol FaceAnalyzer {
     var rightEyeStart:CGPoint { get }
     var rightEyeEnd:CGPoint { get }
     
+    func isReady() -> Bool
+    
     func updatePoints<T>(_ points:T)
     func outterEyeDistance() -> CGFloat
     func eyeToEyeCenter() -> CGPoint

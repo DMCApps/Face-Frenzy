@@ -48,8 +48,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         self.view?.didEndTranslation()
     }
     
-    func didSelectImageNamed(_ name: String) {
-        self.view?.showHeadViewWithImageNamed(name)
+    func didSelectFaceItem(_ faceItem: FaceItem) {
+        self.view?.showHeadViewWithFaceItem(faceItem)
         self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
     }
     
@@ -65,7 +65,9 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         if let points = points {
             faceAnalyzer.updatePoints(points)
             self.view?.positionFacePoints(points)
+            self.view?.showHeadView()
             self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+            
             if self.model.areFacePointsShown() {
                 self.view?.showFacePoints()
             }

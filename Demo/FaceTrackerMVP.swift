@@ -14,9 +14,11 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func positionFacePoints(_ points:FacePoints)
     func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
     
-    func showHeadViewWithImageNamed(_ name:String)
+    func showHeadViewWithFaceItem(_ faceItem:FaceItem)
     
+    func showFacePoints()
     func hideFacePoints()
+    func showHeadView()
     func hideHeadView()
     
     func openActionsMenu()
@@ -25,8 +27,6 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func didBeginTranslation()
     func didTranslateBy(_ translation:CGFloat)
     func didEndTranslation()
-    
-    func showFacePoints()
     
 }
 

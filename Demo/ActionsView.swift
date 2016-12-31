@@ -21,7 +21,7 @@ protocol ActionsDelegate {
     func showFacePoints()
     func hideFacePoints()
     
-    func didSelectImageNamed(_ name:String)
+    func didSelectFaceItem(_ faceItem:FaceItem)
     
 }
 
@@ -109,18 +109,18 @@ class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewD
         }
     }
     
-    func images() -> [String] {
+    func faceItems() -> [FaceItem] {
         return [
-            "hat",
-            "horns",
-            "light",
-            "heart",
-            "dog_nose",
-            "pig_nose",
-            "beard",
-            "lips",
-            "mustache",
-            "dog_tongue"
+            FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "hat"),
+            FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "horns"),
+            FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "light"),
+            FaceItem(position: .eyes, anchorPoint: CGPoint(x:0.5, y:1), imageName: "heart"),
+            FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_nose"),
+            FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "pig_nose"),
+            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "beard"),
+            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "lips"),
+            FaceItem(position: .upperLip, anchorPoint: CGPoint(x:0.5, y:1), imageName: "mustache"),
+            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0, y:0), imageName: "dog_tongue")
         ]
     }
     
@@ -129,14 +129,15 @@ class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewD
     // MARK: <UICollectionViewDataSource>
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images().count
+        return faceItems().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         
+        let faceItem = faceItems()[indexPath.row];
         let imageView = cell.viewWithTag(1000) as! UIImageView
-        imageView.image = UIImage(named: images()[indexPath.row])
+        imageView.image = UIImage(named: faceItem.imageName)
         
         return cell
     }
@@ -144,7 +145,7 @@ class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewD
     // MARK: <UICollectionViewDelegate>
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate.didSelectImageNamed(images()[indexPath.row])
+        self.delegate.didSelectFaceItem(faceItems()[indexPath.row])
     }
     
     // MARK: <ActionsViewOps>
