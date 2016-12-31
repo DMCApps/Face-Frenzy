@@ -13,6 +13,12 @@ protocol ActionsViewOps: NSObjectProtocol {
     func openActionsMenu()
     func closeActionsMenu()
     
+    func showFacePoints()
+    func hideFacePoints()
+    
+    func toggleShowFacePointsOn()
+    func toggleShowFacePointsOff()
+    
 }
 
 protocol ActionsViewPresenterOps {
@@ -20,6 +26,7 @@ protocol ActionsViewPresenterOps {
     func viewDidLoad(withView view:ActionsViewOps)
     
     func didClickOpenClose()
+    func didClickToggleFacePoints()
     
 }
 
@@ -28,7 +35,11 @@ protocol ActionsModelPresenterOps {
 }
 
 protocol ActionsModelOps {
+    
     func toggleMenuState()
     func isMenuOpen() -> Bool
+    
+    func toggleFacePointsState()
+    func isFacePointsShown() -> Bool
     
 }

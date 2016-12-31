@@ -18,6 +18,9 @@ protocol ActionsDelegate {
     func didTranslateBy(_ translation:CGFloat)
     func didEndTranslation()
     
+    func showFacePoints()
+    func hideFacePoints()
+    
 }
 
 class ActionsView: UIViewController, ActionsViewOps {
@@ -25,6 +28,7 @@ class ActionsView: UIViewController, ActionsViewOps {
     // MARK: Properties
     
     @IBOutlet weak var ibOpenCloseButton: UIButton!
+    @IBOutlet weak var ibShowPointsSwitch: UISwitch!
     
     public var delegate:ActionsDelegate!
     
@@ -80,6 +84,10 @@ class ActionsView: UIViewController, ActionsViewOps {
         self.presenter.didClickOpenClose()
     }
     
+    @IBAction func toggleFacePointsClick(_ sender: UIButton) {
+        self.presenter.didClickToggleFacePoints()
+    }
+    
     // MARK: Public
     
     // MARK: Private
@@ -109,6 +117,21 @@ class ActionsView: UIViewController, ActionsViewOps {
     
     func closeActionsMenu() {
         self.delegate.closeActionsMenu()
+    }
+    
+    func showFacePoints() {
+        self.delegate.showFacePoints()
+    }
+    
+    func hideFacePoints() {
+        self.delegate.hideFacePoints()
+    }
+    
+    func toggleShowFacePointsOn() {
+        self.ibShowPointsSwitch.setOn(true, animated: true)
+    }
+    
+    func toggleShowFacePointsOff() {self.self.ibShowPointsSwitch.setOn(false, animated: true)
     }
     
 }

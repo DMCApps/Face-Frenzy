@@ -13,6 +13,7 @@ class ActionsModel: ActionsModelOps {
     // MARK: Properties
     
     private var _isMenuOpen:Bool = false
+    private var _isFacePointsShown:Bool = true
     
     private let presenter:ActionsModelPresenterOps
     
@@ -34,6 +35,14 @@ class ActionsModel: ActionsModelOps {
     
     func isMenuOpen() -> Bool {
         return self._isMenuOpen
+    }
+    
+    func toggleFacePointsState() {
+        self._isFacePointsShown = !self._isFacePointsShown
+    }
+    
+    func isFacePointsShown() -> Bool {
+        return self._isFacePointsShown
     }
     
 }

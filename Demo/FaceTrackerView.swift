@@ -103,6 +103,12 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         animateActionMenuTo(30)
     }
     
+    func showFacePoints() {
+        for pointView in pointViews {
+            pointView.isHidden = false
+        }
+    }
+    
     func didBeginTranslation() {
         // TODO: Should the model and presenter handle these things?
         self.startTranslationConstraintConstant = self.ibActionMenuTopToContainerConstraint.constant
@@ -134,7 +140,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     // MARK: <FaceTrackerViewOps>
     
-    func showFacePoints(_ points:FacePoints) {
+    func positionFacePoints(_ points:FacePoints) {
         // Allocate some views for the points if needed
         if (pointViews.count == 0) {
             let numPoints = points.getTotalNumberOFPoints()
@@ -152,7 +158,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             let pointView = self.pointViews[index]
             let pointSize: CGFloat = 4
             
-            pointView.isHidden = false
             pointView.frame = CGRect(x: point.x - pointSize / 2,
                                      y: point.y - pointSize / 2,
                                      width: pointSize,

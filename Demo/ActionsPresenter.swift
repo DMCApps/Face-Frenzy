@@ -30,6 +30,17 @@ class ActionsPresenter: ActionsViewPresenterOps, ActionsModelPresenterOps {
         }
     }
     
+    func didClickToggleFacePoints() {
+        self.model.toggleFacePointsState()
+        if self.model.isFacePointsShown() {
+            self.view?.showFacePoints()
+            self.view?.toggleShowFacePointsOn()
+        }
+        else {
+            self.view?.hideFacePoints()
+            self.view?.toggleShowFacePointsOff()
+        }
+    }
     // Mark: ActionsModelPresenterOps
     
 }

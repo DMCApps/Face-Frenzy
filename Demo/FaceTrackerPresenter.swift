@@ -27,7 +27,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func didReceiveFacePoints(_ points:FacePoints?) {
         if let points = points {
             faceAnalyzer.updatePoints(points)
-            self.view?.showFacePoints(points)
+            self.view?.positionFacePoints(points)
             self.view?.repositionHatView(usingAnalyzer: faceAnalyzer)
         }
         else {
