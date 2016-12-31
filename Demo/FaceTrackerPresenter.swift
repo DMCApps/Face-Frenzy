@@ -48,6 +48,11 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         self.view?.didEndTranslation()
     }
     
+    func didSelectImageNamed(_ name: String) {
+        self.view?.showHeadViewWithImageNamed(name)
+        self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+    }
+    
     // Mark: FaceTrackerViewPresenterOps
     
     func viewDidLoad(withView view:FaceTrackerViewOps) {
@@ -60,14 +65,14 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         if let points = points {
             faceAnalyzer.updatePoints(points)
             self.view?.positionFacePoints(points)
-            self.view?.repositionHatView(usingAnalyzer: faceAnalyzer)
+            self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
             if self.model.areFacePointsShown() {
                 self.view?.showFacePoints()
             }
         }
         else {
             self.view?.hideFacePoints()
-            self.view?.hideHatView()
+            self.view?.hideHeadView()
         }
     }
     

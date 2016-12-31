@@ -12,10 +12,12 @@ import FaceTracker
 protocol FaceTrackerViewOps: NSObjectProtocol {
     
     func positionFacePoints(_ points:FacePoints)
-    func repositionHatView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    
+    func showHeadViewWithImageNamed(_ name:String)
     
     func hideFacePoints()
-    func hideHatView()
+    func hideHeadView()
     
     func openActionsMenu()
     func closeActionsMenu()

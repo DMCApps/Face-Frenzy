@@ -125,7 +125,11 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         })
     }
     
-    func repositionHatView(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
+    func showHeadViewWithImageNamed(_ name: String) {
+        hatView.image = UIImage(named: name)
+    }
+    
+    func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
         let hatWidth = 2.0 * faceAnalyzer.outterEyeDistance()
         let hatHeight = (hatView.image!.size.height / hatView.image!.size.width) * hatWidth
         
@@ -151,7 +155,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         }
     }
     
-    func hideHatView() {
+    func hideHeadView() {
         hatView.isHidden = true
     }
     

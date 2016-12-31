@@ -21,9 +21,11 @@ protocol ActionsDelegate {
     func showFacePoints()
     func hideFacePoints()
     
+    func didSelectImageNamed(_ name:String)
+    
 }
 
-class ActionsView: UIViewController, ActionsViewOps {
+class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ActionsViewOps {
     
     // MARK: Properties
     
@@ -107,7 +109,43 @@ class ActionsView: UIViewController, ActionsViewOps {
         }
     }
     
+    func images() -> [String] {
+        return [
+            "hat",
+            "horns",
+            "light",
+            "heart",
+            "dog_nose",
+            "pig_nose",
+            "beard",
+            "lips",
+            "mustache",
+            "dog_tongue"
+        ]
+    }
+    
     // MARK: <NameOfProtocol>
+    
+    // MARK: <UICollectionViewDataSource>
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images().count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
+        
+        let imageView = cell.viewWithTag(1000) as! UIImageView
+        imageView.image = UIImage(named: images()[indexPath.row])
+        
+        return cell
+    }
+    
+    // MARK: <UICollectionViewDelegate>
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate.didSelectImageNamed(images()[indexPath.row])
+    }
     
     // MARK: <ActionsViewOps>
     
@@ -131,7 +169,8 @@ class ActionsView: UIViewController, ActionsViewOps {
         self.ibShowPointsSwitch.setOn(true, animated: true)
     }
     
-    func toggleShowFacePointsOff() {self.self.ibShowPointsSwitch.setOn(false, animated: true)
+    func toggleShowFacePointsOff() {
+        self.ibShowPointsSwitch.setOn(false, animated: true)
     }
     
 }
