@@ -20,6 +20,7 @@ protocol FaceAnalyzer {
     func updatePoints<T>(_ points:T)
     func outterEyeDistance() -> CGFloat
     func eyeToEyeCenter() -> CGPoint
+    func leftToRightEyeAngle() -> CGFloat
 }
 
 // Maybe change to associatedtype and Thunk:

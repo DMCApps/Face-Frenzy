@@ -176,7 +176,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
         hatView.anchorTo(point: CGPoint(x: 0.5, y: 1.0))
         
-        let angle = faceAnalyzer.leftEyeStart.angleTo(point: faceAnalyzer.rightEyeEnd)
+        let angle = faceAnalyzer.leftToRightEyeAngle()
         hatView.transform = CGAffineTransform(rotationAngle: angle)
     }
     

@@ -32,6 +32,7 @@ class FacePointAnalyzer: FaceAnalyzer {
     
     private var _outterEyeDistance:CGFloat? = nil
     private var _eyeToEyeCenter:CGPoint? = nil
+    private var _leftToRightEyeAngle:CGFloat? = nil
     
     // MARK: init
     
@@ -40,7 +41,7 @@ class FacePointAnalyzer: FaceAnalyzer {
     // MARK: Public
     
     // Make this updatable as the number of allocations would happen too often if it was an immutable object
-    // TODO: This doesn't make sense. This should be done using the thunk and associated type explained in FaceAnalyzer class
+    // TODO: This doesn't make sense. This should be done using the thunk and associatedtype explained in FaceAnalyzer class comments
     func updatePoints<T>(_ points:T) {
         self.points = points as! FacePoints
         _eyeToEyeCenter = nil
@@ -59,6 +60,13 @@ class FacePointAnalyzer: FaceAnalyzer {
             _eyeToEyeCenter = self.leftEyeStart.centerTo(point: self.rightEyeEnd)
         }
         return _eyeToEyeCenter!
+    }
+    
+    func leftToRightEyeAngle() -> CGFloat {
+        if _leftToRightEyeAngle == nil {
+            _leftToRightEyeAngle = leftEyeStart.angleTo(point: self.rightEyeEnd)
+        }
+        return _leftToRightEyeAngle!
     }
     
     // MARK: Private
