@@ -20,6 +20,14 @@ protocol FaceAnalyzer {
     func isReady() -> Bool
     
     func updatePoints<T>(_ points:T)
+    
+    func leftEyeWidth() -> CGFloat
+    func leftEyeCenter() -> CGPoint
+    func leftEyeAngle() -> CGFloat
+    func rightEyeWidth() -> CGFloat
+    func rightEyeCenter() -> CGPoint
+    func rightEyeAngle() -> CGFloat
+    
     func outterEyeDistance() -> CGFloat
     func eyeToEyeCenter() -> CGPoint
     func leftToRightEyeAngle() -> CGFloat

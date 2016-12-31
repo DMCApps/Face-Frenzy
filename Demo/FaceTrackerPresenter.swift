@@ -49,8 +49,16 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     }
     
     func didSelectFaceItem(_ faceItem: FaceItem) {
-        self.view?.showHeadViewWithFaceItem(faceItem)
-        self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+        switch faceItem.position {
+        case .head:
+            self.view?.showHeadViewWithFaceItem(faceItem)
+            self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+        case .eyes:
+            self.view?.showEyesViewWithFaceItem(faceItem)
+            self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer)
+        default:
+            break
+        }
     }
     
     // Mark: FaceTrackerViewPresenterOps
@@ -67,6 +75,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             self.view?.positionFacePoints(points)
             self.view?.showHeadView()
             self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+            self.view?.showEyesView()
+            self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer)
             
             if self.model.areFacePointsShown() {
                 self.view?.showFacePoints()

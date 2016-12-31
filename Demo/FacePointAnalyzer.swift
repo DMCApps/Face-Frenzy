@@ -30,6 +30,13 @@ class FacePointAnalyzer: FaceAnalyzer {
         return points.rightEye[5]
     }
     
+    private var _leftEyeWidth:CGFloat? = nil
+    private var _leftEyeCenter:CGPoint? = nil
+    private var _leftEyeAngle:CGFloat? = nil
+    private var _rightEyeWidth:CGFloat? = nil
+    private var _rightEyeCenter:CGPoint? = nil
+    private var _rightEyeAngle:CGFloat? = nil
+    
     private var _outterEyeDistance:CGFloat? = nil
     private var _eyeToEyeCenter:CGPoint? = nil
     private var _leftToRightEyeAngle:CGFloat? = nil
@@ -51,6 +58,54 @@ class FacePointAnalyzer: FaceAnalyzer {
         _eyeToEyeCenter = nil
         _outterEyeDistance = nil
         _leftToRightEyeAngle = nil
+        _leftEyeWidth = nil
+        _leftEyeCenter = nil
+        _leftEyeAngle = nil
+        _rightEyeWidth = nil
+        _rightEyeCenter = nil
+        _rightEyeAngle = nil
+    }
+    
+    func leftEyeWidth() -> CGFloat {
+        if _leftEyeWidth == nil {
+            _leftEyeWidth = leftEyeStart.distanceTo(point: leftEyeEnd)
+        }
+        return _leftEyeWidth!
+    }
+    
+    func leftEyeCenter() -> CGPoint {
+        if _leftEyeCenter == nil {
+            _leftEyeCenter = leftEyeStart.centerTo(point: leftEyeEnd)
+        }
+        return _leftEyeCenter!
+    }
+    
+    func leftEyeAngle() -> CGFloat {
+        if _leftEyeAngle == nil {
+            _leftEyeAngle = leftEyeStart.angleTo(point: rightEyeEnd)
+        }
+        return _leftEyeAngle!
+    }
+    
+    func rightEyeWidth() -> CGFloat {
+        if _rightEyeWidth == nil {
+            _rightEyeWidth = rightEyeStart.distanceTo(point: rightEyeEnd)
+        }
+        return _rightEyeWidth!
+    }
+    
+    func rightEyeCenter() -> CGPoint {
+        if _rightEyeCenter == nil {
+            _rightEyeCenter = rightEyeStart.centerTo(point: rightEyeEnd)
+        }
+        return _rightEyeCenter!
+    }
+    
+    func rightEyeAngle() -> CGFloat {
+        if _rightEyeAngle == nil {
+            _rightEyeAngle = rightEyeStart.angleTo(point: rightEyeEnd)
+        }
+        return _rightEyeAngle!
     }
     
     func outterEyeDistance() -> CGFloat {

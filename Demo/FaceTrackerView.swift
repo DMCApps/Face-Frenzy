@@ -13,6 +13,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var actionsView: ActionsView?
     
     var headView = UIImageView()
+    var leftEyeImageView = UIImageView()
+    var rightEyeImageView = UIImageView()
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
@@ -33,6 +35,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         self.presenter.viewDidLoad(withView:self)
         
         self.view.insertSubview(headView, aboveSubview: faceTrackerContainerView)
+        self.view.insertSubview(leftEyeImageView, aboveSubview: faceTrackerContainerView)
+        self.view.insertSubview(rightEyeImageView, aboveSubview: faceTrackerContainerView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +91,19 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         UIView.animate(withDuration: duration) {
             self.view.layoutIfNeeded()
         }
+    }
+    
+    func placeEyeImageView(_ imageView:UIImageView, center:CGPoint, width:CGFloat, angle:CGFloat) {
+        let height = (imageView.image!.size.height / imageView.image!.size.width) * width
+        
+        imageView.transform = CGAffineTransform.identity
+        
+        imageView.frame = CGRect(x: center.x - width / 2,
+                                 y: center.y - height / 2,
+                                 width: width,
+                                 height: height)
+        
+        imageView.transform = CGAffineTransform(rotationAngle: angle)
     }
     
     // MARK: <NameOfProtocol>
@@ -150,6 +167,42 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         }
     }
     
+    func showEyesViewWithFaceItem(_ faceItem: FaceItem) {
+        leftEyeImageView.image = UIImage(named: faceItem.imageName)
+        leftEyeImageView.anchorTo(point: faceItem.anchorPoint)
+        rightEyeImageView.image = UIImage(named: faceItem.imageName)
+        rightEyeImageView.anchorTo(point: faceItem.anchorPoint)
+        
+    }
+    
+    func repositionEyesView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+        if faceAnalyzer.isReady(),
+            !leftEyeImageView.isHidden,
+            !rightEyeImageView.isHidden,
+            let leftImage = leftEyeImageView.image,
+            let rightImage = rightEyeImageView.image {
+            
+            let leftImageWidth = faceAnalyzer.leftEyeWidth() + 20
+            let leftEyeCenter = faceAnalyzer.leftEyeCenter()
+            let leftImageAngle = faceAnalyzer.leftEyeAngle()
+            
+            placeEyeImageView(leftEyeImageView,
+                              center: leftEyeCenter,
+                              width: leftImageWidth,
+                              angle: leftImageAngle)
+            
+            let rightImageWidth = faceAnalyzer.rightEyeWidth() + 20
+            let rightEyeCenter = faceAnalyzer.rightEyeCenter()
+            let rightImageAngle = faceAnalyzer.rightEyeAngle()
+            
+            placeEyeImageView(rightEyeImageView,
+                              center: rightEyeCenter,
+                              width: rightImageWidth,
+                              angle: rightImageAngle)
+            
+        }
+    }
+    
     func hideFacePoints() {
         for view in pointViews {
             view.isHidden = true
@@ -162,6 +215,16 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     func hideHeadView() {
         headView.isHidden = true
+    }
+    
+    func showEyesView() {
+        leftEyeImageView.isHidden = false
+        rightEyeImageView.isHidden = false
+    }
+    
+    func hideEyesView() {
+        leftEyeImageView.isHidden = true
+        rightEyeImageView.isHidden = true
     }
     
     func openActionsMenu() {
