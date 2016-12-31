@@ -17,9 +17,18 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func hideFacePoints()
     func hideHatView()
     
+    func openActionsMenu()
+    func closeActionsMenu()
+    
+    func didBeginTranslation()
+    func didTranslateBy(_ translation:CGFloat)
+    func didEndTranslation()
+    
+    func showFacePoints()
+    
 }
 
-protocol FaceTrackerViewPresenterOps {
+protocol FaceTrackerViewPresenterOps: ActionsDelegate {
     
     func viewDidLoad(withView view:FaceTrackerViewOps)
     
@@ -32,5 +41,8 @@ protocol FaceTrackerModelPresenterOps {
 }
 
 protocol FaceTrackerModelOps {
+    
+    func setFacePointsShown(_ shown:Bool)
+    func areFacePointsShown() -> Bool
     
 }

@@ -1,7 +1,7 @@
 import UIKit
 import FaceTracker
 
-class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewControllerDelegate, ActionsDelegate {
+class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewControllerDelegate {
     
     // MARK: Properties
     
@@ -17,7 +17,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     var startTranslationConstraintConstant:CGFloat?
     
-    private var presenter:FaceTrackerViewPresenterOps!
+    private var presenter:FaceTrackerViewPresenterOps = FaceTrackerPresenter()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -30,7 +30,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.presenter = FaceTrackerPresenter()
         self.presenter.viewDidLoad(withView:self)
         
         self.view.insertSubview(hatView, aboveSubview: faceTrackerContainerView)
@@ -71,7 +70,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         else if segue.identifier == "embedActionsViewController" {
             actionsView = segue.destination as? ActionsView
             // TODO: with MVP should the view or the presenter be the delegate?
-            actionsView!.delegate = self
+            actionsView!.delegate = self.presenter
         }
     }
     
@@ -92,45 +91,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     // MARK: <NameOfProtocol>
-    
-    // MARK: <ActionsDelegate>
-    
-    func openActionsMenu() {
-        animateActionMenuTo(190)
-    }
-    
-    func closeActionsMenu() {
-        animateActionMenuTo(30)
-    }
-    
-    func showFacePoints() {
-        for pointView in pointViews {
-            pointView.isHidden = false
-        }
-    }
-    
-    func didBeginTranslation() {
-        // TODO: Should the model and presenter handle these things?
-        self.startTranslationConstraintConstant = self.ibActionMenuTopToContainerConstraint.constant
-    }
-    
-    func didTranslateBy(_ translation: CGFloat) {
-        // TODO: Should the model and presenter handle these things?
-        guard let startTranslationConstraintConstant = self.startTranslationConstraintConstant else {
-            return
-        }
-        
-        var newConstraintConstant = startTranslationConstraintConstant + translation
-        newConstraintConstant = newConstraintConstant.clamp(to: (30 ... 190))
-        animateActionMenuTo(newConstraintConstant, withDuration: 0.05)
-    }
-    
-    func didEndTranslation() {
-        // TODO: Should the model and presenter handle these things?
-        // TODO: Complete open or close operation
-        
-        self.startTranslationConstraintConstant = nil
-    }
     
     // MARK: <FaceTrackerViewControllerDelegate>
     
@@ -193,6 +153,43 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     func hideHatView() {
         hatView.isHidden = true
+    }
+    
+    func openActionsMenu() {
+        animateActionMenuTo(190)
+    }
+    
+    func closeActionsMenu() {
+        animateActionMenuTo(30)
+    }
+    
+    func showFacePoints() {
+        for pointView in pointViews {
+            pointView.isHidden = false
+        }
+    }
+    
+    func didBeginTranslation() {
+        // TODO: Should the model and presenter handle these things?
+        self.startTranslationConstraintConstant = self.ibActionMenuTopToContainerConstraint.constant
+    }
+    
+    func didTranslateBy(_ translation: CGFloat) {
+        // TODO: Should the model and presenter handle these things?
+        guard let startTranslationConstraintConstant = self.startTranslationConstraintConstant else {
+            return
+        }
+        
+        var newConstraintConstant = startTranslationConstraintConstant + translation
+        newConstraintConstant = newConstraintConstant.clamp(to: (30 ... 190))
+        animateActionMenuTo(newConstraintConstant, withDuration: 0.05)
+    }
+    
+    func didEndTranslation() {
+        // TODO: Should the model and presenter handle these things?
+        // TODO: Complete open or close operation
+        
+        self.startTranslationConstraintConstant = nil
     }
     
 }

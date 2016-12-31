@@ -16,6 +16,38 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     private let faceAnalyzer:FaceAnalyzer = FacePointAnalyzer()
     
+    // MARK: <ActionsDelegate>
+    
+    func openActionsMenu() {
+        self.view?.openActionsMenu()
+    }
+    
+    func closeActionsMenu() {
+        self.view?.closeActionsMenu()
+    }
+    
+    func showFacePoints() {
+        self.view?.showFacePoints()
+        self.model.setFacePointsShown(true)
+    }
+    
+    func hideFacePoints() {
+        self.view?.hideFacePoints()
+        self.model.setFacePointsShown(false)
+    }
+    
+    func didBeginTranslation() {
+        self.view?.didBeginTranslation()
+    }
+    
+    func didTranslateBy(_ translation: CGFloat) {
+        self.view?.didTranslateBy(translation)
+    }
+    
+    func didEndTranslation() {
+        self.view?.didEndTranslation()
+    }
+    
     // Mark: FaceTrackerViewPresenterOps
     
     func viewDidLoad(withView view:FaceTrackerViewOps) {
@@ -29,6 +61,9 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             faceAnalyzer.updatePoints(points)
             self.view?.positionFacePoints(points)
             self.view?.repositionHatView(usingAnalyzer: faceAnalyzer)
+            if self.model.areFacePointsShown() {
+                self.view?.showFacePoints()
+            }
         }
         else {
             self.view?.hideFacePoints()

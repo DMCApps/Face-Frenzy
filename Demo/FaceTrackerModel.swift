@@ -12,6 +12,8 @@ class FaceTrackerModel: FaceTrackerModelOps {
     
     // MARK: Properties
     
+    private var _areFacePointsShown:Bool = true
+    
     private let presenter:FaceTrackerModelPresenterOps
     
     // MARK: init
@@ -24,6 +26,14 @@ class FaceTrackerModel: FaceTrackerModelOps {
     
     // MARK: Private
     
-    // MAKR: <ProtocolName>
+    // MARK: <FaceTrackerModelPresenterOps>
+    
+    func setFacePointsShown(_ shown:Bool) {
+        self._areFacePointsShown = shown
+    }
+    
+    func areFacePointsShown() -> Bool {
+        return self._areFacePointsShown
+    }
     
 }
