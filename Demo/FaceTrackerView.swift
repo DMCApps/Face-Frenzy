@@ -70,6 +70,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         }
         else if segue.identifier == "embedActionsViewController" {
             actionsView = segue.destination as? ActionsView
+            // TODO: with MVP should the view or the presenter be the delegate?
             actionsView!.delegate = self
         }
     }
@@ -103,10 +104,12 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func didBeginTranslation() {
+        // TODO: Should the model and presenter handle these things?
         self.startTranslationConstraintConstant = self.ibActionMenuTopToContainerConstraint.constant
     }
     
     func didTranslateBy(_ translation: CGFloat) {
+        // TODO: Should the model and presenter handle these things?
         guard let startTranslationConstraintConstant = self.startTranslationConstraintConstant else {
             return
         }
@@ -117,6 +120,9 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func didEndTranslation() {
+        // TODO: Should the model and presenter handle these things?
+        // TODO: Complete open or close operation
+        
         self.startTranslationConstraintConstant = nil
     }
     
@@ -154,19 +160,13 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         })
     }
     
-    func repositionHatViewForPoints(_ points:FacePoints) {
-        // Compute the hat frame
-        let leftEyeStart = points.leftEye[0]
-        let rightEyeEnd = points.rightEye[5]
-        
-        let eyeCornerDist = leftEyeStart.distanceTo(point: rightEyeEnd)
-        let eyeToEyeCenter = leftEyeStart.centerTo(point: rightEyeEnd)
-        
-        let hatWidth = 2.0 * eyeCornerDist
+    func repositionHatView(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
+        let hatWidth = 2.0 * faceAnalyzer.outterEyeDistance()
         let hatHeight = (hatView.image!.size.height / hatView.image!.size.width) * hatWidth
         
         hatView.transform = CGAffineTransform.identity
         
+        let eyeToEyeCenter = faceAnalyzer.eyeToEyeCenter()
         hatView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2,
                                y: eyeToEyeCenter.y - 1.3 * hatHeight,
                                width: hatWidth,
@@ -176,7 +176,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
         hatView.anchorTo(point: CGPoint(x: 0.5, y: 1.0))
         
-        let angle = leftEyeStart.angleTo(point: rightEyeEnd)
+        let angle = faceAnalyzer.leftEyeStart.angleTo(point: faceAnalyzer.rightEyeEnd)
         hatView.transform = CGAffineTransform(rotationAngle: angle)
     }
     

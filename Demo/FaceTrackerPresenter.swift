@@ -14,6 +14,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     weak private var view:FaceTrackerViewOps?
     private var model:FaceTrackerModelOps!
     
+    private let faceAnalyzer:FaceAnalyzer = FacePointAnalyzer()
+    
     // Mark: FaceTrackerViewPresenterOps
     
     func viewDidLoad(withView view:FaceTrackerViewOps) {
@@ -24,8 +26,9 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     // TODO: Should FacePoints be passed or just the raw values so that we don't have to import FaceTracker?
     func didReceiveFacePoints(_ points:FacePoints?) {
         if let points = points {
+            faceAnalyzer.updatePoints(points)
             self.view?.showFacePoints(points)
-            self.view?.repositionHatViewForPoints(points)
+            self.view?.repositionHatView(usingAnalyzer: faceAnalyzer)
         }
         else {
             self.view?.hideFacePoints()
