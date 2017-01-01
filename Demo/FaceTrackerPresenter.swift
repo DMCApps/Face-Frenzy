@@ -66,11 +66,22 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             if let currentFaceItem = self.model.eyesFaceItem,
                 currentFaceItem == faceItem {
                 
+                // TODO: How do I make this into a nice model
+                if faceItem.imageName == "heart" {
+                    self.view?.stopAnimatingHearts()
+                }
+                
                 self.model.eyesFaceItem = nil
                 self.view?.hideEyesView()
             }
             else {
                 self.model.eyesFaceItem = faceItem
+                
+                // TODO: How do I make this into a nice model and actionable item
+                if faceItem.imageName == "heart" {
+                    self.view?.startAnimatingHearts()
+                }
+                
                 self.view?.showEyesViewWithFaceItem(faceItem)
                 self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
             }

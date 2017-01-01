@@ -19,6 +19,9 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var lipImageView = UIImageView()
     var mouthImageView = UIImageView()
     
+    var animatedHeartsTimer:Timer?
+    var animatedHearts = [UIImageView]()
+    
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
@@ -147,6 +150,45 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
                                      width: pointSize,
                                      height: pointSize).integral
         })
+    }
+    
+    func startAnimatingHearts() {
+        self.animatedHeartsTimer = Timer.scheduledTimer(timeInterval: 0.4,
+                                                        target: self,
+                                                        selector: #selector(self.addRandomHeartAndAnimate),
+                                                        userInfo: nil,
+                                                        repeats: true);
+    }
+    
+    func addRandomHeartAndAnimate() {
+        let randomX = self.view.frame.size.width / 2 - 49 + CGFloat(arc4random_uniform(100))
+        
+        let heartImageView = UIImageView()
+        heartImageView.image = UIImage(named: "heart")
+        heartImageView.frame = CGRect(x: randomX,
+                                      y: 200,
+                                      width: heartImageView.image?.size.width ?? 50,
+                                      height: heartImageView.image?.size.height ?? 50)
+        heartImageView.alpha = 1.0
+        
+        self.animatedHearts.append(heartImageView)
+        self.view.insertSubview(heartImageView, aboveSubview: faceTrackerContainerView)
+        
+        UIView.animate(withDuration: 1.0, animations: {
+            heartImageView.center = CGPoint(x: heartImageView.center.x, y: heartImageView.center.y - 50)
+            heartImageView.alpha = 0.0
+        }) { [unowned self] (complete) in
+            if complete {
+                heartImageView.removeFromSuperview()
+                // TODO: Probably more efficient to recycle these
+                self.animatedHearts.remove(at: self.animatedHearts.index(of: heartImageView)!)
+            }
+        }
+    }
+    
+    func stopAnimatingHearts() {
+        self.animatedHeartsTimer?.invalidate()
+        self.animatedHeartsTimer = nil
     }
     
     func showHeadView() {
