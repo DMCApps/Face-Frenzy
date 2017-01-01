@@ -38,12 +38,20 @@ class FacePointAnalyzer: FaceAnalyzer {
         return points.nose[6]
     }
     
-    var outterMouthStart:CGPoint {
+    var outerMouthStart:CGPoint {
         return points.outerMouth[0]
     }
     
-    var outterMouthEnd:CGPoint {
-        return points.outerMouth[5]
+    var outerMouthTopLeft:CGPoint {
+        return points.outerMouth[2]
+    }
+    
+    var outerMouthTopRight:CGPoint {
+        return points.outerMouth[4]
+    }
+    
+    var outerMouthEnd:CGPoint {
+        return points.outerMouth[6]
     }
     
     var innerMouthStart:CGPoint {
@@ -51,7 +59,7 @@ class FacePointAnalyzer: FaceAnalyzer {
     }
     
     var innerMouthEnd:CGPoint {
-        return points.innerMouth[5]
+        return points.innerMouth[4]
     }
     
     private var _leftEyeWidth:CGFloat? = nil
@@ -61,7 +69,7 @@ class FacePointAnalyzer: FaceAnalyzer {
     private var _rightEyeCenter:CGPoint? = nil
     private var _rightEyeAngle:CGFloat? = nil
     
-    private var _outterEyeDistance:CGFloat? = nil
+    private var _outerEyeDistance:CGFloat? = nil
     private var _eyeToEyeCenter:CGPoint? = nil
     private var _leftToRightEyeAngle:CGFloat? = nil
     
@@ -69,13 +77,15 @@ class FacePointAnalyzer: FaceAnalyzer {
     private var _noseCenter:CGPoint? = nil
     private var _noseAngle:CGFloat? = nil
     
-    private var _outterMouthWidth:CGFloat? = nil
-    private var _outterMouthCenter:CGPoint? = nil
-    private var _outterMouthAngle:CGFloat? = nil
+    private var _outerMouthWidth:CGFloat? = nil
+    private var _outerMouthCenter:CGPoint? = nil
+    private var _outerMouthAngle:CGFloat? = nil
     
     private var _innerMouthWidth:CGFloat? = nil
     private var _innerMouthCenter:CGPoint? = nil
     private var _innerMouthAngle:CGFloat? = nil
+    
+    private var _topLipCenter:CGPoint? = nil
     
     // MARK: init
     
@@ -100,16 +110,16 @@ class FacePointAnalyzer: FaceAnalyzer {
         _rightEyeAngle = nil
         
         _eyeToEyeCenter = nil
-        _outterEyeDistance = nil
+        _outerEyeDistance = nil
         _leftToRightEyeAngle = nil
         
         _noseWidth = nil
         _noseCenter = nil
         _noseAngle = nil
         
-        _outterMouthWidth = nil
-        _outterMouthCenter = nil
-        _outterMouthAngle = nil
+        _outerMouthWidth = nil
+        _outerMouthCenter = nil
+        _outerMouthAngle = nil
         
         _innerMouthWidth = nil
         _innerMouthCenter = nil
@@ -158,11 +168,11 @@ class FacePointAnalyzer: FaceAnalyzer {
         return _rightEyeAngle!
     }
     
-    func outterEyeDistance() -> CGFloat {
-        if _outterEyeDistance == nil {
-            _outterEyeDistance = leftEyeStart.distanceTo(point: rightEyeEnd)
+    func outerEyeDistance() -> CGFloat {
+        if _outerEyeDistance == nil {
+            _outerEyeDistance = leftEyeStart.distanceTo(point: rightEyeEnd)
         }
-        return _outterEyeDistance!
+        return _outerEyeDistance!
     }
     
     func eyeToEyeCenter() -> CGPoint {
@@ -221,25 +231,32 @@ class FacePointAnalyzer: FaceAnalyzer {
         return _innerMouthAngle!
     }
     
-    func outterMouthWidth() -> CGFloat {
-        if _outterMouthWidth == nil {
-            _outterMouthWidth = outterMouthStart.distanceTo(point: outterMouthEnd)
+    func outerMouthWidth() -> CGFloat {
+        if _outerMouthWidth == nil {
+            _outerMouthWidth = outerMouthStart.distanceTo(point: outerMouthEnd)
         }
-        return _outterMouthWidth!
+        return _outerMouthWidth!
     }
     
-    func outterMouthCenter() -> CGPoint {
-        if _outterMouthCenter == nil {
-            _outterMouthCenter = outterMouthStart.centerTo(point: outterMouthEnd)
+    func outerMouthCenter() -> CGPoint {
+        if _outerMouthCenter == nil {
+            _outerMouthCenter = outerMouthStart.centerTo(point: outerMouthEnd)
         }
-        return _outterMouthCenter!
+        return _outerMouthCenter!
     }
     
-    func outterMouthAngle() -> CGFloat {
-        if _outterMouthAngle == nil {
-            _outterMouthAngle = outterMouthStart.angleTo(point: outterMouthEnd)
+    func outerMouthAngle() -> CGFloat {
+        if _outerMouthAngle == nil {
+            _outerMouthAngle = outerMouthStart.angleTo(point: outerMouthEnd)
         }
-        return _outterMouthAngle!
+        return _outerMouthAngle!
+    }
+    
+    func topLipCenter() -> CGPoint {
+        if _topLipCenter == nil {
+            _topLipCenter = outerMouthTopLeft.centerTo(point: outerMouthTopRight)
+        }
+        return _topLipCenter!
     }
     
     // MARK: Private

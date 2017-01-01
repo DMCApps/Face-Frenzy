@@ -59,8 +59,12 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         case .nose:
             self.view?.showNoseViewWithFaceItem(faceItem)
             self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer)
-        default:
-            break
+        case .upperLip:
+            self.view?.showLipViewWithFaceItem(faceItem)
+            self.view?.repositionLipView(usingAnalyzer: faceAnalyzer)
+        case .centerMouth:
+            self.view?.showMouthViewWithFaceItem(faceItem)
+            self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer)
         }
     }
     
@@ -86,6 +90,12 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             self.view?.showNoseView()
             self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer)
             
+            self.view?.showLipView()
+            self.view?.repositionLipView(usingAnalyzer: faceAnalyzer)
+            
+            self.view?.showMouthView()
+            self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer)
+            
             if self.model.areFacePointsShown() {
                 self.view?.showFacePoints()
             }
@@ -93,6 +103,10 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         else {
             self.view?.hideFacePoints()
             self.view?.hideHeadView()
+            self.view?.hideEyesView()
+            self.view?.hideNoseView()
+            self.view?.hideLipView()
+            self.view?.hideMouthView()
         }
     }
     

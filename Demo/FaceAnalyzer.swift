@@ -28,7 +28,7 @@ protocol FaceAnalyzer {
     func rightEyeCenter() -> CGPoint
     func rightEyeAngle() -> CGFloat
     
-    func outterEyeDistance() -> CGFloat
+    func outerEyeDistance() -> CGFloat
     func eyeToEyeCenter() -> CGPoint
     func leftToRightEyeAngle() -> CGFloat
     
@@ -40,9 +40,11 @@ protocol FaceAnalyzer {
     func innerMouthCenter() -> CGPoint
     func innerMouthAngle() -> CGFloat
     
-    func outterMouthWidth() -> CGFloat
-    func outterMouthCenter() -> CGPoint
-    func outterMouthAngle() -> CGFloat
+    func outerMouthWidth() -> CGFloat
+    func outerMouthCenter() -> CGPoint
+    func outerMouthAngle() -> CGFloat
+    
+    func topLipCenter() -> CGPoint
 }
 
 // Maybe change to associatedtype and Thunk:

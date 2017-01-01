@@ -28,6 +28,16 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func showNoseViewWithFaceItem(_ faceItem:FaceItem)
     func repositionNoseView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
     
+    func showLipView()
+    func hideLipView()
+    func showLipViewWithFaceItem(_ faceItem:FaceItem)
+    func repositionLipView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    
+    func showMouthView()
+    func hideMouthView()
+    func showMouthViewWithFaceItem(_ faceItem:FaceItem)
+    func repositionMouthView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    
     func showFacePoints()
     func hideFacePoints()
     

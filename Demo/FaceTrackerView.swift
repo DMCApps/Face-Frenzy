@@ -16,6 +16,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var leftEyeImageView = UIImageView()
     var rightEyeImageView = UIImageView()
     var noseImageView = UIImageView()
+    var lipImageView = UIImageView()
+    var mouthImageView = UIImageView()
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
@@ -39,6 +41,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         self.view.insertSubview(leftEyeImageView, aboveSubview: faceTrackerContainerView)
         self.view.insertSubview(rightEyeImageView, aboveSubview: faceTrackerContainerView)
         self.view.insertSubview(noseImageView, aboveSubview: faceTrackerContainerView)
+        self.view.insertSubview(lipImageView, aboveSubview: faceTrackerContainerView)
+        self.view.insertSubview(mouthImageView, aboveSubview: faceTrackerContainerView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,7 +165,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             !headImageView.isHidden,
             let image = headImageView.image {
             
-            let hatWidth = 2.0 * faceAnalyzer.outterEyeDistance()
+            let hatWidth = 2.0 * faceAnalyzer.outerEyeDistance()
             let hatHeight = (image.size.height / image.size.width) * hatWidth
             
             headImageView.transform = CGAffineTransform.identity
@@ -246,6 +250,64 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             let angle = faceAnalyzer.noseAngle()
             
             placeImageView(noseImageView,
+                           center: center,
+                           width: width,
+                           angle: angle)
+        }
+    }
+    
+    func showLipView() {
+        lipImageView.isHidden = false
+    }
+    
+    func hideLipView() {
+        lipImageView.isHidden = true
+    }
+    
+    func showLipViewWithFaceItem(_ faceItem: FaceItem) {
+        lipImageView.image = UIImage(named: faceItem.imageName)
+        lipImageView.anchorTo(point: faceItem.anchorPoint)
+    }
+    
+    func repositionLipView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+        if faceAnalyzer.isReady(),
+            !lipImageView.isHidden,
+            lipImageView.image != nil {
+            
+            let width = faceAnalyzer.outerMouthWidth() + 60
+            let center = faceAnalyzer.outerMouthCenter()
+            let angle = faceAnalyzer.outerMouthAngle()
+            
+            placeImageView(lipImageView,
+                           center: center,
+                           width: width,
+                           angle: angle)
+        }
+    }
+    
+    func showMouthView() {
+        mouthImageView.isHidden = false
+    }
+    
+    func hideMouthView() {
+        mouthImageView.isHidden = true
+    }
+    
+    func showMouthViewWithFaceItem(_ faceItem: FaceItem) {
+        mouthImageView.image = UIImage(named: faceItem.imageName)
+        mouthImageView.anchorTo(point: faceItem.anchorPoint)
+    }
+    
+    func repositionMouthView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+        if faceAnalyzer.isReady(),
+            !mouthImageView.isHidden,
+            mouthImageView.image != nil {
+            
+            let width = faceAnalyzer.innerMouthWidth() + 20
+            let center = faceAnalyzer.innerMouthCenter()
+            let angle = faceAnalyzer.innerMouthAngle()
+            
+            placeImageView(mouthImageView,
                            center: center,
                            width: width,
                            angle: angle)
