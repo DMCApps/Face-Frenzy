@@ -11,6 +11,8 @@ import FaceTracker
 
 protocol FaceTrackerViewOps: NSObjectProtocol {
     
+    func stopLoadingAnimation()
+    
     func positionFacePoints(_ points:FacePoints)
     
     func showHeadView()
@@ -55,6 +57,8 @@ protocol FaceTrackerViewPresenterOps: ActionsDelegate {
     func viewDidLoad(withView view:FaceTrackerViewOps)
     
     func didReceiveFacePoints(_ points:FacePoints?)
+    
+    func faceTrackerDidFinishLoading()
     
 }
 

@@ -18,6 +18,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var noseImageView = UIImageView()
     var lipImageView = UIImageView()
     var mouthImageView = UIImageView()
+    
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
@@ -53,7 +54,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         super.viewDidAppear(animated)
         
         faceTrackerViewController!.startTracking { () -> Void in
-            self.activityIndicator.stopAnimating()
+            self.presenter.faceTrackerDidFinishLoading()
         }
     }
     
@@ -78,7 +79,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         }
         else if segue.identifier == "embedActionsViewController" {
             actionsView = segue.destination as? ActionsView
-            // TODO: with MVP should the view or the presenter be the delegate?
             actionsView!.delegate = self.presenter
         }
     }
@@ -122,8 +122,11 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     // MARK: <FaceTrackerViewOps>
     
+    func stopLoadingAnimation() {
+        self.activityIndicator.stopAnimating()
+    }
+    
     func positionFacePoints(_ points:FacePoints) {
-        // Allocate some views for the points if needed
         if (pointViews.count == 0) {
             let numPoints = points.getTotalNumberOFPoints()
             for _ in 0...numPoints {
@@ -135,7 +138,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             }
         }
         
-        // Set frame for each point view
         points.enumeratePoints({ (point, index) -> Void in
             let pointView = self.pointViews[index]
             let pointSize: CGFloat = 4
@@ -207,7 +209,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             rightEyeImageView.image != nil {
             
             let leftImageWidth = faceAnalyzer.leftEyeWidth() + 20
-            let leftEyeCenter = faceAnalyzer.leftEyeCenter()
+            let leftEyeCenter = faceAnalyzer.leftEyeCenter() + faceItem.centerOffset
             let leftImageAngle = faceAnalyzer.leftEyeAngle()
             
             placeImageView(leftEyeImageView,
@@ -216,7 +218,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
                            angle: leftImageAngle)
             
             let rightImageWidth = faceAnalyzer.rightEyeWidth() + 20
-            let rightEyeCenter = faceAnalyzer.rightEyeCenter()
+            let rightEyeCenter = faceAnalyzer.rightEyeCenter() + faceItem.centerOffset
             let rightImageAngle = faceAnalyzer.rightEyeAngle()
             
             placeImageView(rightEyeImageView,
@@ -246,7 +248,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             noseImageView.image != nil {
             
             let width = faceAnalyzer.noseWidth() + 20
-            let center = faceAnalyzer.noseCenter()
+            let center = faceAnalyzer.noseCenter() + faceItem.centerOffset
             let angle = faceAnalyzer.noseAngle()
             
             placeImageView(noseImageView,
@@ -275,7 +277,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             lipImageView.image != nil {
             
             let width = faceAnalyzer.outerMouthWidth() + 60
-            let center = faceAnalyzer.outerMouthCenter()
+            let center = faceAnalyzer.outerMouthCenter() + faceItem.centerOffset
             let angle = faceAnalyzer.outerMouthAngle()
             
             placeImageView(lipImageView,
@@ -304,7 +306,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             mouthImageView.image != nil {
             
             let width = faceAnalyzer.innerMouthWidth() + 20
-            let center = faceAnalyzer.innerMouthCenter()
+            let center = faceAnalyzer.innerMouthCenter() + faceItem.centerOffset
             let angle = faceAnalyzer.innerMouthAngle()
             
             placeImageView(mouthImageView,

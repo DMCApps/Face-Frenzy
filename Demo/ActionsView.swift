@@ -36,6 +36,19 @@ class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewD
     
     private var presenter:ActionsViewPresenterOps!
     
+    private static let faceItems = [
+        FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "hat"),
+        FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "horns"),
+        FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "light"),
+        FaceItem(position: .eyes, anchorPoint: CGPoint(x:0.5, y:1), imageName: "heart"),
+        FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_nose"),
+        FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "pig_nose"),
+        FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "beard"),
+        FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "lips"),
+        FaceItem(position: .upperLip, anchorPoint: CGPoint(x:0.5, y:1), imageName: "mustache"),
+        FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_tongue", centerOffset: CGPoint(x: 0, y: 40))
+    ]
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -109,33 +122,18 @@ class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewD
         }
     }
     
-    func faceItems() -> [FaceItem] {
-        return [
-            FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "hat"),
-            FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "horns"),
-            FaceItem(position: .head, anchorPoint: CGPoint(x:0.5, y:1), imageName: "light"),
-            FaceItem(position: .eyes, anchorPoint: CGPoint(x:0.5, y:1), imageName: "heart"),
-            FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_nose"),
-            FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "pig_nose"),
-            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "beard"),
-            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "lips"),
-            FaceItem(position: .upperLip, anchorPoint: CGPoint(x:0.5, y:1), imageName: "mustache"),
-            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_tongue", centerOffset: CGPoint(x: 0, y: 60))
-        ]
-    }
-    
     // MARK: <NameOfProtocol>
     
     // MARK: <UICollectionViewDataSource>
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return faceItems().count
+        return ActionsView.faceItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         
-        let faceItem = faceItems()[indexPath.row];
+        let faceItem = ActionsView.faceItems[indexPath.row];
         let imageView = cell.viewWithTag(1000) as! UIImageView
         imageView.image = UIImage(named: faceItem.imageName)
         
@@ -145,7 +143,7 @@ class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewD
     // MARK: <UICollectionViewDelegate>
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate.didSelectFaceItem(faceItems()[indexPath.row])
+        self.delegate.didSelectFaceItem(ActionsView.faceItems[indexPath.row])
     }
     
     // MARK: <ActionsViewOps>

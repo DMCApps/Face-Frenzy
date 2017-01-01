@@ -115,6 +115,10 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     // Mark: FaceTrackerViewPresenterOps
     
+    func faceTrackerDidFinishLoading() {
+        self.view?.stopLoadingAnimation()
+    }
+    
     func viewDidLoad(withView view:FaceTrackerViewOps) {
         self.view = view
         self.model = FaceTrackerModel(presenter: self)

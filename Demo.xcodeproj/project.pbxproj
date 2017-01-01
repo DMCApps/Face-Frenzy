@@ -22,6 +22,8 @@
 		176699551E1845D80026F471 /* FacePointAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176699541E1845D80026F471 /* FacePointAnalyzer.swift */; };
 		176EF77E1E184CB900FB5B86 /* FaceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF77D1E184CB900FB5B86 /* FaceAnalyzer.swift */; };
 		176EF7811E186B1000FB5B86 /* FaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7801E186B1000FB5B86 /* FaceItem.swift */; };
+		176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7821E197BAB00FB5B86 /* Animatable.swift */; };
+		176EF7861E197C1700FB5B86 /* HeartAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7851E197C1700FB5B86 /* HeartAnimation.swift */; };
 		CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81041C7E17E6007345D1 /* AppDelegate.swift */; };
 		CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */; };
 		CECE810A1C7E17E6007345D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE81081C7E17E6007345D1 /* Main.storyboard */; };
@@ -61,6 +63,8 @@
 		176699541E1845D80026F471 /* FacePointAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacePointAnalyzer.swift; sourceTree = "<group>"; };
 		176EF77D1E184CB900FB5B86 /* FaceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceAnalyzer.swift; sourceTree = "<group>"; };
 		176EF7801E186B1000FB5B86 /* FaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItem.swift; sourceTree = "<group>"; };
+		176EF7821E197BAB00FB5B86 /* Animatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
+		176EF7851E197C1700FB5B86 /* HeartAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartAnimation.swift; sourceTree = "<group>"; };
 		CECE81011C7E17E6007345D1 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE81041C7E17E6007345D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackerView.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 		176699531E18458D0026F471 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				176EF7841E197C0500FB5B86 /* Animations */,
 				176EF77F1E186AEF00FB5B86 /* Face Analyzer */,
 				176EF7801E186B1000FB5B86 /* FaceItem.swift */,
 			);
@@ -150,6 +155,15 @@
 				176699541E1845D80026F471 /* FacePointAnalyzer.swift */,
 			);
 			name = "Face Analyzer";
+			sourceTree = "<group>";
+		};
+		176EF7841E197C0500FB5B86 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				176EF7821E197BAB00FB5B86 /* Animatable.swift */,
+				176EF7851E197C1700FB5B86 /* HeartAnimation.swift */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 		CECE80F81C7E17E6007345D1 = {
@@ -262,7 +276,9 @@
 				176699411E16C54C0026F471 /* FaceTrackerModel.swift in Sources */,
 				176699551E1845D80026F471 /* FacePointAnalyzer.swift in Sources */,
 				1766994A1E16DBDA0026F471 /* ActionsMVP.swift in Sources */,
+				176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */,
 				1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */,
+				176EF7861E197C1700FB5B86 /* HeartAnimation.swift in Sources */,
 				176699521E16EAFA0026F471 /* Comparable+Clamp.swift in Sources */,
 				1766994E1E16DC210026F471 /* ActionsPresenter.swift in Sources */,
 				176699451E16D71C0026F471 /* CGPoint+Calculations.swift in Sources */,

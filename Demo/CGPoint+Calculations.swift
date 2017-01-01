@@ -21,4 +21,9 @@ extension CGPoint {
     func angleTo(point: CGPoint) -> CGFloat {
         return atan2(point.y - self.y, point.x - self.x)
     }
+    
+    static func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+        return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+    
 }
