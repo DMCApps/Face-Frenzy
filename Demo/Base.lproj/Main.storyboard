@@ -188,10 +188,6 @@
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="A57-he-e5a" id="evN-vh-kp9"/>
-                                    <outlet property="delegate" destination="A57-he-e5a" id="YDi-4p-9e9"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,6 +205,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ibFaceItemCollectionsView" destination="LNJ-5l-RbW" id="r8Q-yi-0B0"/>
                         <outlet property="ibOpenCloseButton" destination="EYR-t9-xSj" id="LJW-yv-Lee"/>
                         <outlet property="ibShowPointsSwitch" destination="L8o-bg-sK2" id="h72-v7-Ns3"/>
                     </connections>
