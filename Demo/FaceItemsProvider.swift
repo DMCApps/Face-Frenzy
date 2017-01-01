@@ -18,9 +18,8 @@ class FaceItemProvider {
         FaceItem(position: .eyes, anchorPoint: CGPoint(x:0.5, y:1), imageName: "heart"),
         FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_nose"),
         FaceItem(position: .nose, anchorPoint: CGPoint(x:0.5, y:1), imageName: "pig_nose"),
-        FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "beard"),
         FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "lips"),
-        FaceItem(position: .upperLip, anchorPoint: CGPoint(x:0.5, y:1), imageName: "mustache"),
+        FaceItem(position: .upperLip, anchorPoint: CGPoint(x:0.5, y:1), imageName: "mustache", centerOffset: CGPoint(x:0, y:-20)),
         FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_tongue", centerOffset: CGPoint(x: 0, y: 40))
     ]
     

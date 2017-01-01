@@ -33,7 +33,6 @@ class ActionsView: UIViewController, ActionsViewOps {
     @IBOutlet weak var ibShowPointsSwitch: UISwitch!
     @IBOutlet weak var ibFaceItemCollectionsView: UICollectionView!
     
-    
     public var delegate:ActionsDelegate!
     
     private var presenter:ActionsViewPresenterOps!
