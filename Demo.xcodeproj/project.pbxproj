@@ -26,6 +26,7 @@
 		176EF7861E197C1700FB5B86 /* HeartAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7851E197C1700FB5B86 /* HeartAnimation.swift */; };
 		17D5C7421E19828500B44E24 /* FaceItemsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D5C7411E19828500B44E24 /* FaceItemsDataSource.swift */; };
 		17D5C7441E19841300B44E24 /* FaceItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D5C7431E19841300B44E24 /* FaceItemsProvider.swift */; };
+		17D5C7491E1985F800B44E24 /* FaceItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D5C7481E1985F800B44E24 /* FaceItemCollectionViewCell.swift */; };
 		CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81041C7E17E6007345D1 /* AppDelegate.swift */; };
 		CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */; };
 		CECE810A1C7E17E6007345D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECE81081C7E17E6007345D1 /* Main.storyboard */; };
@@ -69,6 +70,7 @@
 		176EF7851E197C1700FB5B86 /* HeartAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartAnimation.swift; sourceTree = "<group>"; };
 		17D5C7411E19828500B44E24 /* FaceItemsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemsDataSource.swift; sourceTree = "<group>"; };
 		17D5C7431E19841300B44E24 /* FaceItemsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemsProvider.swift; sourceTree = "<group>"; };
+		17D5C7481E1985F800B44E24 /* FaceItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		CECE81011C7E17E6007345D1 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE81041C7E17E6007345D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackerView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				17D5C7411E19828500B44E24 /* FaceItemsDataSource.swift */,
+				17D5C7481E1985F800B44E24 /* FaceItemCollectionViewCell.swift */,
 			);
 			name = CollectionView;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				176699411E16C54C0026F471 /* FaceTrackerModel.swift in Sources */,
 				176699551E1845D80026F471 /* FacePointAnalyzer.swift in Sources */,
 				1766994A1E16DBDA0026F471 /* ActionsMVP.swift in Sources */,
+				17D5C7491E1985F800B44E24 /* FaceItemCollectionViewCell.swift in Sources */,
 				176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */,
 				1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */,
 				176EF7861E197C1700FB5B86 /* HeartAnimation.swift in Sources */,

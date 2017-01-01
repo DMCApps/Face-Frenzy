@@ -37,11 +37,9 @@ class FaceItemsDataSource: NSObject, UICollectionViewDataSource, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! FaceItemCollectionViewCell
 
-        let faceItem = self.dataSource[indexPath.row];
-        let imageView = cell.viewWithTag(1000) as! UIImageView
-        imageView.image = UIImage(named: faceItem.imageName)
+        cell.faceItem = self.dataSource[indexPath.row]
 
         return cell
     }
@@ -49,35 +47,8 @@ class FaceItemsDataSource: NSObject, UICollectionViewDataSource, UICollectionVie
     // MARK: <UICollectionViewDelegate>
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate.didSelectFaceItem(self.dataSource[indexPath.row])
+        let cell = collectionView.cellForItem(at: indexPath) as! FaceItemCollectionViewCell
+        self.delegate.didSelectFaceItem(cell.faceItem)
     }
     
 }
-
-//class FaceItemsDataSource: UICollectionViewDataSource, UICollectionViewDelegate {
-//    
-//    // MARK: Properties
-//    
-//    // MARK: <UICollectionViewDataSource>
-//    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return ActionsView.faceItems.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
-//        
-//        let faceItem = ActionsView.faceItems[indexPath.row];
-//        let imageView = cell.viewWithTag(1000) as! UIImageView
-//        imageView.image = UIImage(named: faceItem.imageName)
-//        
-//        return cell
-//    }
-//    
-//    // MARK: <UICollectionViewDelegate>
-//    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        self.delegate.didSelectFaceItem(ActionsView.faceItems[indexPath.row])
-//    }
-//    
-//}

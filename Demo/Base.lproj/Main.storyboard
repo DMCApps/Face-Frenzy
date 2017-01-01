@@ -168,7 +168,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="GAv-fD-QHq">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="GAv-fD-QHq" customClass="FaceItemCollectionViewCell" customModule="Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -186,6 +186,9 @@
                                             <constraint firstAttribute="bottom" secondItem="9yP-g7-rJ7" secondAttribute="bottom" constant="4" id="gU9-uq-brc"/>
                                             <constraint firstItem="9yP-g7-rJ7" firstAttribute="top" secondItem="GAv-fD-QHq" secondAttribute="top" constant="4" id="p08-8l-Hmr"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="ibImageView" destination="9yP-g7-rJ7" id="dZV-jd-cMg"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
