@@ -49,6 +49,8 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func openActionsMenu()
     func closeActionsMenu()
     
+    func swapCamera()
+    
     func didBeginTranslation()
     func didTranslateBy(_ translation:CGFloat)
     func didEndTranslation()

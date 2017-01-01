@@ -23,6 +23,10 @@ protocol ActionsDelegate {
     
     func didSelectFaceItem(_ faceItem:FaceItem)
     
+    func swapCamera()
+    
+    func clearAllFaceItems()
+    
 }
 
 class ActionsView: UIViewController, ActionsViewOps {
@@ -98,6 +102,13 @@ class ActionsView: UIViewController, ActionsViewOps {
         self.presenter.didClickToggleFacePoints()
     }
     
+    @IBAction func swapCameraClick(_ sender: UIButton) {
+        self.presenter.didClickSwapCamera()
+    }
+    
+    @IBAction func clearSelectionClick(_ sender: UIButton) {
+        self.presenter.didClickClearSelection()
+    }
     // MARK: Public
     
     // MARK: Private
@@ -137,12 +148,12 @@ class ActionsView: UIViewController, ActionsViewOps {
         self.delegate.hideFacePoints()
     }
     
-    func toggleShowFacePointsOn() {
-        self.ibShowPointsSwitch.setOn(true, animated: true)
+    func swapCamera() {
+        self.delegate.swapCamera()
     }
     
-    func toggleShowFacePointsOff() {
-        self.ibShowPointsSwitch.setOn(false, animated: true)
+    func clearAllFaceItems() {
+        self.delegate.clearAllFaceItems()
     }
     
 }

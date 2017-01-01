@@ -16,8 +16,9 @@ protocol ActionsViewOps: NSObjectProtocol {
     func showFacePoints()
     func hideFacePoints()
     
-    func toggleShowFacePointsOn()
-    func toggleShowFacePointsOff()
+    func swapCamera()
+    
+    func clearAllFaceItems()
     
 }
 
@@ -27,6 +28,8 @@ protocol ActionsViewPresenterOps {
     
     func didClickOpenClose()
     func didClickToggleFacePoints()
+    func didClickSwapCamera()
+    func didClickClearSelection()
     
 }
 

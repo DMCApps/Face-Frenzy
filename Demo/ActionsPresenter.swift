@@ -30,17 +30,24 @@ class ActionsPresenter: ActionsViewPresenterOps, ActionsModelPresenterOps {
         }
     }
     
+    func didClickSwapCamera() {
+        self.view?.swapCamera()
+    }
+    
     func didClickToggleFacePoints() {
         self.model.toggleFacePointsState()
         if self.model.areFacePointsShown {
             self.view?.showFacePoints()
-            self.view?.toggleShowFacePointsOn()
         }
         else {
             self.view?.hideFacePoints()
-            self.view?.toggleShowFacePointsOff()
         }
     }
+    
+    func didClickClearSelection() {
+        self.view?.clearAllFaceItems()
+    }
+    
     // Mark: ActionsModelPresenterOps
     
 }

@@ -16,6 +16,74 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     private let faceAnalyzer:FaceAnalyzer = FacePointAnalyzer()
     
+    // MARK: Private
+    
+    func clearHeadFaceItem() {
+        self.model.headFaceItem = nil
+        self.view?.hideHeadView()
+    }
+    
+    func addHeadFaceItem(_ faceItem:FaceItem) {
+        self.model.headFaceItem = faceItem
+        self.view?.showHeadViewWithFaceItem(faceItem)
+        self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+    }
+    
+    func clearEyesFaceItem() {
+        // TODO: How do I make this into a nice model
+        if self.model.eyesFaceItem?.imageName == "heart" {
+            self.view?.stopAnimatingHearts()
+        }
+        
+        self.model.eyesFaceItem = nil
+        self.view?.hideEyesView()
+    }
+    
+    func addEyesFaceItem(_ faceItem:FaceItem) {
+        self.model.eyesFaceItem = faceItem
+        
+        // TODO: How do I make this into a nice model and actionable item
+        if faceItem.imageName == "heart" {
+            self.view?.startAnimatingHearts()
+        }
+        
+        self.view?.showEyesViewWithFaceItem(faceItem)
+        self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+    }
+    
+    func clearNoseFaceItem() {
+        self.model.noseFaceItem = nil
+        self.view?.hideNoseView()
+    }
+    
+    func addNoseFaceItem(_ faceItem:FaceItem) {
+        self.model.noseFaceItem = faceItem
+        self.view?.showNoseViewWithFaceItem(faceItem)
+        self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+    }
+    
+    func clearLipFaceItem() {
+        self.model.lipFaceItem = nil
+        self.view?.hideLipView()
+    }
+    
+    func addLipFaceItem(_ faceItem:FaceItem) {
+        self.model.lipFaceItem = faceItem
+        self.view?.showLipViewWithFaceItem(faceItem)
+        self.view?.repositionLipView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+    }
+    
+    func clearMouthFaceItem() {
+        self.model.mouthFaceItem = nil
+        self.view?.hideMouthView()
+    }
+    
+    func addMouthFaceItem(_ faceItem:FaceItem) {
+        self.model.mouthFaceItem = faceItem
+        self.view?.showMouthViewWithFaceItem(faceItem)
+        self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+    }
+
     // MARK: <ActionsDelegate>
     
     func openActionsMenu() {
@@ -63,77 +131,53 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func didSelectFaceItem(_ faceItem: FaceItem) {
         switch faceItem.position {
         case .head:
-            if let currentFaceItem = self.model.headFaceItem,
-                currentFaceItem == faceItem {
-                
-                self.model.headFaceItem = nil
-                self.view?.hideHeadView()
+            if let currentFaceItem = self.model.headFaceItem, currentFaceItem == faceItem {
+                clearHeadFaceItem()
             }
             else {
-                self.model.headFaceItem = faceItem
-                self.view?.showHeadViewWithFaceItem(faceItem)
-                self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+                addHeadFaceItem(faceItem)
             }
         case .eyes:
-            if let currentFaceItem = self.model.eyesFaceItem,
-                currentFaceItem == faceItem {
-                
-                // TODO: How do I make this into a nice model
-                if faceItem.imageName == "heart" {
-                    self.view?.stopAnimatingHearts()
-                }
-                
-                self.model.eyesFaceItem = nil
-                self.view?.hideEyesView()
+            if let currentFaceItem = self.model.eyesFaceItem, currentFaceItem == faceItem {
+                clearEyesFaceItem()
             }
             else {
-                self.model.eyesFaceItem = faceItem
-                
-                // TODO: How do I make this into a nice model and actionable item
-                if faceItem.imageName == "heart" {
-                    self.view?.startAnimatingHearts()
-                }
-                
-                self.view?.showEyesViewWithFaceItem(faceItem)
-                self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+                addEyesFaceItem(faceItem)
             }
         case .nose:
-            if let currentFaceItem = self.model.noseFaceItem,
-                currentFaceItem == faceItem {
-                
-                self.model.noseFaceItem = nil
-                self.view?.hideNoseView()
+            if let currentFaceItem = self.model.noseFaceItem, currentFaceItem == faceItem {
+                clearNoseFaceItem()
             }
             else {
-                self.model.noseFaceItem = faceItem
-                self.view?.showNoseViewWithFaceItem(faceItem)
-                self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+                addNoseFaceItem(faceItem)
             }
         case .upperLip:
-            if let currentFaceItem = self.model.lipFaceItem,
-                currentFaceItem == faceItem {
-                
-                self.model.lipFaceItem = nil
-                self.view?.hideLipView()
+            if let currentFaceItem = self.model.lipFaceItem, currentFaceItem == faceItem {
+                clearLipFaceItem()
             }
             else {
-                self.model.lipFaceItem = faceItem
-                self.view?.showLipViewWithFaceItem(faceItem)
-                self.view?.repositionLipView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+                addLipFaceItem(faceItem)
             }
         case .centerMouth:
-            if let currentFaceItem = self.model.mouthFaceItem,
-                currentFaceItem == faceItem {
-                
-                self.model.mouthFaceItem = nil
-                self.view?.hideMouthView()
+            if let currentFaceItem = self.model.mouthFaceItem, currentFaceItem == faceItem {
+                clearMouthFaceItem()
             }
             else {
-                self.model.mouthFaceItem = faceItem
-                self.view?.showMouthViewWithFaceItem(faceItem)
-                self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+                addMouthFaceItem(faceItem)
             }
         }
+    }
+    
+    func swapCamera() {
+        self.view?.swapCamera()
+    }
+    
+    func clearAllFaceItems() {
+        clearHeadFaceItem()
+        clearEyesFaceItem()
+        clearNoseFaceItem()
+        clearLipFaceItem()
+        clearMouthFaceItem()
     }
     
     // Mark: FaceTrackerViewPresenterOps

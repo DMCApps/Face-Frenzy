@@ -152,8 +152,12 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         })
     }
     
+    func swapCamera() {
+        faceTrackerViewController?.swapCamera()
+    }
+    
     func startAnimatingHearts() {
-        self.animatedHeartsTimer = Timer.scheduledTimer(timeInterval: 0.4,
+        self.animatedHeartsTimer = Timer.scheduledTimer(timeInterval: 0.2,
                                                         target: self,
                                                         selector: #selector(self.addRandomHeartAndAnimate),
                                                         userInfo: nil,
@@ -174,7 +178,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         self.animatedHearts.append(heartImageView)
         self.view.insertSubview(heartImageView, aboveSubview: faceTrackerContainerView)
         
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 1.2, animations: {
             heartImageView.center = CGPoint(x: heartImageView.center.x, y: heartImageView.center.y - 50)
             heartImageView.alpha = 0.0
         }) { [unowned self] (complete) in

@@ -116,43 +116,64 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGI-sB-PaI">
                                         <rect key="frame" x="0.0" y="0.0" width="114.5" height="74"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNp-qG-ytn">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNp-qG-ytn">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="74"/>
+                                                <color key="tintColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" image="ic_info_outline_white"/>
                                                 <connections>
                                                     <action selector="toggleFacePointsClick:" destination="A57-he-e5a" eventType="touchUpInside" id="5gH-7m-ecc"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mlm-V2-mLo">
-                                                <rect key="frame" x="0.0" y="8" width="114.5" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8o-bg-sK2">
-                                                <rect key="frame" x="33" y="35" width="51" height="31"/>
-                                            </switch>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="L8o-bg-sK2" firstAttribute="centerX" secondItem="GGI-sB-PaI" secondAttribute="centerX" id="0SK-ay-Ryw"/>
                                             <constraint firstItem="NNp-qG-ytn" firstAttribute="leading" secondItem="GGI-sB-PaI" secondAttribute="leading" id="5sJ-mC-Gcd"/>
                                             <constraint firstAttribute="bottom" secondItem="NNp-qG-ytn" secondAttribute="bottom" id="H7a-bQ-UGi"/>
-                                            <constraint firstAttribute="trailing" secondItem="Mlm-V2-mLo" secondAttribute="trailing" id="Xgr-2a-Na0"/>
                                             <constraint firstAttribute="trailing" secondItem="NNp-qG-ytn" secondAttribute="trailing" id="Yfq-Pv-RQd"/>
-                                            <constraint firstItem="Mlm-V2-mLo" firstAttribute="top" secondItem="GGI-sB-PaI" secondAttribute="top" constant="8" id="caW-Nk-Sw0"/>
                                             <constraint firstItem="NNp-qG-ytn" firstAttribute="top" secondItem="GGI-sB-PaI" secondAttribute="top" id="ewB-WH-oCF"/>
-                                            <constraint firstAttribute="bottom" secondItem="L8o-bg-sK2" secondAttribute="bottom" constant="8" id="pQd-FI-eKa"/>
-                                            <constraint firstItem="L8o-bg-sK2" firstAttribute="top" secondItem="Mlm-V2-mLo" secondAttribute="bottom" constant="6" id="r4S-GC-xwS"/>
-                                            <constraint firstItem="Mlm-V2-mLo" firstAttribute="leading" secondItem="GGI-sB-PaI" secondAttribute="leading" id="zt3-5F-zQI"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTE-fD-FMC">
                                         <rect key="frame" x="114.5" y="0.0" width="114" height="74"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edx-ej-hmi">
+                                                <rect key="frame" x="0.0" y="0.0" width="114" height="74"/>
+                                                <color key="tintColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" image="ic_switch_camera_white"/>
+                                                <connections>
+                                                    <action selector="swapCameraClick:" destination="A57-he-e5a" eventType="touchUpInside" id="kVE-Mf-ptk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="edx-ej-hmi" firstAttribute="leading" secondItem="ZTE-fD-FMC" secondAttribute="leading" id="05w-GF-37s"/>
+                                            <constraint firstAttribute="bottom" secondItem="edx-ej-hmi" secondAttribute="bottom" id="8ZO-ys-2KY"/>
+                                            <constraint firstAttribute="trailing" secondItem="edx-ej-hmi" secondAttribute="trailing" id="Tj3-nU-WCl"/>
+                                            <constraint firstItem="edx-ej-hmi" firstAttribute="top" secondItem="ZTE-fD-FMC" secondAttribute="top" id="oHh-mU-wbt"/>
+                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40e-Lh-cth">
                                         <rect key="frame" x="228.5" y="0.0" width="114.5" height="74"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vM-RX-YKd">
+                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="74"/>
+                                                <color key="tintColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" image="ic_clear_white">
+                                                    <color key="titleColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="clearSelectionClick:" destination="A57-he-e5a" eventType="touchUpInside" id="G0z-9H-bDO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="5vM-RX-YKd" firstAttribute="top" secondItem="40e-Lh-cth" secondAttribute="top" id="6vz-xj-yUf"/>
+                                            <constraint firstItem="5vM-RX-YKd" firstAttribute="leading" secondItem="40e-Lh-cth" secondAttribute="leading" id="7ck-xp-hJO"/>
+                                            <constraint firstAttribute="trailing" secondItem="5vM-RX-YKd" secondAttribute="trailing" id="anl-oc-2te"/>
+                                            <constraint firstAttribute="bottom" secondItem="5vM-RX-YKd" secondAttribute="bottom" id="hc7-MZ-FSu"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -211,7 +232,6 @@
                     <connections>
                         <outlet property="ibFaceItemCollectionsView" destination="LNJ-5l-RbW" id="r8Q-yi-0B0"/>
                         <outlet property="ibOpenCloseButton" destination="EYR-t9-xSj" id="LJW-yv-Lee"/>
-                        <outlet property="ibShowPointsSwitch" destination="L8o-bg-sK2" id="h72-v7-Ns3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SL0-zt-hEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -221,6 +241,9 @@
     </scenes>
     <resources>
         <image name="heart" width="31" height="28"/>
-        <image name="ic_remove_white" width="36" height="36"/>
+        <image name="ic_clear_white" width="48" height="48"/>
+        <image name="ic_info_outline_white" width="48" height="48"/>
+        <image name="ic_remove_white" width="48" height="48"/>
+        <image name="ic_switch_camera_white" width="48" height="48"/>
     </resources>
 </document>
