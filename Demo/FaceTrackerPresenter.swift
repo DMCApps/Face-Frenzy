@@ -28,12 +28,12 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     func showFacePoints() {
         self.view?.showFacePoints()
-        self.model.setFacePointsShown(true)
+        self.model.areFacePointsShown = true
     }
     
     func hideFacePoints() {
         self.view?.hideFacePoints()
-        self.model.setFacePointsShown(false)
+        self.model.areFacePointsShown = false
     }
     
     func didBeginTranslation() {
@@ -51,20 +51,65 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func didSelectFaceItem(_ faceItem: FaceItem) {
         switch faceItem.position {
         case .head:
-            self.view?.showHeadViewWithFaceItem(faceItem)
-            self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+            if let currentFaceItem = self.model.headFaceItem,
+                currentFaceItem == faceItem {
+                
+                self.model.headFaceItem = nil
+                self.view?.hideHeadView()
+            }
+            else {
+                self.model.headFaceItem = faceItem
+                self.view?.showHeadViewWithFaceItem(faceItem)
+                self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+            }
         case .eyes:
-            self.view?.showEyesViewWithFaceItem(faceItem)
-            self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer)
+            if let currentFaceItem = self.model.eyesFaceItem,
+                currentFaceItem == faceItem {
+                
+                self.model.eyesFaceItem = nil
+                self.view?.hideEyesView()
+            }
+            else {
+                self.model.eyesFaceItem = faceItem
+                self.view?.showEyesViewWithFaceItem(faceItem)
+                self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+            }
         case .nose:
-            self.view?.showNoseViewWithFaceItem(faceItem)
-            self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer)
+            if let currentFaceItem = self.model.noseFaceItem,
+                currentFaceItem == faceItem {
+                
+                self.model.noseFaceItem = nil
+                self.view?.hideNoseView()
+            }
+            else {
+                self.model.noseFaceItem = faceItem
+                self.view?.showNoseViewWithFaceItem(faceItem)
+                self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+            }
         case .upperLip:
-            self.view?.showLipViewWithFaceItem(faceItem)
-            self.view?.repositionLipView(usingAnalyzer: faceAnalyzer)
+            if let currentFaceItem = self.model.lipFaceItem,
+                currentFaceItem == faceItem {
+                
+                self.model.lipFaceItem = nil
+                self.view?.hideLipView()
+            }
+            else {
+                self.model.lipFaceItem = faceItem
+                self.view?.showLipViewWithFaceItem(faceItem)
+                self.view?.repositionLipView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+            }
         case .centerMouth:
-            self.view?.showMouthViewWithFaceItem(faceItem)
-            self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer)
+            if let currentFaceItem = self.model.mouthFaceItem,
+                currentFaceItem == faceItem {
+                
+                self.model.mouthFaceItem = nil
+                self.view?.hideMouthView()
+            }
+            else {
+                self.model.mouthFaceItem = faceItem
+                self.view?.showMouthViewWithFaceItem(faceItem)
+                self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+            }
         }
     }
     
@@ -79,25 +124,53 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func didReceiveFacePoints(_ points:FacePoints?) {
         if let points = points {
             faceAnalyzer.updatePoints(points)
-            self.view?.positionFacePoints(points)
             
-            self.view?.showHeadView()
-            self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+            if let headFaceItem = self.model.headFaceItem {
+                self.view?.showHeadView()
+                self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer, andFaceItem:headFaceItem)
+            }
+            else {
+                self.view?.hideHeadView()
+            }
             
-            self.view?.showEyesView()
-            self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer)
+            if let eyesFaceItem = self.model.eyesFaceItem {
+                self.view?.showEyesView()
+                self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer, andFaceItem:eyesFaceItem)
+            }
+            else {
+                self.view?.hideEyesView()
+            }
             
-            self.view?.showNoseView()
-            self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer)
+            if let noseFaceItem = self.model.noseFaceItem {
+                self.view?.showNoseView()
+                self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer, andFaceItem:noseFaceItem)
+            }
+            else {
+                self.view?.hideNoseView()
+            }
             
-            self.view?.showLipView()
-            self.view?.repositionLipView(usingAnalyzer: faceAnalyzer)
+            if let lipFaceItem = self.model.lipFaceItem {
+                self.view?.showLipView()
+                self.view?.repositionLipView(usingAnalyzer: faceAnalyzer, andFaceItem:lipFaceItem)
+            }
+            else {
+                self.view?.hideLipView()
+            }
             
-            self.view?.showMouthView()
-            self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer)
+            if let mouthFaceItem = self.model.mouthFaceItem {
+                self.view?.showMouthView()
+                self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer, andFaceItem:mouthFaceItem)
+            }
+            else {
+                self.view?.hideMouthView()
+            }
             
-            if self.model.areFacePointsShown() {
+            if self.model.areFacePointsShown {
+                self.view?.positionFacePoints(points)
                 self.view?.showFacePoints()
+            }
+            else {
+                self.view?.hideFacePoints()
             }
         }
         else {

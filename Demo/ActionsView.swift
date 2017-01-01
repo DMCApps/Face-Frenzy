@@ -120,7 +120,7 @@ class ActionsView: UIViewController, UICollectionViewDelegate, UICollectionViewD
             FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "beard"),
             FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "lips"),
             FaceItem(position: .upperLip, anchorPoint: CGPoint(x:0.5, y:1), imageName: "mustache"),
-            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_tongue")
+            FaceItem(position: .centerMouth, anchorPoint: CGPoint(x:0.5, y:1), imageName: "dog_tongue", centerOffset: CGPoint(x: 0, y: 60))
         ]
     }
     

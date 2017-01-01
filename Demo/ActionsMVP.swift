@@ -36,10 +36,11 @@ protocol ActionsModelPresenterOps {
 
 protocol ActionsModelOps {
     
+    var isMenuOpen:Bool { get set }
+    var areFacePointsShown:Bool { get set }
+    
     func toggleMenuState()
-    func isMenuOpen() -> Bool
     
     func toggleFacePointsState()
-    func isFacePointsShown() -> Bool
     
 }

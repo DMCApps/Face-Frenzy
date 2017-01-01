@@ -12,7 +12,12 @@ class FaceTrackerModel: FaceTrackerModelOps {
     
     // MARK: Properties
     
-    private var _areFacePointsShown:Bool = true
+    var areFacePointsShown:Bool = true
+    var headFaceItem:FaceItem? = nil
+    var eyesFaceItem:FaceItem? = nil
+    var noseFaceItem:FaceItem? = nil
+    var lipFaceItem:FaceItem? = nil
+    var mouthFaceItem:FaceItem? = nil
     
     private let presenter:FaceTrackerModelPresenterOps
     
@@ -27,13 +32,5 @@ class FaceTrackerModel: FaceTrackerModelOps {
     // MARK: Private
     
     // MARK: <FaceTrackerModelPresenterOps>
-    
-    func setFacePointsShown(_ shown:Bool) {
-        self._areFacePointsShown = shown
-    }
-    
-    func areFacePointsShown() -> Bool {
-        return self._areFacePointsShown
-    }
     
 }

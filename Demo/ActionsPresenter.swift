@@ -22,7 +22,7 @@ class ActionsPresenter: ActionsViewPresenterOps, ActionsModelPresenterOps {
     
     func didClickOpenClose() {
         self.model.toggleMenuState()
-        if self.model.isMenuOpen() {
+        if self.model.isMenuOpen {
             self.view?.openActionsMenu()
         }
         else {
@@ -32,7 +32,7 @@ class ActionsPresenter: ActionsViewPresenterOps, ActionsModelPresenterOps {
     
     func didClickToggleFacePoints() {
         self.model.toggleFacePointsState()
-        if self.model.isFacePointsShown() {
+        if self.model.areFacePointsShown {
             self.view?.showFacePoints()
             self.view?.toggleShowFacePointsOn()
         }

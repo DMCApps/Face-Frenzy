@@ -16,27 +16,27 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func showHeadView()
     func hideHeadView()
     func showHeadViewWithFaceItem(_ faceItem:FaceItem)
-    func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
     
     func showEyesView()
     func hideEyesView()
     func showEyesViewWithFaceItem(_ faceItem:FaceItem)
-    func repositionEyesView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func repositionEyesView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
     
     func showNoseView()
     func hideNoseView()
     func showNoseViewWithFaceItem(_ faceItem:FaceItem)
-    func repositionNoseView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func repositionNoseView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
     
     func showLipView()
     func hideLipView()
     func showLipViewWithFaceItem(_ faceItem:FaceItem)
-    func repositionLipView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func repositionLipView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
     
     func showMouthView()
     func hideMouthView()
     func showMouthViewWithFaceItem(_ faceItem:FaceItem)
-    func repositionMouthView(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func repositionMouthView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
     
     func showFacePoints()
     func hideFacePoints()
@@ -64,7 +64,11 @@ protocol FaceTrackerModelPresenterOps {
 
 protocol FaceTrackerModelOps {
     
-    func setFacePointsShown(_ shown:Bool)
-    func areFacePointsShown() -> Bool
+    var areFacePointsShown:Bool { get set }
+    var headFaceItem:FaceItem? { get set }
+    var eyesFaceItem:FaceItem? { get set }
+    var noseFaceItem:FaceItem? { get set }
+    var lipFaceItem:FaceItem? { get set }
+    var mouthFaceItem:FaceItem? { get set }
     
 }

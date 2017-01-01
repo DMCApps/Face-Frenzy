@@ -17,15 +17,20 @@ enum FacePosition {
     case centerMouth
 }
 
-struct FaceItem {
+class FaceItem: Equatable {
     let position:FacePosition
     let anchorPoint:CGPoint
     let imageName:String
+    let centerOffset:CGPoint
     
-    init(position:FacePosition, anchorPoint:CGPoint, imageName:String) {
+    init(position:FacePosition, anchorPoint:CGPoint, imageName:String, centerOffset:CGPoint = CGPoint.zero) {
         self.position = position
         self.anchorPoint = anchorPoint
         self.imageName = imageName
+        self.centerOffset = centerOffset
     }
-    
+}
+
+func ==(lhs:FaceItem, rhs:FaceItem) -> Bool {
+    return lhs.imageName == rhs.imageName
 }

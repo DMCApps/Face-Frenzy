@@ -160,7 +160,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         headImageView.anchorTo(point: faceItem.anchorPoint)
     }
     
-    func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
+    func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem) {
         if faceAnalyzer.isReady(),
             !headImageView.isHidden,
             let image = headImageView.image {
@@ -199,7 +199,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
     }
     
-    func repositionEyesView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+    func repositionEyesView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
         if faceAnalyzer.isReady(),
             !leftEyeImageView.isHidden,
             !rightEyeImageView.isHidden,
@@ -240,7 +240,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         noseImageView.anchorTo(point: faceItem.anchorPoint)
     }
     
-    func repositionNoseView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+    func repositionNoseView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
         if faceAnalyzer.isReady(),
             !noseImageView.isHidden,
             noseImageView.image != nil {
@@ -269,7 +269,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         lipImageView.anchorTo(point: faceItem.anchorPoint)
     }
     
-    func repositionLipView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+    func repositionLipView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
         if faceAnalyzer.isReady(),
             !lipImageView.isHidden,
             lipImageView.image != nil {
@@ -298,7 +298,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         mouthImageView.anchorTo(point: faceItem.anchorPoint)
     }
     
-    func repositionMouthView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+    func repositionMouthView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
         if faceAnalyzer.isReady(),
             !mouthImageView.isHidden,
             mouthImageView.image != nil {
