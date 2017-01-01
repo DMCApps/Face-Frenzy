@@ -18,6 +18,8 @@ class FaceTrackerModel: FaceTrackerModelOps {
     var noseFaceItem:FaceItem? = nil
     var lipFaceItem:FaceItem? = nil
     var mouthFaceItem:FaceItem? = nil
+    var lastTranslationAmount: Double = 0
+    var lastTranslationDirection: TranslationDirection = .up
     
     private let presenter:FaceTrackerModelPresenterOps
     

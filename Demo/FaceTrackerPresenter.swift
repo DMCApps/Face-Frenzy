@@ -38,13 +38,25 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     func didBeginTranslation() {
         self.view?.didBeginTranslation()
+        
+        self.model.lastTranslationDirection = .unknown
+        self.model.lastTranslationAmount = 0
     }
     
     func didTranslateBy(_ translation: CGFloat) {
         self.view?.didTranslateBy(translation)
+        
+        self.model.lastTranslationDirection = (CGFloat(self.model.lastTranslationAmount) - translation) < 0 ? .up : .down
+        self.model.lastTranslationAmount = Double(translation)
     }
     
     func didEndTranslation() {
+        if self.model.lastTranslationDirection == .up {
+            self.view?.openActionsMenu()
+        }
+        else if self.model.lastTranslationDirection == .down {
+            self.view?.closeActionsMenu()
+        }
         self.view?.didEndTranslation()
     }
     

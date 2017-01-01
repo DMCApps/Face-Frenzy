@@ -99,12 +99,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYR-t9-xSj">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYR-t9-xSj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="cJy-U0-8ti"/>
                                 </constraints>
-                                <state key="normal" title="Open"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="ic_remove_white"/>
                                 <connections>
                                     <action selector="openCloseClick:" destination="A57-he-e5a" eventType="touchUpInside" id="Sr9-bt-9lR"/>
                                 </connections>
@@ -220,5 +221,6 @@
     </scenes>
     <resources>
         <image name="heart" width="31" height="28"/>
+        <image name="ic_remove_white" width="36" height="36"/>
     </resources>
 </document>

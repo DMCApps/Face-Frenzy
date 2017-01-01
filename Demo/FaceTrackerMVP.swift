@@ -69,6 +69,12 @@ protocol FaceTrackerModelPresenterOps {
     
 }
 
+enum TranslationDirection {
+    case unknown
+    case up
+    case down
+}
+
 protocol FaceTrackerModelOps {
     
     var areFacePointsShown:Bool { get set }
@@ -77,5 +83,7 @@ protocol FaceTrackerModelOps {
     var noseFaceItem:FaceItem? { get set }
     var lipFaceItem:FaceItem? { get set }
     var mouthFaceItem:FaceItem? { get set }
+    var lastTranslationAmount:Double { get set }
+    var lastTranslationDirection:TranslationDirection { get set }
     
 }
