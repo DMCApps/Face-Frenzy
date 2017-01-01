@@ -30,6 +30,30 @@ class FacePointAnalyzer: FaceAnalyzer {
         return points.rightEye[5]
     }
     
+    var noseStart:CGPoint {
+        return points.nose[0]
+    }
+    
+    var noseEnd:CGPoint {
+        return points.nose[6]
+    }
+    
+    var outterMouthStart:CGPoint {
+        return points.outerMouth[0]
+    }
+    
+    var outterMouthEnd:CGPoint {
+        return points.outerMouth[5]
+    }
+    
+    var innerMouthStart:CGPoint {
+        return points.innerMouth[0]
+    }
+    
+    var innerMouthEnd:CGPoint {
+        return points.innerMouth[5]
+    }
+    
     private var _leftEyeWidth:CGFloat? = nil
     private var _leftEyeCenter:CGPoint? = nil
     private var _leftEyeAngle:CGFloat? = nil
@@ -40,6 +64,18 @@ class FacePointAnalyzer: FaceAnalyzer {
     private var _outterEyeDistance:CGFloat? = nil
     private var _eyeToEyeCenter:CGPoint? = nil
     private var _leftToRightEyeAngle:CGFloat? = nil
+    
+    private var _noseWidth:CGFloat? = nil
+    private var _noseCenter:CGPoint? = nil
+    private var _noseAngle:CGFloat? = nil
+    
+    private var _outterMouthWidth:CGFloat? = nil
+    private var _outterMouthCenter:CGPoint? = nil
+    private var _outterMouthAngle:CGFloat? = nil
+    
+    private var _innerMouthWidth:CGFloat? = nil
+    private var _innerMouthCenter:CGPoint? = nil
+    private var _innerMouthAngle:CGFloat? = nil
     
     // MARK: init
     
@@ -55,15 +91,29 @@ class FacePointAnalyzer: FaceAnalyzer {
     // TODO: This doesn't make sense. This should be done using the thunk and associatedtype explained in FaceAnalyzer class comments no time to implement at this point as it's not an assignment requirement
     func updatePoints<T>(_ points:T) {
         self.points = points as! FacePoints
-        _eyeToEyeCenter = nil
-        _outterEyeDistance = nil
-        _leftToRightEyeAngle = nil
+        
         _leftEyeWidth = nil
         _leftEyeCenter = nil
         _leftEyeAngle = nil
         _rightEyeWidth = nil
         _rightEyeCenter = nil
         _rightEyeAngle = nil
+        
+        _eyeToEyeCenter = nil
+        _outterEyeDistance = nil
+        _leftToRightEyeAngle = nil
+        
+        _noseWidth = nil
+        _noseCenter = nil
+        _noseAngle = nil
+        
+        _outterMouthWidth = nil
+        _outterMouthCenter = nil
+        _outterMouthAngle = nil
+        
+        _innerMouthWidth = nil
+        _innerMouthCenter = nil
+        _innerMouthAngle = nil
     }
     
     func leftEyeWidth() -> CGFloat {
@@ -127,6 +177,69 @@ class FacePointAnalyzer: FaceAnalyzer {
             _leftToRightEyeAngle = leftEyeStart.angleTo(point: rightEyeEnd)
         }
         return _leftToRightEyeAngle!
+    }
+    
+    func noseWidth() -> CGFloat {
+        if _noseWidth == nil {
+            _noseWidth = noseStart.distanceTo(point: noseEnd)
+        }
+        return _noseWidth!
+    }
+    
+    func noseCenter() -> CGPoint {
+        if _noseCenter == nil {
+            _noseCenter = noseStart.centerTo(point: noseEnd)
+        }
+        return _noseCenter!
+    }
+    
+    func noseAngle() -> CGFloat {
+        if _noseAngle == nil {
+            _noseAngle = noseStart.angleTo(point: noseEnd)
+        }
+        return _noseAngle!
+    }
+    
+    func innerMouthWidth() -> CGFloat {
+        if _innerMouthWidth == nil {
+            _innerMouthWidth = innerMouthStart.distanceTo(point: innerMouthEnd)
+        }
+        return _innerMouthWidth!
+    }
+    
+    func innerMouthCenter() -> CGPoint {
+        if _innerMouthCenter == nil {
+            _innerMouthCenter = innerMouthStart.centerTo(point: innerMouthEnd)
+        }
+        return _innerMouthCenter!
+    }
+    
+    func innerMouthAngle() -> CGFloat {
+        if _innerMouthAngle == nil {
+            _innerMouthAngle = innerMouthStart.angleTo(point: innerMouthEnd)
+        }
+        return _innerMouthAngle!
+    }
+    
+    func outterMouthWidth() -> CGFloat {
+        if _outterMouthWidth == nil {
+            _outterMouthWidth = outterMouthStart.distanceTo(point: outterMouthEnd)
+        }
+        return _outterMouthWidth!
+    }
+    
+    func outterMouthCenter() -> CGPoint {
+        if _outterMouthCenter == nil {
+            _outterMouthCenter = outterMouthStart.centerTo(point: outterMouthEnd)
+        }
+        return _outterMouthCenter!
+    }
+    
+    func outterMouthAngle() -> CGFloat {
+        if _outterMouthAngle == nil {
+            _outterMouthAngle = outterMouthStart.angleTo(point: outterMouthEnd)
+        }
+        return _outterMouthAngle!
     }
     
     // MARK: Private

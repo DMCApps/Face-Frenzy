@@ -12,9 +12,10 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var faceTrackerViewController: FaceTrackerViewController?
     var actionsView: ActionsView?
     
-    var headView = UIImageView()
+    var headImageView = UIImageView()
     var leftEyeImageView = UIImageView()
     var rightEyeImageView = UIImageView()
+    var noseImageView = UIImageView()
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
@@ -34,9 +35,10 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
         self.presenter.viewDidLoad(withView:self)
         
-        self.view.insertSubview(headView, aboveSubview: faceTrackerContainerView)
+        self.view.insertSubview(headImageView, aboveSubview: faceTrackerContainerView)
         self.view.insertSubview(leftEyeImageView, aboveSubview: faceTrackerContainerView)
         self.view.insertSubview(rightEyeImageView, aboveSubview: faceTrackerContainerView)
+        self.view.insertSubview(noseImageView, aboveSubview: faceTrackerContainerView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,7 +95,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         }
     }
     
-    func placeEyeImageView(_ imageView:UIImageView, center:CGPoint, width:CGFloat, angle:CGFloat) {
+    func placeImageView(_ imageView:UIImageView, center:CGPoint, width:CGFloat, angle:CGFloat) {
         let height = (imageView.image!.size.height / imageView.image!.size.width) * width
         
         imageView.transform = CGAffineTransform.identity
@@ -141,30 +143,48 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         })
     }
     
+    func showHeadView() {
+        headImageView.isHidden = false
+    }
+    
+    func hideHeadView() {
+        headImageView.isHidden = true
+    }
+    
     func showHeadViewWithFaceItem(_ faceItem: FaceItem) {
-        headView.image = UIImage(named: faceItem.imageName)
-        headView.anchorTo(point: faceItem.anchorPoint)
+        headImageView.image = UIImage(named: faceItem.imageName)
+        headImageView.anchorTo(point: faceItem.anchorPoint)
     }
     
     func repositionHeadView(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
         if faceAnalyzer.isReady(),
-            !headView.isHidden,
-            let image = headView.image {
+            !headImageView.isHidden,
+            let image = headImageView.image {
             
             let hatWidth = 2.0 * faceAnalyzer.outterEyeDistance()
             let hatHeight = (image.size.height / image.size.width) * hatWidth
             
-            headView.transform = CGAffineTransform.identity
+            headImageView.transform = CGAffineTransform.identity
             
             let eyeToEyeCenter = faceAnalyzer.eyeToEyeCenter()
-            headView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2,
+            headImageView.frame = CGRect(x: eyeToEyeCenter.x - hatWidth / 2,
                                    y: eyeToEyeCenter.y - (hatHeight + 75),
                                    width: hatWidth,
                                    height: hatHeight)
             
             let angle = faceAnalyzer.leftToRightEyeAngle()
-            headView.transform = CGAffineTransform(rotationAngle: angle)
+            headImageView.transform = CGAffineTransform(rotationAngle: angle)
         }
+    }
+    
+    func showEyesView() {
+        leftEyeImageView.isHidden = false
+        rightEyeImageView.isHidden = false
+    }
+    
+    func hideEyesView() {
+        leftEyeImageView.isHidden = true
+        rightEyeImageView.isHidden = true
     }
     
     func showEyesViewWithFaceItem(_ faceItem: FaceItem) {
@@ -179,27 +199,56 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         if faceAnalyzer.isReady(),
             !leftEyeImageView.isHidden,
             !rightEyeImageView.isHidden,
-            let leftImage = leftEyeImageView.image,
-            let rightImage = rightEyeImageView.image {
+            leftEyeImageView.image != nil,
+            rightEyeImageView.image != nil {
             
             let leftImageWidth = faceAnalyzer.leftEyeWidth() + 20
             let leftEyeCenter = faceAnalyzer.leftEyeCenter()
             let leftImageAngle = faceAnalyzer.leftEyeAngle()
             
-            placeEyeImageView(leftEyeImageView,
-                              center: leftEyeCenter,
-                              width: leftImageWidth,
-                              angle: leftImageAngle)
+            placeImageView(leftEyeImageView,
+                           center: leftEyeCenter,
+                           width: leftImageWidth,
+                           angle: leftImageAngle)
             
             let rightImageWidth = faceAnalyzer.rightEyeWidth() + 20
             let rightEyeCenter = faceAnalyzer.rightEyeCenter()
             let rightImageAngle = faceAnalyzer.rightEyeAngle()
             
-            placeEyeImageView(rightEyeImageView,
-                              center: rightEyeCenter,
-                              width: rightImageWidth,
-                              angle: rightImageAngle)
+            placeImageView(rightEyeImageView,
+                           center: rightEyeCenter,
+                           width: rightImageWidth,
+                           angle: rightImageAngle)
             
+        }
+    }
+    
+    func showNoseView() {
+        noseImageView.isHidden = false
+    }
+    
+    func hideNoseView() {
+        noseImageView.isHidden = true
+    }
+    
+    func showNoseViewWithFaceItem(_ faceItem: FaceItem) {
+        noseImageView.image = UIImage(named: faceItem.imageName)
+        noseImageView.anchorTo(point: faceItem.anchorPoint)
+    }
+    
+    func repositionNoseView(usingAnalyzer faceAnalyzer: FaceAnalyzer) {
+        if faceAnalyzer.isReady(),
+            !noseImageView.isHidden,
+            noseImageView.image != nil {
+            
+            let width = faceAnalyzer.noseWidth() + 20
+            let center = faceAnalyzer.noseCenter()
+            let angle = faceAnalyzer.noseAngle()
+            
+            placeImageView(noseImageView,
+                           center: center,
+                           width: width,
+                           angle: angle)
         }
     }
     
@@ -207,24 +256,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         for view in pointViews {
             view.isHidden = true
         }
-    }
-    
-    func showHeadView() {
-        headView.isHidden = false
-    }
-    
-    func hideHeadView() {
-        headView.isHidden = true
-    }
-    
-    func showEyesView() {
-        leftEyeImageView.isHidden = false
-        rightEyeImageView.isHidden = false
-    }
-    
-    func hideEyesView() {
-        leftEyeImageView.isHidden = true
-        rightEyeImageView.isHidden = true
     }
     
     func openActionsMenu() {

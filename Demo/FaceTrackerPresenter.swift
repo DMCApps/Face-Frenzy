@@ -56,6 +56,9 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         case .eyes:
             self.view?.showEyesViewWithFaceItem(faceItem)
             self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer)
+        case .nose:
+            self.view?.showNoseViewWithFaceItem(faceItem)
+            self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer)
         default:
             break
         }
@@ -73,10 +76,15 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         if let points = points {
             faceAnalyzer.updatePoints(points)
             self.view?.positionFacePoints(points)
+            
             self.view?.showHeadView()
             self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer)
+            
             self.view?.showEyesView()
             self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer)
+            
+            self.view?.showNoseView()
+            self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer)
             
             if self.model.areFacePointsShown() {
                 self.view?.showFacePoints()
