@@ -5,8 +5,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     // MARK: Properties
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var faceTrackerContainerView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var faceTrackerContainerView: UIView!
     @IBOutlet weak var ibActionMenuTopToContainerConstraint: NSLayoutConstraint!
     
     var faceTrackerViewController: FaceTrackerViewController?
@@ -244,7 +244,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         leftEyeImageView.anchorTo(point: faceItem.anchorPoint)
         rightEyeImageView.image = UIImage(named: faceItem.imageName)
         rightEyeImageView.anchorTo(point: faceItem.anchorPoint)
-        
     }
     
     func repositionEyesView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
@@ -383,12 +382,10 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func didBeginTranslation() {
-        // TODO: Should the model and presenter handle these things?
         self.startTranslationConstraintConstant = self.ibActionMenuTopToContainerConstraint.constant
     }
     
     func didTranslateBy(_ translation: CGFloat) {
-        // TODO: Should the model and presenter handle these things?
         guard let startTranslationConstraintConstant = self.startTranslationConstraintConstant else {
             return
         }
@@ -399,9 +396,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func didEndTranslation() {
-        // TODO: Should the model and presenter handle these things?
-        // TODO: Complete open or close operation
-        
         self.startTranslationConstraintConstant = nil
     }
     
