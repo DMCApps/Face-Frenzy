@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+// Use of value types that are immutable
+// https://developer.apple.com/videos/play/wwdc2015/414/
+
 enum FacePosition {
     case head
     case eyes
@@ -17,7 +20,7 @@ enum FacePosition {
     case centerMouth
 }
 
-class FaceItem: Equatable {
+struct FaceItem: Equatable {
     let position:FacePosition
     let anchorPoint:CGPoint
     let imageName:String
