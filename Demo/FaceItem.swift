@@ -15,6 +15,8 @@ import UIKit
 enum FacePosition {
     case head
     case eyes
+    case leftEye
+    case rightEye
     case nose
     case upperLip
     case centerMouth
@@ -49,7 +51,61 @@ struct FaceItem: Equatable {
         self.centerOffset = centerOffset
         self.widthAdjustment = widthAdjustment
         self.widthMultiplier = widthMultiplier
+    }
+    
+    func withPosition(_ facePosition:FacePosition) -> FaceItem {
+        return FaceItem(position: facePosition,
+                        anchorPosition: self.anchorPosition,
+                        anchorPoint: self.anchorPoint,
+                        imageName: self.imageName,
+                        centerOffset: self.centerOffset,
+                        widthAdjustment: self.widthAdjustment,
+                        widthMultiplier: self.widthMultiplier)
+    }
+    
+    func centerWidthAngle(usingAnalyzer faceAnalyzer:FaceAnalyzer) -> (CGFloat, CGPoint, CGFloat) {
+        var width:CGFloat = 0.0
+        var center = CGPoint(x: 0, y: 0)
+        var angle:CGFloat = 0.0
         
+        switch self.position {
+        case .head:
+            width = faceAnalyzer.outerEyeDistance()
+            center = faceAnalyzer.eyeToEyeCenter()
+            angle = faceAnalyzer.leftToRightEyeAngle()
+        case .eyes:
+            print("Defaulting to left eye for eye position: .eyes")
+            print("Please use the FaceItem.withPosition(FacePosition) to create a .leftEye and .rightEye value")
+            
+            width = faceAnalyzer.leftEyeWidth()
+            center = faceAnalyzer.leftEyeCenter()
+            angle = faceAnalyzer.leftEyeAngle()
+        case .leftEye:
+            width = faceAnalyzer.leftEyeWidth()
+            center = faceAnalyzer.leftEyeCenter()
+            angle = faceAnalyzer.leftEyeAngle()
+        case .rightEye:
+            width = faceAnalyzer.rightEyeWidth()
+            center = faceAnalyzer.rightEyeCenter()
+            angle = faceAnalyzer.rightEyeAngle()
+        case .nose:
+            width = faceAnalyzer.noseWidth()
+            center = faceAnalyzer.noseCenter()
+            angle = faceAnalyzer.noseAngle()
+        case .upperLip:
+            width = faceAnalyzer.outerMouthWidth()
+            center = faceAnalyzer.betweenMouthAndNoseCenter()
+            angle = faceAnalyzer.outerMouthAngle()
+        case .centerMouth:
+            width = faceAnalyzer.innerMouthWidth()
+            center = faceAnalyzer.innerMouthCenter()
+            angle = faceAnalyzer.innerMouthAngle()
+        }
+        
+        width = self.widthMultiplier * width + self.widthAdjustment
+        center = center + self.centerOffset
+        
+        return (width, center, angle)
     }
 }
 
@@ -59,29 +115,28 @@ func ==(lhs:FaceItem, rhs:FaceItem) -> Bool {
 
 protocol FaceView {
     
-    func adjustLayoutFor(faceItem:FaceItem, center:CGPoint, width:CGFloat, angle:CGFloat)
+    func adjustLayoutFor(faceItem:FaceItem, usingAnalyzer faceAnalyzer:FaceAnalyzer)
     
 }
 
 extension UIImageView: FaceView {
     
-    func adjustLayoutFor(faceItem: FaceItem, center:CGPoint, width:CGFloat, angle:CGFloat) {
-        let adjustedWidth = faceItem.widthMultiplier * width + faceItem.widthAdjustment
-        let height = (self.image!.size.height / self.image!.size.width) * adjustedWidth
+    func adjustLayoutFor(faceItem: FaceItem, usingAnalyzer faceAnalyzer:FaceAnalyzer) {
+        let (width, center, angle) = faceItem.centerWidthAngle(usingAnalyzer: faceAnalyzer)
+        let height = (self.image!.size.height / self.image!.size.width) * width
         
         self.transform = CGAffineTransform.identity
         
-        let adjustedCenter = center + faceItem.centerOffset
         switch faceItem.anchorPosition {
         case .center:
-            self.frame = CGRect(x: adjustedCenter.x - adjustedWidth / 2,
-                                y: adjustedCenter.y - height / 2,
-                                width: adjustedWidth,
+            self.frame = CGRect(x: center.x - width / 2,
+                                y: center.y - height / 2,
+                                width: width,
                                 height: height)
         case .above:
-            self.frame = CGRect(x: adjustedCenter.x - adjustedWidth / 2,
-                                y: adjustedCenter.y - height,
-                                width: adjustedWidth,
+            self.frame = CGRect(x: center.x - width / 2,
+                                y: center.y - height,
+                                width: width,
                                 height: height)
         }
         

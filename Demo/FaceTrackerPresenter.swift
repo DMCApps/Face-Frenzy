@@ -165,6 +165,9 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             else {
                 addMouthFaceItem(faceItem)
             }
+        default:
+            // TODO: .leftEye and .rightEye
+            break
         }
     }
     

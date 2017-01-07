@@ -200,14 +200,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
                 return
         }
         
-        let width = faceAnalyzer.outerEyeDistance()
-        let center = faceAnalyzer.eyeToEyeCenter()
-        let angle = faceAnalyzer.leftToRightEyeAngle()
-        
-        headImageView.adjustLayoutFor(faceItem: faceItem,
-                                      center: center,
-                                      width: width,
-                                      angle: angle)
+        headImageView.adjustLayoutFor(faceItem: faceItem, usingAnalyzer: faceAnalyzer)
     }
     
     func showEyesView() {
@@ -234,25 +227,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             leftEyeImageView.image != nil,
             rightEyeImageView.image != nil {
             
-            // TODO: Feel like the presenter should be dealing with this
-            let leftImageWidth = faceAnalyzer.leftEyeWidth()
-            let leftEyeCenter = faceAnalyzer.leftEyeCenter()
-            let leftImageAngle = faceAnalyzer.leftEyeAngle()
-            
-            leftEyeImageView.adjustLayoutFor(faceItem: faceItem,
-                                             center: leftEyeCenter,
-                                             width: leftImageWidth,
-                                             angle: leftImageAngle)
-            
-            // TODO: Feel like the presenter should be dealing with this
-            let rightImageWidth = faceAnalyzer.rightEyeWidth()
-            let rightEyeCenter = faceAnalyzer.rightEyeCenter()
-            let rightImageAngle = faceAnalyzer.rightEyeAngle()
-            
-            rightEyeImageView.adjustLayoutFor(faceItem: faceItem,
-                                              center: rightEyeCenter,
-                                              width: rightImageWidth,
-                                              angle: rightImageAngle)
+            leftEyeImageView.adjustLayoutFor(faceItem: faceItem.withPosition(.leftEye), usingAnalyzer: faceAnalyzer)
+            rightEyeImageView.adjustLayoutFor(faceItem: faceItem.withPosition(.rightEye), usingAnalyzer: faceAnalyzer)
             
         }
     }
@@ -275,14 +251,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             !noseImageView.isHidden,
             noseImageView.image != nil {
             
-            let width = faceAnalyzer.noseWidth()
-            let center = faceAnalyzer.noseCenter()
-            let angle = faceAnalyzer.noseAngle()
-            
-            noseImageView.adjustLayoutFor(faceItem: faceItem,
-                                          center: center,
-                                          width: width,
-                                          angle: angle)
+            noseImageView.adjustLayoutFor(faceItem: faceItem, usingAnalyzer: faceAnalyzer)
         }
     }
     
@@ -304,14 +273,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             !lipImageView.isHidden,
             lipImageView.image != nil {
             
-            let width = faceAnalyzer.outerMouthWidth()
-            let center = faceAnalyzer.betweenMouthAndNoseCenter()
-            let angle = faceAnalyzer.outerMouthAngle()
-            
-            lipImageView.adjustLayoutFor(faceItem: faceItem,
-                                         center: center,
-                                         width: width,
-                                         angle: angle)
+            lipImageView.adjustLayoutFor(faceItem: faceItem, usingAnalyzer: faceAnalyzer)
         }
     }
     
@@ -333,14 +295,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             !mouthImageView.isHidden,
             mouthImageView.image != nil {
             
-            let width = faceAnalyzer.innerMouthWidth()
-            let center = faceAnalyzer.innerMouthCenter()
-            let angle = faceAnalyzer.innerMouthAngle()
-            
-            mouthImageView.adjustLayoutFor(faceItem: faceItem,
-                                           center: center,
-                                           width: width,
-                                           angle: angle)
+            mouthImageView.adjustLayoutFor(faceItem: faceItem, usingAnalyzer: faceAnalyzer)
         }
     }
     
