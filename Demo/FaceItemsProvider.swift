@@ -59,10 +59,9 @@ class FaceItemProvider {
                  centerOffset: CGPoint(x: 0, y: 40)),
         
         FaceItem(position: .upperLip,
-                 anchorPosition: .above,
                  anchorPoint: CGPoint(x:0.5, y:1),
                  imageName: "mustache",
-                 centerOffset: CGPoint(x:0, y:-10),
+                 //centerOffset: CGPoint(x:0, y:-10),
                  widthAdjustment:60.0)
         
     ]

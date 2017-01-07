@@ -40,6 +40,18 @@ class FacePointAnalyzer: FaceAnalyzer {
         return points.nose[6]
     }
     
+    var noseBottomLeft:CGPoint {
+        return points.nose[1]
+    }
+    
+    var noseBottomCenter:CGPoint {
+        return points.nose[3]
+    }
+    
+    var noseBottomRight:CGPoint {
+        return points.nose[5]
+    }
+    
     var outerMouthStart:CGPoint {
         return points.outerMouth[0]
     }
@@ -78,6 +90,8 @@ class FacePointAnalyzer: FaceAnalyzer {
     private var _noseWidth:CGFloat? = nil
     private var _noseCenter:CGPoint? = nil
     private var _noseAngle:CGFloat? = nil
+    
+    private var _bottomNoseCenter:CGPoint? = nil
     
     private var _outerMouthWidth:CGFloat? = nil
     private var _outerMouthCenter:CGPoint? = nil
@@ -118,6 +132,8 @@ class FacePointAnalyzer: FaceAnalyzer {
         _noseWidth = nil
         _noseCenter = nil
         _noseAngle = nil
+        
+        _bottomNoseCenter = nil
         
         _outerMouthWidth = nil
         _outerMouthCenter = nil
@@ -275,7 +291,7 @@ class FacePointAnalyzer: FaceAnalyzer {
     func betweenMouthAndNoseCenter() -> CGPoint {
         if _betweenMouthAndNoseCenter == nil {
             let topLipCenter = self.topLipCenter()
-            _betweenMouthAndNoseCenter = topLipCenter.centerTo(point: topLipCenter)
+            _betweenMouthAndNoseCenter = topLipCenter.centerTo(point: self.noseBottomCenter)
         }
         return _betweenMouthAndNoseCenter!
     }

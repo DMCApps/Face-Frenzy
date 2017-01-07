@@ -305,7 +305,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             lipImageView.image != nil {
             
             let width = faceAnalyzer.outerMouthWidth()
-            let center = faceAnalyzer.outerMouthCenter()
+            let center = faceAnalyzer.betweenMouthAndNoseCenter()
             let angle = faceAnalyzer.outerMouthAngle()
             
             lipImageView.adjustLayoutFor(faceItem: faceItem,
