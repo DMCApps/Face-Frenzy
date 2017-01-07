@@ -53,6 +53,8 @@ protocol FaceAnalyzer {
     func outerMouthCenter() -> CGPoint
     func outerMouthAngle() -> CGFloat
     
+    func betweenMouthAndNoseCenter() -> CGPoint
+    
     func topLipCenter() -> CGPoint
 }
 

@@ -88,6 +88,7 @@ class FacePointAnalyzer: FaceAnalyzer {
     private var _innerMouthAngle:CGFloat? = nil
     
     private var _topLipCenter:CGPoint? = nil
+    private var _betweenMouthAndNoseCenter:CGPoint? = nil
     
     // MARK: init
     
@@ -125,6 +126,9 @@ class FacePointAnalyzer: FaceAnalyzer {
         _innerMouthWidth = nil
         _innerMouthCenter = nil
         _innerMouthAngle = nil
+        
+        _topLipCenter = nil
+        _betweenMouthAndNoseCenter = nil
     }
     
     func leftEyeWidth() -> CGFloat {
@@ -266,6 +270,14 @@ class FacePointAnalyzer: FaceAnalyzer {
             _topLipCenter = outerMouthTopLeft.centerTo(point: outerMouthTopRight)
         }
         return _topLipCenter!
+    }
+    
+    func betweenMouthAndNoseCenter() -> CGPoint {
+        if _betweenMouthAndNoseCenter == nil {
+            let topLipCenter = self.topLipCenter()
+            _betweenMouthAndNoseCenter = topLipCenter.centerTo(point: topLipCenter)
+        }
+        return _betweenMouthAndNoseCenter!
     }
     
     // MARK: Private
