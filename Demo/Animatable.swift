@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+enum AnimationStartPoint {
+    case forehead
+    case leftNostral
+    case rightNostral
+}
+
+enum AnimationEndPoint {
+    case above(CGFloat)
+    case toLeft
+    case toRight
+}
+
 // http://stackoverflow.com/questions/31921972/swift-protocol-implements-equatable
 // Greate Explanation of Equatable use.
 // I went with method 3 as I don't have a reaquirement for the Equatable and would like to be able to have a generic list of Animatable

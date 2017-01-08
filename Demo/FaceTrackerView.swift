@@ -18,11 +18,10 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var noseImageView = UIImageView()
     var lipImageView = UIImageView()
     var mouthImageView = UIImageView()
-    
-//    var animatedHeartsTimer:Timer?
-//    var animatedHearts = [UIImageView]()
 
-    let heartAnimation:Animatable = HeartAnimation()
+    let heartAnimation:Animatable = FloatAndFadeAnimation(imageName:"heart",
+                                                          animationStartPoint:.forehead,
+                                                          animationEndPoint:.above(100))
     
     var pointViews = [UIView]()
     

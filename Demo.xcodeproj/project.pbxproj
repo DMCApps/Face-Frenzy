@@ -24,7 +24,7 @@
 		176EF77E1E184CB900FB5B86 /* FaceAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF77D1E184CB900FB5B86 /* FaceAnalyzer.swift */; };
 		176EF7811E186B1000FB5B86 /* FaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7801E186B1000FB5B86 /* FaceItem.swift */; };
 		176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7821E197BAB00FB5B86 /* Animatable.swift */; };
-		176EF7861E197C1700FB5B86 /* HeartAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7851E197C1700FB5B86 /* HeartAnimation.swift */; };
+		176EF7861E197C1700FB5B86 /* FloatAndFadeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */; };
 		17D5C7421E19828500B44E24 /* FaceItemsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D5C7411E19828500B44E24 /* FaceItemsDataSource.swift */; };
 		17D5C7441E19841300B44E24 /* FaceItemsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D5C7431E19841300B44E24 /* FaceItemsProvider.swift */; };
 		17D5C7491E1985F800B44E24 /* FaceItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D5C7481E1985F800B44E24 /* FaceItemCollectionViewCell.swift */; };
@@ -69,7 +69,7 @@
 		176EF77D1E184CB900FB5B86 /* FaceAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceAnalyzer.swift; sourceTree = "<group>"; };
 		176EF7801E186B1000FB5B86 /* FaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItem.swift; sourceTree = "<group>"; };
 		176EF7821E197BAB00FB5B86 /* Animatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
-		176EF7851E197C1700FB5B86 /* HeartAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartAnimation.swift; sourceTree = "<group>"; };
+		176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatAndFadeAnimation.swift; sourceTree = "<group>"; };
 		17D5C7411E19828500B44E24 /* FaceItemsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemsDataSource.swift; sourceTree = "<group>"; };
 		17D5C7431E19841300B44E24 /* FaceItemsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemsProvider.swift; sourceTree = "<group>"; };
 		17D5C7481E1985F800B44E24 /* FaceItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				176EF7821E197BAB00FB5B86 /* Animatable.swift */,
-				176EF7851E197C1700FB5B86 /* HeartAnimation.swift */,
+				176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -307,7 +307,7 @@
 				17D5C7491E1985F800B44E24 /* FaceItemCollectionViewCell.swift in Sources */,
 				176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */,
 				1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */,
-				176EF7861E197C1700FB5B86 /* HeartAnimation.swift in Sources */,
+				176EF7861E197C1700FB5B86 /* FloatAndFadeAnimation.swift in Sources */,
 				176699521E16EAFA0026F471 /* Comparable+Clamp.swift in Sources */,
 				17D5C7421E19828500B44E24 /* FaceItemsDataSource.swift in Sources */,
 				1766994E1E16DC210026F471 /* ActionsPresenter.swift in Sources */,
