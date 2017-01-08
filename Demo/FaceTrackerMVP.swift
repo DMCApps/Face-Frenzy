@@ -15,7 +15,8 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     
     func positionFacePoints(_ points:FacePoints)
     
-    func startAnimatingHearts()
+    func startAnimatingHearts(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func updateAnimatingHearts(faceAnalyzer:FaceAnalyzer)
     func stopAnimatingHearts()
     
     func showHeadView()

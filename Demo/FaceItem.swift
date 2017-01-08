@@ -28,6 +28,8 @@ enum AnchorPosition {
 }
 
 struct FaceItem: Equatable {
+    
+    // MARK: Properties
     let position:FacePosition
     let anchorPosition:AnchorPosition
     let anchorPoint:CGPoint
@@ -35,6 +37,8 @@ struct FaceItem: Equatable {
     let centerOffset:CGPoint
     let widthAdjustment:CGFloat
     let widthMultiplier:CGFloat
+    
+    // MARK: init
     
     init(position:FacePosition,
          anchorPosition:AnchorPosition = .center,
@@ -53,6 +57,8 @@ struct FaceItem: Equatable {
         self.widthMultiplier = widthMultiplier
     }
     
+    // MARK: Public
+    
     func withPosition(_ facePosition:FacePosition) -> FaceItem {
         return FaceItem(position: facePosition,
                         anchorPosition: self.anchorPosition,
@@ -63,7 +69,7 @@ struct FaceItem: Equatable {
                         widthMultiplier: self.widthMultiplier)
     }
     
-    func centerWidthAngle(usingAnalyzer faceAnalyzer:FaceAnalyzer) -> (CGFloat, CGPoint, CGFloat) {
+    func positionData(usingAnalyzer faceAnalyzer:FaceAnalyzer) -> (CGFloat, CGPoint, CGFloat) {
         var width:CGFloat = 0.0
         var center = CGPoint(x: 0, y: 0)
         var angle:CGFloat = 0.0
@@ -107,6 +113,10 @@ struct FaceItem: Equatable {
         
         return (width, center, angle)
     }
+    
+    // MARK: Private
+    
+    // MARK: <ProtocolName>
 }
 
 func ==(lhs:FaceItem, rhs:FaceItem) -> Bool {
@@ -122,7 +132,7 @@ protocol FaceView {
 extension UIImageView: FaceView {
     
     func adjustLayoutFor(faceItem: FaceItem, usingAnalyzer faceAnalyzer:FaceAnalyzer) {
-        let (width, center, angle) = faceItem.centerWidthAngle(usingAnalyzer: faceAnalyzer)
+        let (width, center, angle) = faceItem.positionData(usingAnalyzer: faceAnalyzer)
         let height = (self.image!.size.height / self.image!.size.width) * width
         
         self.transform = CGAffineTransform.identity

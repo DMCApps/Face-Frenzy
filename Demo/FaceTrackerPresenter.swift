@@ -47,7 +47,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         
         // TODO: How do I make this into a nice model and actionable item
         if faceItem.imageName == "heart" {
-            self.view?.startAnimatingHearts()
+            self.view?.startAnimatingHearts(usingAnalyzer: self.faceAnalyzer)
         }
         
         self.view?.showEyesViewWithFaceItem(faceItem)
@@ -55,6 +55,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     }
     
     func clearLeftEyeFaceItem() {
+        self.view?.stopAnimatingHearts()
         self.model.leftEyeFaceItem = nil
         self.view?.hideLeftEyeView()
     }
@@ -67,6 +68,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     }
     
     func clearRightEyeFaceItem() {
+        self.view?.stopAnimatingHearts()
         self.model.rightEyeFaceItem = nil
         self.view?.hideRightEyeView()
     }
@@ -230,6 +232,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func didReceiveFacePoints(_ points:FacePoints?) {
         if let points = points {
             faceAnalyzer.updatePoints(points)
+            
+            self.view?.updateAnimatingHearts(faceAnalyzer: faceAnalyzer)
             
             if let headFaceItem = self.model.headFaceItem {
                 self.view?.showHeadView()
