@@ -20,11 +20,13 @@ enum FacePosition {
     case nose
     case upperLip
     case centerMouth
+    case centerMouthImageTop
 }
 
 enum AnchorPosition {
     case above
     case center
+    case below
 }
 
 struct FaceItem: Equatable {
@@ -106,6 +108,10 @@ struct FaceItem: Equatable {
             width = faceAnalyzer.innerMouthWidth()
             center = faceAnalyzer.innerMouthCenter()
             angle = faceAnalyzer.innerMouthAngle()
+        case .centerMouthImageTop:
+            width = faceAnalyzer.innerMouthWidth()
+            center = faceAnalyzer.innerMouthCenter()
+            angle = faceAnalyzer.innerMouthAngle()
         }
         
         width = self.widthMultiplier * width + self.widthAdjustment
@@ -146,6 +152,11 @@ extension UIImageView: FaceView {
         case .above:
             self.frame = CGRect(x: center.x - width / 2,
                                 y: center.y - height,
+                                width: width,
+                                height: height)
+        case .below:
+            self.frame = CGRect(x: center.x - width / 2,
+                                y: center.y,
                                 width: width,
                                 height: height)
         }

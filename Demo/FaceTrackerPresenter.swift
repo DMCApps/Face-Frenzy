@@ -201,6 +201,12 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             } else {
                 addMouthFaceItem(faceItem)
             }
+        case .centerMouthImageTop:
+            if let currentFaceItem = self.model.mouthFaceItem, currentFaceItem == faceItem {
+                clearMouthFaceItem()
+            } else {
+                addMouthFaceItem(faceItem)
+            }
         }
     }
     

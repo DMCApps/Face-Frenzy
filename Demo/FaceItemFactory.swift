@@ -50,6 +50,12 @@ class FaceItemFactory {
                             anchorPoint: CGPoint(x:0.5, y:1),
                             imageName: imageName,
                             widthAdjustment:20.0)
+        case .centerMouthImageTop:
+            return FaceItem(position: .centerMouth,
+                            anchorPosition: .below,
+                            anchorPoint: CGPoint(x:0.5, y:1),
+                            imageName: imageName,
+                            widthAdjustment:20.0)
         }
     }
     

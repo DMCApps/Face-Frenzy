@@ -147,6 +147,14 @@ class FacePointAnalyzer: FaceAnalyzer {
         _betweenMouthAndNoseCenter = nil
     }
     
+    func leftEyeLeftEdge() -> CGPoint {
+        return leftEyeStart
+    }
+    
+    func rightEyeRightEdge() -> CGPoint {
+        return rightEyeEnd
+    }
+    
     func leftEyeWidth() -> CGFloat {
         if _leftEyeWidth == nil {
             _leftEyeWidth = leftEyeStart.distanceTo(point: leftEyeEnd)
@@ -155,14 +163,6 @@ class FacePointAnalyzer: FaceAnalyzer {
     }
     
     func leftEyeCenter() -> CGPoint {
-//        if _leftEyeCenter == nil {
-//            let sumX = points.leftEye.reduce(0) { $0 + $1.x }
-//            let avgX = sumX / CGFloat(points.leftEye.count)
-//            let sumY = points.leftEye.reduce(0) { $0 + $1.y }
-//            let avgY = sumY / CGFloat(points.leftEye.count)
-//            _leftEyeCenter = CGPoint(x: CGFloat(avgX), y: CGFloat(avgY))
-//        }
-        
         if _leftEyeCenter == nil {
             _leftEyeCenter = leftEyeStart.centerTo(point: leftEyeEnd)
         }

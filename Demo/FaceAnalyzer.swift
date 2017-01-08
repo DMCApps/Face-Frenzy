@@ -30,6 +30,9 @@ protocol FaceAnalyzer {
     
     func updatePoints(_ points:FaceAnalyzerPoints)
     
+    func leftEyeLeftEdge() -> CGPoint
+    func rightEyeRightEdge() -> CGPoint
+    
     func leftEyeWidth() -> CGFloat
     func leftEyeCenter() -> CGPoint
     func leftEyeAngle() -> CGFloat

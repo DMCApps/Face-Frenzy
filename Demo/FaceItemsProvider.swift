@@ -20,7 +20,7 @@ class FaceItemProvider {
         FaceItemFactory.build(forFacePosition: .nose, imageName: "dog_nose"),
         FaceItemFactory.build(forFacePosition: .nose, imageName: "pig_nose"),
         FaceItemFactory.build(forFacePosition: .centerMouth, imageName: "lips"),
-        FaceItemFactory.build(forFacePosition: .centerMouth, imageName: "dog_tongue"),
+        FaceItemFactory.build(forFacePosition: .centerMouthImageTop, imageName: "dog_tongue"),
         FaceItemFactory.build(forFacePosition: .upperLip, imageName: "mustache")        
     ]
     

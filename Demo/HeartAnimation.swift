@@ -33,7 +33,7 @@ class HeartAnimation: Animatable {
         }
     
         let forheadSize = Swift.abs(faceAnalyzer.outerEyeDistance());
-        let randomX = (view.frame.size.width / 2) - (forheadSize / 2) + CGFloat(arc4random_uniform(UInt32(forheadSize)))
+        let randomX = faceAnalyzer.leftEyeLeftEdge().x + CGFloat(arc4random_uniform(UInt32(forheadSize)))
         
         let heartImageView = UIImageView()
         heartImageView.image = UIImage(named: "heart")
@@ -43,18 +43,14 @@ class HeartAnimation: Animatable {
                                       height: heartImageView.image?.size.height ?? 50)
         heartImageView.alpha = 1.0
         
-        //self.animatedHearts.append(heartImageView)
-        //view.insertSubview(heartImageView, aboveSubview: faceTrackerContainerView)
         view.insertSubview(heartImageView, at: 1000)
         
         UIView.animate(withDuration: 1.2, animations: {
-            heartImageView.center = CGPoint(x: heartImageView.center.x, y: heartImageView.center.y - 50)
+            heartImageView.center = CGPoint(x: heartImageView.center.x, y: heartImageView.center.y - 100)
             heartImageView.alpha = 0.0
-        }) { (complete) in // [unowned self]
+        }) { (complete) in
             if complete {
                 heartImageView.removeFromSuperview()
-                // TODO: Probably more efficient to recycle these
-                //self.animatedHearts.remove(at: self.animatedHearts.index(of: heartImageView)!)
             }
         }
     }
