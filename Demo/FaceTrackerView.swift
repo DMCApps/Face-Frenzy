@@ -204,30 +204,66 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func showEyesView() {
-        leftEyeImageView.isHidden = false
-        rightEyeImageView.isHidden = false
+        showLeftEyeView()
+        showRightEyeView()
     }
     
     func hideEyesView() {
-        leftEyeImageView.isHidden = true
-        rightEyeImageView.isHidden = true
+        hideLeftEyeView()
+        hideRightEyeView()
     }
     
     func showEyesViewWithFaceItem(_ faceItem: FaceItem) {
+        showLeftEyeViewWithFaceItem(faceItem)
+        showRightEyeViewWithFaceItem(faceItem)
+    }
+    
+    func repositionEyesView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
+        repositionLeftEyeView(usingAnalyzer: faceAnalyzer, andFaceItem: faceItem)
+        repositionRightEyeView(usingAnalyzer: faceAnalyzer, andFaceItem: faceItem)
+    }
+    
+    func showLeftEyeView() {
+        leftEyeImageView.isHidden = false
+    }
+    
+    func hideLeftEyeView() {
+        leftEyeImageView.isHidden = true
+    }
+    
+    func showLeftEyeViewWithFaceItem(_ faceItem: FaceItem) {
         leftEyeImageView.image = UIImage(named: faceItem.imageName)
         leftEyeImageView.anchorTo(point: faceItem.anchorPoint)
+    }
+    
+    func repositionLeftEyeView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
+        if faceAnalyzer.isReady(),
+            !leftEyeImageView.isHidden,
+            leftEyeImageView.image != nil {
+            
+            rightEyeImageView.adjustLayoutFor(faceItem: faceItem.withPosition(.rightEye), usingAnalyzer: faceAnalyzer)
+            
+        }
+    }
+    
+    func showRightEyeView() {
+        rightEyeImageView.isHidden = false
+    }
+    
+    func hideRightEyeView() {
+        rightEyeImageView.isHidden = true
+    }
+    
+    func showRightEyeViewWithFaceItem(_ faceItem: FaceItem) {
         rightEyeImageView.image = UIImage(named: faceItem.imageName)
         rightEyeImageView.anchorTo(point: faceItem.anchorPoint)
     }
     
-    func repositionEyesView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
+    func repositionRightEyeView(usingAnalyzer faceAnalyzer: FaceAnalyzer, andFaceItem faceItem:FaceItem) {
         if faceAnalyzer.isReady(),
-            !leftEyeImageView.isHidden,
             !rightEyeImageView.isHidden,
-            leftEyeImageView.image != nil,
             rightEyeImageView.image != nil {
             
-            leftEyeImageView.adjustLayoutFor(faceItem: faceItem.withPosition(.leftEye), usingAnalyzer: faceAnalyzer)
             rightEyeImageView.adjustLayoutFor(faceItem: faceItem.withPosition(.rightEye), usingAnalyzer: faceAnalyzer)
             
         }

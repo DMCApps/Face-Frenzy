@@ -30,17 +30,19 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     }
     
     func clearEyesFaceItem() {
-        // TODO: How do I make this into a nice model
-        if self.model.eyesFaceItem?.imageName == "heart" {
+        // TODO: How do I make this into a nice model or animation system
+        if self.model.leftEyeFaceItem?.imageName == "heart" {
             self.view?.stopAnimatingHearts()
         }
         
-        self.model.eyesFaceItem = nil
+        self.model.leftEyeFaceItem = nil
+        self.model.rightEyeFaceItem = nil
         self.view?.hideEyesView()
     }
     
     func addEyesFaceItem(_ faceItem:FaceItem) {
-        self.model.eyesFaceItem = faceItem
+        self.model.leftEyeFaceItem = faceItem
+        self.model.rightEyeFaceItem = faceItem
         
         // TODO: How do I make this into a nice model and actionable item
         if faceItem.imageName == "heart" {
@@ -49,6 +51,30 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         
         self.view?.showEyesViewWithFaceItem(faceItem)
         self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+    }
+    
+    func clearLeftEyeFaceItem() {
+        self.model.leftEyeFaceItem = nil
+        self.view?.hideLeftEyeView()
+    }
+    
+    func addLeftEyeFaceItem(_ faceItem:FaceItem) {
+        self.model.leftEyeFaceItem = faceItem
+        
+        self.view?.showLeftEyeViewWithFaceItem(faceItem)
+        self.view?.repositionLeftEyeView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
+    }
+    
+    func clearRightEyeFaceItem() {
+        self.model.rightEyeFaceItem = nil
+        self.view?.hideRightEyeView()
+    }
+    
+    func addRightEyeFaceItem(_ faceItem:FaceItem) {
+        self.model.rightEyeFaceItem = faceItem
+        
+        self.view?.showRightEyeViewWithFaceItem(faceItem)
+        self.view?.repositionRightEyeView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)
     }
     
     func clearNoseFaceItem() {
@@ -133,41 +159,45 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         case .head:
             if let currentFaceItem = self.model.headFaceItem, currentFaceItem == faceItem {
                 clearHeadFaceItem()
-            }
-            else {
+            } else {
                 addHeadFaceItem(faceItem)
             }
         case .eyes:
-            if let currentFaceItem = self.model.eyesFaceItem, currentFaceItem == faceItem {
+            if let currentFaceItem = self.model.leftEyeFaceItem, currentFaceItem == faceItem {
                 clearEyesFaceItem()
-            }
-            else {
+            } else {
                 addEyesFaceItem(faceItem)
+            }
+        case .leftEye:
+            if let currentFaceItem = self.model.leftEyeFaceItem, currentFaceItem == faceItem {
+                clearLeftEyeFaceItem()
+            } else {
+                addLeftEyeFaceItem(faceItem)
+            }
+        case .rightEye:
+            if let currentFaceItem = self.model.mouthFaceItem, currentFaceItem == faceItem {
+                clearRightEyeFaceItem()
+            } else {
+                addRightEyeFaceItem(faceItem)
             }
         case .nose:
             if let currentFaceItem = self.model.noseFaceItem, currentFaceItem == faceItem {
                 clearNoseFaceItem()
-            }
-            else {
+            } else {
                 addNoseFaceItem(faceItem)
             }
         case .upperLip:
             if let currentFaceItem = self.model.lipFaceItem, currentFaceItem == faceItem {
                 clearLipFaceItem()
-            }
-            else {
+            } else {
                 addLipFaceItem(faceItem)
             }
         case .centerMouth:
             if let currentFaceItem = self.model.mouthFaceItem, currentFaceItem == faceItem {
                 clearMouthFaceItem()
-            }
-            else {
+            } else {
                 addMouthFaceItem(faceItem)
             }
-        default:
-            // TODO: .leftEye and .rightEye
-            break
         }
     }
     
@@ -177,7 +207,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     func clearAllFaceItems() {
         clearHeadFaceItem()
-        clearEyesFaceItem()
+        clearLeftEyeFaceItem()
+        clearRightEyeFaceItem()
         clearNoseFaceItem()
         clearLipFaceItem()
         clearMouthFaceItem()
@@ -207,12 +238,20 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
                 self.view?.hideHeadView()
             }
             
-            if let eyesFaceItem = self.model.eyesFaceItem {
-                self.view?.showEyesView()
-                self.view?.repositionEyesView(usingAnalyzer: faceAnalyzer, andFaceItem:eyesFaceItem)
+            if let leftEyeFaceItem = self.model.leftEyeFaceItem {
+                self.view?.showLeftEyeView()
+                self.view?.repositionLeftEyeView(usingAnalyzer: faceAnalyzer, andFaceItem: leftEyeFaceItem)
             }
             else {
-                self.view?.hideEyesView()
+                self.view?.hideLeftEyeView()
+            }
+            
+            if let rightEyeFaceItem = self.model.leftEyeFaceItem {
+                self.view?.showRightEyeView()
+                self.view?.repositionRightEyeView(usingAnalyzer: faceAnalyzer, andFaceItem: rightEyeFaceItem)
+            }
+            else {
+                self.view?.hideRightEyeView()
             }
             
             if let noseFaceItem = self.model.noseFaceItem {

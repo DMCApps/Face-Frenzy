@@ -28,6 +28,16 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func showEyesViewWithFaceItem(_ faceItem:FaceItem)
     func repositionEyesView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
     
+    func showLeftEyeView()
+    func hideLeftEyeView()
+    func showLeftEyeViewWithFaceItem(_ faceItem:FaceItem)
+    func repositionLeftEyeView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
+    
+    func showRightEyeView()
+    func hideRightEyeView()
+    func showRightEyeViewWithFaceItem(_ faceItem:FaceItem)
+    func repositionRightEyeView(usingAnalyzer faceAnalyzer:FaceAnalyzer, andFaceItem faceItem:FaceItem)
+    
     func showNoseView()
     func hideNoseView()
     func showNoseViewWithFaceItem(_ faceItem:FaceItem)
@@ -81,7 +91,8 @@ protocol FaceTrackerModelOps {
     
     var areFacePointsShown:Bool { get set }
     var headFaceItem:FaceItem? { get set }
-    var eyesFaceItem:FaceItem? { get set }
+    var leftEyeFaceItem:FaceItem? { get set }
+    var rightEyeFaceItem:FaceItem? { get set }
     var noseFaceItem:FaceItem? { get set }
     var lipFaceItem:FaceItem? { get set }
     var mouthFaceItem:FaceItem? { get set }

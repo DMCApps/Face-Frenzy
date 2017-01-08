@@ -14,7 +14,8 @@ class FaceTrackerModel: FaceTrackerModelOps {
     
     var areFacePointsShown:Bool = true
     var headFaceItem:FaceItem? = nil
-    var eyesFaceItem:FaceItem? = nil
+    var leftEyeFaceItem:FaceItem? = nil
+    var rightEyeFaceItem:FaceItem? = nil
     var noseFaceItem:FaceItem? = nil
     var lipFaceItem:FaceItem? = nil
     var mouthFaceItem:FaceItem? = nil
