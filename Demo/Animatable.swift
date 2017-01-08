@@ -28,9 +28,9 @@ protocol Animatable {
     
     var id: String { get }
     var isAnimating:Bool { get set }
+    var faceAnalyzer:FaceAnalyzer? { get set }
     
     func startAnimating(in view: UIView, usingAnalyzer faceAnalyzer:FaceAnalyzer)
-    func update(faceAnalyzer:FaceAnalyzer)
     func stopAnimating()
     
 }

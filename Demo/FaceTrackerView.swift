@@ -19,7 +19,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var lipImageView = UIImageView()
     var mouthImageView = UIImageView()
 
-    let heartAnimation:Animatable = FloatAndFadeAnimation(imageName:"heart",
+    var heartAnimation:Animatable = FloatAndFadeAnimation(imageName:"heart",
                                                           animationStartPoint:.forehead,
                                                           animationEndPoint:.above(100))
     
@@ -149,7 +149,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func updateAnimatingHearts(faceAnalyzer:FaceAnalyzer) {
-        self.heartAnimation.update(faceAnalyzer: faceAnalyzer)
+        self.heartAnimation.faceAnalyzer = faceAnalyzer
     }
     
     func stopAnimatingHearts() {

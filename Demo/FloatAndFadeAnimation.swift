@@ -94,10 +94,6 @@ class FloatAndFadeAnimation: Animatable {
         }
     }
     
-    func update(faceAnalyzer: FaceAnalyzer) {
-        self.faceAnalyzer = faceAnalyzer
-    }
-    
     func stopAnimating() {
         self.animatedHeartsTimer?.invalidate()
         self.animatedHeartsTimer = nil
