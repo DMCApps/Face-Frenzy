@@ -30,10 +30,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     }
     
     func clearEyesFaceItem() {
-        // TODO: How do I make this into a nice model or animation system
-        if self.model.leftEyeFaceItem?.imageName == "heart" {
-            self.view?.stopAnimatingHearts()
-        }
+        // TODO: Make a better animation system
+        self.view?.stopAnimatingHearts()
         
         self.model.leftEyeFaceItem = nil
         self.model.rightEyeFaceItem = nil
@@ -41,6 +39,9 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     }
     
     func addEyesFaceItem(_ faceItem:FaceItem) {
+        // TODO: Make a better animation system
+        self.view?.stopAnimatingHearts()
+        
         self.model.leftEyeFaceItem = faceItem
         self.model.rightEyeFaceItem = faceItem
         

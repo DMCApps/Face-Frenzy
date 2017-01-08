@@ -16,6 +16,7 @@ class FaceItemProvider {
         FaceItemFactory.build(forFacePosition: .head, imageName: "horns"),
         FaceItemFactory.build(forFacePosition: .head, imageName: "light"),
         FaceItemFactory.build(forFacePosition: .eyes, imageName: "heart"),
+        FaceItemFactory.build(forFacePosition: .eyes, imageName: "star"),
         FaceItemFactory.build(forFacePosition: .nose, imageName: "dog_nose"),
         FaceItemFactory.build(forFacePosition: .nose, imageName: "pig_nose"),
         FaceItemFactory.build(forFacePosition: .centerMouth, imageName: "lips"),
