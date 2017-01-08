@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1741423F1E229ADC0044E485 /* FaceItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741423E1E229ADC0044E485 /* FaceItemFactory.swift */; };
 		176699331E16C07C0026F471 /* UIAlertController+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176699321E16C07C0026F471 /* UIAlertController+Builder.swift */; };
 		176699391E16C28D0026F471 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 176699371E16C28D0026F471 /* Localizable.strings */; };
 		1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766993E1E16C5410026F471 /* FaceTrackerPresenter.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1741423E1E229ADC0044E485 /* FaceItemFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemFactory.swift; sourceTree = "<group>"; };
 		176699321E16C07C0026F471 /* UIAlertController+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Builder.swift"; sourceTree = "<group>"; };
 		176699381E16C28D0026F471 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1766993E1E16C5410026F471 /* FaceTrackerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTrackerPresenter.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				176EF7801E186B1000FB5B86 /* FaceItem.swift */,
 				17D5C7431E19841300B44E24 /* FaceItemsProvider.swift */,
+				1741423E1E229ADC0044E485 /* FaceItemFactory.swift */,
 			);
 			name = "Face Item";
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */,
 				CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */,
 				176EF77E1E184CB900FB5B86 /* FaceAnalyzer.swift in Sources */,
+				1741423F1E229ADC0044E485 /* FaceItemFactory.swift in Sources */,
 				176699501E16DC3B0026F471 /* ActionsModel.swift in Sources */,
 				176699471E16D8F70026F471 /* UIView+Anchor.swift in Sources */,
 				176699331E16C07C0026F471 /* UIAlertController+Builder.swift in Sources */,
