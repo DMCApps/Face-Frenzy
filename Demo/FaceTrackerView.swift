@@ -20,8 +20,19 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var mouthImageView = UIImageView()
 
     var heartAnimation:Animatable = FloatAndFadeAnimation(imageName:"heart",
+                                                          frequency:0.2,
                                                           animationStartPoint:.forehead,
                                                           animationEndPoint:.above(100))
+    
+    var leftNostralSmokeAnimation:Animatable = FloatAndFadeAnimation(imageName: "smoke",
+                                                                     frequency:1.0,
+                                                                     animationStartPoint: .leftNostral,
+                                                                     animationEndPoint: .toLeft)
+    
+    var rightNostralSmokeAnimation:Animatable = FloatAndFadeAnimation(imageName: "smoke",
+                                                                      frequency:1.0,
+                                                                      animationStartPoint: .rightNostral,
+                                                                      animationEndPoint: .toRight)
     
     var pointViews = [UIView]()
     
@@ -108,7 +119,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     // MARK: <FaceTrackerViewControllerDelegate>
     
     func faceTrackerDidUpdate(_ points: FacePoints?) {
-        self.presenter.didReceiveFacePoints(points)
+        self.presenter.didReceiveFaceAnalyzerPoints(points)
     }
     
     // MARK: <FaceTrackerViewOps>
@@ -117,7 +128,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         self.activityIndicator.stopAnimating()
     }
     
-    func positionFacePoints(_ points:FacePoints) {
+    func positionFaceAnalyzerPoints(_ points:FaceAnalyzerPoints) {
         if (pointViews.count == 0) {
             let numPoints = points.getTotalNumberOFPoints()
             for _ in 0...numPoints {
@@ -154,6 +165,21 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     func stopAnimatingHearts() {
         self.heartAnimation.stopAnimating()
+    }
+    
+    func startNoseSmokeAnimation(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
+        self.leftNostralSmokeAnimation.startAnimating(in: self.view, usingAnalyzer: faceAnalyzer)
+        self.rightNostralSmokeAnimation.startAnimating(in: self.view, usingAnalyzer: faceAnalyzer)
+    }
+    
+    func updateNoseSmokeAnimation(faceAnalyzer:FaceAnalyzer) {
+        self.leftNostralSmokeAnimation.faceAnalyzer = faceAnalyzer
+        self.rightNostralSmokeAnimation.faceAnalyzer = faceAnalyzer
+    }
+    
+    func stopNoseSmokeAnimation() {
+        self.leftNostralSmokeAnimation.stopAnimating()
+        self.rightNostralSmokeAnimation.stopAnimating()
     }
     
     func showHeadView() {

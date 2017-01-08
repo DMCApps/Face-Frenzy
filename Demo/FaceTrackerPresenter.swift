@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FaceTracker
+import UIKit
 
 class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresenterOps {
     
@@ -234,12 +234,12 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         self.model = FaceTrackerModel(presenter: self)
     }
     
-    // TODO: Should FacePoints be passed or just the raw values so that we don't have to import FaceTracker?
-    func didReceiveFacePoints(_ points:FacePoints?) {
+    func didReceiveFaceAnalyzerPoints(_ points:FaceAnalyzerPoints?) {
         if let points = points {
             faceAnalyzer.updatePoints(points)
             
             self.view?.updateAnimatingHearts(faceAnalyzer: faceAnalyzer)
+            self.view?.updateNoseSmokeAnimation(faceAnalyzer: faceAnalyzer)
             
             if let headFaceItem = self.model.headFaceItem {
                 self.view?.showHeadView()
@@ -290,7 +290,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             }
             
             if self.model.areFacePointsShown {
-                self.view?.positionFacePoints(points)
+                self.view?.positionFaceAnalyzerPoints(points)
                 self.view?.showFacePoints()
             }
             else {

@@ -21,13 +21,15 @@ class FloatAndFadeAnimation: Animatable {
     var animatedHeartsTimer:Timer?
     
     var imageName:String
+    private let frequency:TimeInterval
     private let animationStartPoint:AnimationStartPoint
     private let animationEndPoint:AnimationEndPoint
     
     // MARK: init
     
-    init(imageName:String, animationStartPoint:AnimationStartPoint, animationEndPoint:AnimationEndPoint) {
+    init(imageName:String, frequency:TimeInterval, animationStartPoint:AnimationStartPoint, animationEndPoint:AnimationEndPoint) {
         self.imageName = imageName
+        self.frequency = frequency
         self.animationStartPoint = animationStartPoint
         self.animationEndPoint = animationEndPoint
     }
@@ -86,7 +88,7 @@ class FloatAndFadeAnimation: Animatable {
             self.isAnimating = true
             self.view = view
             self.faceAnalyzer = faceAnalyzer
-            self.animatedHeartsTimer = Timer.scheduledTimer(timeInterval: 0.2,
+            self.animatedHeartsTimer = Timer.scheduledTimer(timeInterval: self.frequency,
                                                             target: self,
                                                             selector: #selector(self.addRandomHeartAndAnimate),
                                                             userInfo: nil,

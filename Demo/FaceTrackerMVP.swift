@@ -13,11 +13,17 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     
     func stopLoadingAnimation()
     
-    func positionFacePoints(_ points:FacePoints)
+    func positionFaceAnalyzerPoints(_ points:FaceAnalyzerPoints)
     
+    // TODO: Likely just have a start and stop animation method that takes in an animation
+    // Then have the animations accociated with the FaceItems and perform start and stop as items are added?
     func startAnimatingHearts(usingAnalyzer faceAnalyzer:FaceAnalyzer)
     func updateAnimatingHearts(faceAnalyzer:FaceAnalyzer)
     func stopAnimatingHearts()
+    
+    func startNoseSmokeAnimation(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func updateNoseSmokeAnimation(faceAnalyzer:FaceAnalyzer)
+    func stopNoseSmokeAnimation()
     
     func showHeadView()
     func hideHeadView()
@@ -72,7 +78,7 @@ protocol FaceTrackerViewPresenterOps: ActionsDelegate {
     
     func viewDidLoad(withView view:FaceTrackerViewOps)
     
-    func didReceiveFacePoints(_ points:FacePoints?)
+    func didReceiveFaceAnalyzerPoints(_ points:FaceAnalyzerPoints?)
     
     func faceTrackerDidFinishLoading()
     
