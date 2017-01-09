@@ -50,12 +50,14 @@ class FloatAndFadeAnimation: Animatable {
         
         guard let image = UIImage(named: self.imageName) else {
             print("FloatAndFadeAnimation - cannot find image named: \(self.imageName)")
+            stopAnimating()
             return
         }
         
         let animatedImageView = UIImageView(image: image)
         
-        if self.animationStartPoint == .forehead {
+        switch self.animationStartPoint {
+        case .forehead:
             let forheadSize = Swift.abs(faceAnalyzer.outerEyeDistance());
             let randomX = faceAnalyzer.leftEyeLeftEdge().x + CGFloat(arc4random_uniform(UInt32(forheadSize)))
             
@@ -63,14 +65,32 @@ class FloatAndFadeAnimation: Animatable {
                                              y: faceAnalyzer.eyeToEyeCenter().y - 150,
                                              width: image.size.width,
                                              height: image.size.height)
-            animatedImageView.alpha = 1.0
+        case .leftNostral:
+            let leftNostralCenter = faceAnalyzer.noseLeftNostral()
+            animatedImageView.frame = CGRect(x: leftNostralCenter.x - (image.size.width / 2),
+                                             y: leftNostralCenter.y - (image.size.height / 2),
+                                             width: image.size.width,
+                                             height: image.size.height)
+            break
+        case .rightNostral:
+            let rightNostralCenter = faceAnalyzer.noseRightNostral()
+            animatedImageView.frame = CGRect(x: rightNostralCenter.x - (image.size.width / 2),
+                                             y: rightNostralCenter.y - (image.size.width / 2),
+                                             width: image.size.width,
+                                             height: image.size.height)
+            break
         }
         
+        animatedImageView.alpha = 1.0
         view.insertSubview(animatedImageView, at: 1000)
         
         UIView.animate(withDuration: 1.2, animations: {
-            if case let .above(value) = self.animationEndPoint {
-                animatedImageView.center = CGPoint(x: animatedImageView.center.x, y: animatedImageView.center.y - value)
+            if case let .above(amount) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x, y: animatedImageView.center.y - amount)
+            } else if case let .toLeft(amount) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x - amount, y: animatedImageView.center.y)
+            } else if case let .toRight(amount) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x + amount, y: animatedImageView.center.y)
             }
             
             animatedImageView.alpha = 0.0

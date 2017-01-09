@@ -48,6 +48,9 @@ protocol FaceAnalyzer {
     func noseCenter() -> CGPoint
     func noseAngle() -> CGFloat
     
+    func noseLeftNostral() -> CGPoint
+    func noseRightNostral() -> CGPoint
+    
     func innerMouthWidth() -> CGFloat
     func innerMouthCenter() -> CGPoint
     func innerMouthAngle() -> CGFloat

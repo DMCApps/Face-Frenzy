@@ -27,12 +27,12 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var leftNostralSmokeAnimation:Animatable = FloatAndFadeAnimation(imageName: "smoke",
                                                                      frequency:1.0,
                                                                      animationStartPoint: .leftNostral,
-                                                                     animationEndPoint: .toLeft)
+                                                                     animationEndPoint: .toLeft(100))
     
     var rightNostralSmokeAnimation:Animatable = FloatAndFadeAnimation(imageName: "smoke",
                                                                       frequency:1.0,
                                                                       animationStartPoint: .rightNostral,
-                                                                      animationEndPoint: .toRight)
+                                                                      animationEndPoint: .toRight(100))
     
     var pointViews = [UIView]()
     

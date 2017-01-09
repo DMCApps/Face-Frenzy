@@ -7,6 +7,7 @@
 //
 
 import Foundation
+// TODO: I need this for CGFloat/CGPoint etc. is there a way to get rid of it?
 import UIKit
 
 class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresenterOps {
@@ -19,11 +20,19 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     // MARK: Private
     
     func clearHeadFaceItem() {
+        // TODO: Better animation system
+        self.view?.stopNoseSmokeAnimation()
+        
         self.model.headFaceItem = nil
         self.view?.hideHeadView()
     }
     
     func addHeadFaceItem(_ faceItem:FaceItem) {
+        // TODO: Better animation system
+        if faceItem.imageName == "horns" {
+            self.view?.startNoseSmokeAnimation(usingAnalyzer: faceAnalyzer)
+        }
+        
         self.model.headFaceItem = faceItem
         self.view?.showHeadViewWithFaceItem(faceItem)
         self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer, andFaceItem:faceItem)

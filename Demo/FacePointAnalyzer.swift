@@ -44,8 +44,16 @@ class FacePointAnalyzer: FaceAnalyzer {
         return points.nose[1]
     }
     
+    var noseLeftNostralPoint:CGPoint {
+        return points.nose[2]
+    }
+    
     var noseBottomCenter:CGPoint {
         return points.nose[3]
+    }
+    
+    var noseRightNostralPoint:CGPoint {
+        return points.nose[4]
     }
     
     var noseBottomRight:CGPoint {
@@ -237,6 +245,14 @@ class FacePointAnalyzer: FaceAnalyzer {
             _noseAngle = noseStart.angleTo(point: noseEnd)
         }
         return _noseAngle!
+    }
+    
+    func noseLeftNostral() -> CGPoint {
+        return noseLeftNostralPoint
+    }
+    
+    func noseRightNostral() -> CGPoint {
+        return noseRightNostralPoint
     }
     
     func innerMouthWidth() -> CGFloat {
