@@ -18,11 +18,16 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var noseImageView = UIImageView()
     var lipImageView = UIImageView()
     var mouthImageView = UIImageView()
-
+    
     var heartAnimation:Animatable = FloatAndFadeAnimation(imageName:"heart",
                                                           frequency:0.2,
                                                           animationStartPoint:.forehead,
                                                           animationEndPoint:.above(100))
+    
+    var starAnimation:Animatable = FloatAndFadeAnimation(imageName:"star",
+                                                         frequency:0.2,
+                                                         animationStartPoint:.forehead,
+                                                         animationEndPoint:.above(100))
     
     var leftNostralSmokeAnimation:Animatable = FloatAndFadeAnimation(imageName: "smoke",
                                                                      frequency:0.5,
@@ -165,6 +170,18 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     func stopAnimatingHearts() {
         self.heartAnimation.stopAnimating()
+    }
+    
+    func startAnimatingStars(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
+        self.starAnimation.startAnimating(in: self.view, usingAnalyzer: faceAnalyzer)
+    }
+    
+    func updateAnimatingStars(faceAnalyzer:FaceAnalyzer) {
+        self.starAnimation.faceAnalyzer = faceAnalyzer
+    }
+    
+    func stopAnimatingStars() {
+        self.starAnimation.stopAnimating()
     }
     
     func startNoseSmokeAnimation(usingAnalyzer faceAnalyzer:FaceAnalyzer) {

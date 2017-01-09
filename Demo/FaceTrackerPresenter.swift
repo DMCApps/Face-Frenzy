@@ -41,6 +41,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func clearEyesFaceItem() {
         // TODO: Make a better animation system
         self.view?.stopAnimatingHearts()
+        self.view?.stopAnimatingStars()
         
         self.model.leftEyeFaceItem = nil
         self.model.rightEyeFaceItem = nil
@@ -50,6 +51,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func addEyesFaceItem(_ faceItem:FaceItem) {
         // TODO: Make a better animation system
         self.view?.stopAnimatingHearts()
+        self.view?.stopAnimatingStars()
         
         self.model.leftEyeFaceItem = faceItem
         self.model.rightEyeFaceItem = faceItem
@@ -57,6 +59,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         // TODO: How do I make this into a nice model and actionable item
         if faceItem.imageName == "heart" {
             self.view?.startAnimatingHearts(usingAnalyzer: self.faceAnalyzer)
+        } else if faceItem.imageName == "star" {
+            self.view?.startAnimatingStars(usingAnalyzer: self.faceAnalyzer)
         }
         
         self.view?.showEyesViewWithFaceItem(faceItem)
@@ -65,6 +69,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     func clearLeftEyeFaceItem() {
         self.view?.stopAnimatingHearts()
+        self.view?.stopAnimatingStars()
         self.model.leftEyeFaceItem = nil
         self.view?.hideLeftEyeView()
     }
@@ -78,6 +83,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     func clearRightEyeFaceItem() {
         self.view?.stopAnimatingHearts()
+        self.view?.stopAnimatingStars()
         self.model.rightEyeFaceItem = nil
         self.view?.hideRightEyeView()
     }
@@ -248,6 +254,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             faceAnalyzer.updatePoints(points)
             
             self.view?.updateAnimatingHearts(faceAnalyzer: faceAnalyzer)
+            self.view?.updateAnimatingStars(faceAnalyzer: faceAnalyzer)
             self.view?.updateNoseSmokeAnimation(faceAnalyzer: faceAnalyzer)
             
             if let headFaceItem = self.model.headFaceItem {

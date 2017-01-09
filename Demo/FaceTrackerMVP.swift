@@ -21,6 +21,10 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func updateAnimatingHearts(faceAnalyzer:FaceAnalyzer)
     func stopAnimatingHearts()
     
+    func startAnimatingStars(usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func updateAnimatingStars(faceAnalyzer:FaceAnalyzer)
+    func stopAnimatingStars()
+    
     func startNoseSmokeAnimation(usingAnalyzer faceAnalyzer:FaceAnalyzer)
     func updateNoseSmokeAnimation(faceAnalyzer:FaceAnalyzer)
     func stopNoseSmokeAnimation()
