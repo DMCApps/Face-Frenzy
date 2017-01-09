@@ -17,8 +17,17 @@ enum AnimationStartPoint {
 
 enum AnimationEndPoint {
     case above(CGFloat)
+    case aboveLeft(CGFloat, CGFloat)
+    case aboveRight(CGFloat, CGFloat)
+    case below(CGFloat)
+    case belowLeft(CGFloat, CGFloat)
+    case belowRight(CGFloat, CGFloat)
     case toLeft(CGFloat)
     case toRight(CGFloat)
+}
+
+enum AnimationCondition {
+    case openMouth
 }
 
 // http://stackoverflow.com/questions/31921972/swift-protocol-implements-equatable

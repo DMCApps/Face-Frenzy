@@ -9,6 +9,10 @@
 import Foundation
 import FaceTracker
 
+struct Mouth {
+    static let openThreshold:CGFloat = 20
+}
+
 extension FacePoints: FaceAnalyzerPoints {}
 
 class FacePointAnalyzer: FaceAnalyzer {
@@ -310,6 +314,14 @@ class FacePointAnalyzer: FaceAnalyzer {
             _betweenMouthAndNoseCenter = topLipCenter.centerTo(point: self.noseBottomCenter)
         }
         return _betweenMouthAndNoseCenter!
+    }
+    
+    func isMouthOpen() -> Bool {
+        let mouthYPositions = self.points.innerMouth.map { $0.y }
+        guard let lowestInnerMouthY = mouthYPositions.min(), let highestInnerMouthY = mouthYPositions.max() else {
+            return false
+        }
+        return (highestInnerMouthY - lowestInnerMouthY) > Mouth.openThreshold
     }
     
     // MARK: Private

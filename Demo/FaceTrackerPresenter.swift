@@ -291,8 +291,15 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             }
             
             if let mouthFaceItem = self.model.mouthFaceItem {
-                self.view?.showMouthView()
-                self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer, andFaceItem:mouthFaceItem)
+                // TODO: Animate this and make it proper
+                // Added this in as a quick demo. need to animate this.
+                if mouthFaceItem.imageName != "dog_tongue"
+                    || (mouthFaceItem.imageName == "dog_tongue" && faceAnalyzer.isMouthOpen()) {
+                    self.view?.showMouthView()
+                    self.view?.repositionMouthView(usingAnalyzer: faceAnalyzer, andFaceItem:mouthFaceItem)
+                } else {
+                    self.view?.hideMouthView()
+                }
             }
             else {
                 self.view?.hideMouthView()

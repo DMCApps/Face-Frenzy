@@ -87,6 +87,20 @@ class FloatAndFadeAnimation: Animatable {
         UIView.animate(withDuration: 1.2, animations: {
             if case let .above(amount) = self.animationEndPoint {
                 animatedImageView.center = CGPoint(x: animatedImageView.center.x, y: animatedImageView.center.y - amount)
+            } else if case let .aboveLeft(amountUp, amountLeft) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x - amountLeft,
+                                                   y: animatedImageView.center.y - amountUp)
+            } else if case let .aboveRight(amountUp, amountRight) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x + amountRight,
+                                                   y: animatedImageView.center.y - amountUp)
+            } else if case let .below(amount) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x, y: animatedImageView.center.y + amount)
+            } else if case let .belowLeft(amountDown, amountLeft) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x - amountLeft,
+                                                   y: animatedImageView.center.y + amountDown)
+            } else if case let .belowRight(amountDown, amountRight) = self.animationEndPoint {
+                animatedImageView.center = CGPoint(x: animatedImageView.center.x + amountRight,
+                                                   y: animatedImageView.center.y + amountDown)
             } else if case let .toLeft(amount) = self.animationEndPoint {
                 animatedImageView.center = CGPoint(x: animatedImageView.center.x - amount, y: animatedImageView.center.y)
             } else if case let .toRight(amount) = self.animationEndPoint {
