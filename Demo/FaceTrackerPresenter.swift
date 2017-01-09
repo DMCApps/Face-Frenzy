@@ -29,6 +29,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     func addHeadFaceItem(_ faceItem:FaceItem) {
         // TODO: Better animation system
+        self.view?.stopNoseSmokeAnimation()
         if faceItem.imageName == "horns" {
             self.view?.startNoseSmokeAnimation(usingAnalyzer: faceAnalyzer)
         }
