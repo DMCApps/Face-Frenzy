@@ -73,7 +73,7 @@
 		17D5C7411E19828500B44E24 /* FaceItemsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemsDataSource.swift; sourceTree = "<group>"; };
 		17D5C7431E19841300B44E24 /* FaceItemsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemsProvider.swift; sourceTree = "<group>"; };
 		17D5C7481E1985F800B44E24 /* FaceItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemCollectionViewCell.swift; sourceTree = "<group>"; };
-		CECE81011C7E17E6007345D1 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECE81011C7E17E6007345D1 /* Face Frenzy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Face Frenzy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CECE81041C7E17E6007345D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CECE81061C7E17E6007345D1 /* FaceTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackerView.swift; sourceTree = "<group>"; };
 		CECE81091C7E17E6007345D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 		CECE80F81C7E17E6007345D1 = {
 			isa = PBXGroup;
 			children = (
-				CECE81031C7E17E6007345D1 /* Demo */,
+				CECE81031C7E17E6007345D1 /* Face Frenzy */,
 				CECE81021C7E17E6007345D1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -205,12 +205,12 @@
 		CECE81021C7E17E6007345D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CECE81011C7E17E6007345D1 /* Demo.app */,
+				CECE81011C7E17E6007345D1 /* Face Frenzy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CECE81031C7E17E6007345D1 /* Demo */ = {
+		CECE81031C7E17E6007345D1 /* Face Frenzy */ = {
 			isa = PBXGroup;
 			children = (
 				CECE81041C7E17E6007345D1 /* AppDelegate.swift */,
@@ -223,15 +223,16 @@
 				CECE81211C7E1B20007345D1 /* FaceTracker.framework */,
 				CECE81101C7E17E6007345D1 /* Info.plist */,
 			);
+			name = "Face Frenzy";
 			path = Demo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CECE81001C7E17E6007345D1 /* Demo */ = {
+		CECE81001C7E17E6007345D1 /* Face Frenzy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CECE81131C7E17E6007345D1 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = CECE81131C7E17E6007345D1 /* Build configuration list for PBXNativeTarget "Face Frenzy" */;
 			buildPhases = (
 				CECE80FD1C7E17E6007345D1 /* Sources */,
 				CECE80FE1C7E17E6007345D1 /* Frameworks */,
@@ -242,9 +243,9 @@
 			);
 			dependencies = (
 			);
-			name = Demo;
+			name = "Face Frenzy";
 			productName = Demo;
-			productReference = CECE81011C7E17E6007345D1 /* Demo.app */;
+			productReference = CECE81011C7E17E6007345D1 /* Face Frenzy.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -264,7 +265,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CECE80FC1C7E17E6007345D1 /* Build configuration list for PBXProject "Demo" */;
+			buildConfigurationList = CECE80FC1C7E17E6007345D1 /* Build configuration list for PBXProject "Face Frenzy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -277,7 +278,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CECE81001C7E17E6007345D1 /* Demo */,
+				CECE81001C7E17E6007345D1 /* Face Frenzy */,
 			);
 		};
 /* End PBXProject section */
@@ -458,7 +459,7 @@
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dmcapps.facetracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dmcapps.facefrenzy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -478,7 +479,7 @@
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dmcapps.facetracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dmcapps.facefrenzy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -487,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CECE80FC1C7E17E6007345D1 /* Build configuration list for PBXProject "Demo" */ = {
+		CECE80FC1C7E17E6007345D1 /* Build configuration list for PBXProject "Face Frenzy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CECE81111C7E17E6007345D1 /* Debug */,
@@ -496,7 +497,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CECE81131C7E17E6007345D1 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		CECE81131C7E17E6007345D1 /* Build configuration list for PBXNativeTarget "Face Frenzy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CECE81141C7E17E6007345D1 /* Debug */,

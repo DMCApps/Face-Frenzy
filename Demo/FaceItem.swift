@@ -13,6 +13,7 @@ import UIKit
 // https://developer.apple.com/videos/play/wwdc2015/414/
 
 enum FacePosition {
+    case none
     case head
     case eyes
     case leftEye
@@ -112,6 +113,8 @@ struct FaceItem: Equatable {
             width = faceAnalyzer.innerMouthWidth()
             center = faceAnalyzer.innerMouthCenter()
             angle = faceAnalyzer.innerMouthAngle()
+        case .none:
+            return (0, CGPoint(x:0, y:0), 0)
         }
         
         width = self.widthMultiplier * width + self.widthAdjustment
