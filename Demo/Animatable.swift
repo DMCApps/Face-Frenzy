@@ -39,7 +39,7 @@ protocol Animatable {
     var isAnimating:Bool { get set }
     var faceAnalyzer:FaceAnalyzer? { get set }
     
-    func startAnimating(in view: UIView, usingAnalyzer faceAnalyzer:FaceAnalyzer)
+    func startAnimating(in view: UIView)
     func stopAnimating()
     
 }

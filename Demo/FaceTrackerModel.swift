@@ -21,6 +21,7 @@ class FaceTrackerModel: FaceTrackerModelOps {
     var mouthFaceItem:FaceItem? = nil
     var lastTranslationAmount: Double = 0
     var lastTranslationDirection: TranslationDirection = .unknown
+    var activeAnimations = [Animatable]()
     
     private let presenter:FaceTrackerModelPresenterOps
     

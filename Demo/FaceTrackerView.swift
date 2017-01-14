@@ -19,26 +19,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var lipImageView = UIImageView()
     var mouthImageView = UIImageView()
     
-    var heartAnimation:Animatable = FloatAndFadeAnimation(imageName:"heart",
-                                                          frequency:0.2,
-                                                          animationStartPoint:.forehead,
-                                                          animationEndPoint:.above(100))
-    
-    var starAnimation:Animatable = FloatAndFadeAnimation(imageName:"star",
-                                                         frequency:0.2,
-                                                         animationStartPoint:.forehead,
-                                                         animationEndPoint:.above(100))
-    
-    var leftNostralSmokeAnimation:Animatable = FloatAndFadeAnimation(imageName: "smoke",
-                                                                     frequency:0.5,
-                                                                     animationStartPoint: .leftNostral,
-                                                                     animationEndPoint: .belowLeft(100, 50))
-    
-    var rightNostralSmokeAnimation:Animatable = FloatAndFadeAnimation(imageName: "smoke",
-                                                                      frequency:0.5,
-                                                                      animationStartPoint: .rightNostral,
-                                                                      animationEndPoint: .belowRight(100, 50))
-    
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
@@ -160,43 +140,20 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         faceTrackerViewController?.swapCamera()
     }
     
-    func startAnimatingHearts(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
-        self.heartAnimation.startAnimating(in: self.view, usingAnalyzer: faceAnalyzer)
+    func runAnimations(_ animations: [Animatable]?) {
+        animations?.forEach({ (animation) in
+            if !animation.isAnimating {
+               animation.startAnimating(in: self.view)
+            }
+        })
     }
     
-    func updateAnimatingHearts(faceAnalyzer:FaceAnalyzer) {
-        self.heartAnimation.faceAnalyzer = faceAnalyzer
-    }
-    
-    func stopAnimatingHearts() {
-        self.heartAnimation.stopAnimating()
-    }
-    
-    func startAnimatingStars(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
-        self.starAnimation.startAnimating(in: self.view, usingAnalyzer: faceAnalyzer)
-    }
-    
-    func updateAnimatingStars(faceAnalyzer:FaceAnalyzer) {
-        self.starAnimation.faceAnalyzer = faceAnalyzer
-    }
-    
-    func stopAnimatingStars() {
-        self.starAnimation.stopAnimating()
-    }
-    
-    func startNoseSmokeAnimation(usingAnalyzer faceAnalyzer:FaceAnalyzer) {
-        self.leftNostralSmokeAnimation.startAnimating(in: self.view, usingAnalyzer: faceAnalyzer)
-        self.rightNostralSmokeAnimation.startAnimating(in: self.view, usingAnalyzer: faceAnalyzer)
-    }
-    
-    func updateNoseSmokeAnimation(faceAnalyzer:FaceAnalyzer) {
-        self.leftNostralSmokeAnimation.faceAnalyzer = faceAnalyzer
-        self.rightNostralSmokeAnimation.faceAnalyzer = faceAnalyzer
-    }
-    
-    func stopNoseSmokeAnimation() {
-        self.leftNostralSmokeAnimation.stopAnimating()
-        self.rightNostralSmokeAnimation.stopAnimating()
+    func stopAnimations(_ animations: [Animatable]?) {
+        animations?.forEach({ (animation) in
+            if animation.isAnimating {
+                animation.stopAnimating()
+            }
+        })
     }
     
     func showHeadView() {

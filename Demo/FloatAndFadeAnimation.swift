@@ -38,7 +38,7 @@ class FloatAndFadeAnimation: Animatable {
     
     // MARK: Private
     
-    @objc private func addRandomHeartAndAnimate() {
+    @objc private func addImageAndAnimate() {
         guard let view = self.view else {
             stopAnimating()
             return
@@ -117,14 +117,13 @@ class FloatAndFadeAnimation: Animatable {
     
     // MARK: <Animatable>
     
-    func startAnimating(in view: UIView, usingAnalyzer faceAnalyzer:FaceAnalyzer) {
+    func startAnimating(in view: UIView) {
         if !self.isAnimating {
             self.isAnimating = true
             self.view = view
-            self.faceAnalyzer = faceAnalyzer
             self.animatedHeartsTimer = Timer.scheduledTimer(timeInterval: self.frequency,
                                                             target: self,
-                                                            selector: #selector(self.addRandomHeartAndAnimate),
+                                                            selector: #selector(self.addImageAndAnimate),
                                                             userInfo: nil,
                                                             repeats: true);
         }

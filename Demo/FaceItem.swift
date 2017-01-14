@@ -40,6 +40,7 @@ struct FaceItem: Equatable {
     let centerOffset:CGPoint
     let widthAdjustment:CGFloat
     let widthMultiplier:CGFloat
+    let animations:[Animatable]?
     
     // MARK: init
     
@@ -49,7 +50,8 @@ struct FaceItem: Equatable {
          imageName:String,
          centerOffset:CGPoint = CGPoint.zero,
          widthAdjustment:CGFloat = 0.0,
-         widthMultiplier:CGFloat = 1.0) {
+         widthMultiplier:CGFloat = 1.0,
+         animations:[Animatable]? = nil) {
         
         self.position = position
         self.anchorPosition = anchorPosition
@@ -58,6 +60,7 @@ struct FaceItem: Equatable {
         self.centerOffset = centerOffset
         self.widthAdjustment = widthAdjustment
         self.widthMultiplier = widthMultiplier
+        self.animations = animations
     }
     
     // MARK: Public
