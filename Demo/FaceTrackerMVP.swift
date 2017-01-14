@@ -1,6 +1,6 @@
 //
 //  FaceTrackerMVP.swift
-//  Demo
+//  Face Frenzy
 //
 //  Created by Daniel Carmo on 2016-12-30.
 //  Copyright © 2016 ModiFace Inc. All rights reserved.
@@ -61,6 +61,13 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     
     func swapCamera()
     
+    func prepareViewForImageCapture()
+    func captureCurrentImage()
+    func revertViewFromImageCapture()
+    func showFailedImageCapture()
+    func playCameraSound()
+    func showCameraFlash()
+    
     func didBeginTranslation()
     func didTranslateBy(_ translation:CGFloat)
     func didEndTranslation()
@@ -74,6 +81,10 @@ protocol FaceTrackerViewPresenterOps: ActionsDelegate {
     func didReceiveFaceAnalyzerPoints(_ points:FaceAnalyzerPoints?)
     
     func faceTrackerDidFinishLoading()
+    
+    func didClickTakePicture()
+    func didSuccessfullyTakeImage()
+    func didFailTakeImage()
     
 }
 

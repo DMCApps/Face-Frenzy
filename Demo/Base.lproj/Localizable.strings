@@ -1,11 +1,18 @@
 /* 
   Localizable.strings
-  Demo
+  Face Frenzy
 
   Created by Daniel Carmo on 2016-12-30.
   Copyright © 2016 ModiFace Inc. All rights reserved.
 */
 
+/* Default values needed to work with my UIAlertController extension */
 "OK" = "OK";
 "Cancel" = "Cancel";
 "Delete" = "Delete";
+
+/* Title shown when the image capture fails */
+"face_tracker_alert_failed_image_capture_title" = "Failed Image Capture";
+
+/* Message shown when the image capture fails */
+"face_tracker_alert_failed_image_capture_msg" = "We were unable to capture the image for you at this time.";

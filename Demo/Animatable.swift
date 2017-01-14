@@ -1,6 +1,6 @@
 //
 //  Animatable.swift
-//  Demo
+//  Face Frenzy
 //
 //  Created by Daniel Carmo on 2017-01-01.
 //  Copyright © 2017 ModiFace Inc. All rights reserved.

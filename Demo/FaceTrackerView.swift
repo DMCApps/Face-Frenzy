@@ -1,5 +1,14 @@
+//
+//  FaceTrackerView.swift
+//  Face Frenzy
+//
+//  Created by Daniel Carmo on 2016-12-30.
+//  Copyright © 2016 ModiFace Inc. All rights reserved.
+//
+
 import UIKit
 import FaceTracker
+import AudioToolbox
 
 class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewControllerDelegate {
     
@@ -9,6 +18,9 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     @IBOutlet weak var faceTrackerContainerView: UIView!
     @IBOutlet weak var ibActionMenuTopToContainerConstraint: NSLayoutConstraint!
     
+    // Design decission. I put the take picture button in the bottom right to easily take a picture in the right hand.
+    @IBOutlet weak var ibTakePictureButton: UIButton!
+    
     var faceTrackerViewController: FaceTrackerViewController?
     var actionsView: ActionsView?
     
@@ -17,7 +29,9 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var rightEyeImageView = UIImageView()
     var noseImageView = UIImageView()
     var lipImageView = UIImageView()
-    var mouthImageView = UIImageView()
+    let mouthImageView = UIImageView()
+    
+    let imageCaptureFlashView = UIView()
     
     var pointViews = [UIView]()
     
@@ -37,6 +51,12 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         super.viewDidLoad()
         
         self.presenter.viewDidLoad(withView:self)
+        
+        self.ibTakePictureButton.layer.cornerRadius = 25.0
+        
+        imageCaptureFlashView.alpha = 0
+        imageCaptureFlashView.backgroundColor = UIColor.black
+        self.view.insertSubview(imageCaptureFlashView, aboveSubview: faceTrackerContainerView)
         
         self.view.insertSubview(headImageView, aboveSubview: faceTrackerContainerView)
         self.view.insertSubview(leftEyeImageView, aboveSubview: faceTrackerContainerView)
@@ -87,6 +107,10 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     // MARK: Actions
     
+    @IBAction func clickTakePicture(_ sender: UIButton) {
+        self.presenter.didClickTakePicture()
+    }
+    
     // MARK: Public
     
     // MARK: Private
@@ -96,6 +120,15 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
         UIView.animate(withDuration: duration) {
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            print(error)
+            self.presenter.didFailTakeImage()
+        } else {
+            self.presenter.didSuccessfullyTakeImage()
         }
     }
     
@@ -138,6 +171,47 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     func swapCamera() {
         faceTrackerViewController?.swapCamera()
+    }
+    
+    func prepareViewForImageCapture() {
+        self.actionsView?.view.isHidden = true
+        self.ibTakePictureButton.isHidden = true
+    }
+    
+    func revertViewFromImageCapture() {
+        self.actionsView?.view.isHidden = false
+        self.ibTakePictureButton.isHidden = false
+    }
+    
+    func captureCurrentImage() {
+        UIGraphicsBeginImageContext(self.view.bounds.size)
+        self.view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let screenCap = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        UIImageWriteToSavedPhotosAlbum(screenCap, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func showFailedImageCapture() {
+        UIAlertController.Builder()
+            .withTitle("face_tracker_alert_failed_image_capture_title")
+            .withMessage("face_tracker_alert_failed_image_capture_msg")
+            .addOkAction()
+            .show(in: self)
+    }
+    
+    func playCameraSound() {
+        AudioServicesPlayAlertSound(1108)
+    }
+    
+    func showCameraFlash() {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .autoreverse, animations: { [weak self] () -> Void in
+            guard let `self` = self else {
+                return
+            }
+            
+            self.imageCaptureFlashView.alpha = 1
+        }, completion: nil)
     }
     
     func runAnimations(_ animations: [Animatable]?) {

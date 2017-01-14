@@ -1,6 +1,6 @@
 //
 //  FaceTrackerPresenter.swift
-//  Demo
+//  Face Frenzy
 //
 //  Created by Daniel Carmo on 2016-12-30.
 //  Copyright © 2016 ModiFace Inc. All rights reserved.
@@ -260,6 +260,21 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         clearLipFaceItem()
         clearMouthFaceItem()
         clearAllAnimations()
+    }
+    
+    func didClickTakePicture() {
+        self.view?.prepareViewForImageCapture()
+        self.view?.captureCurrentImage()
+        self.view?.revertViewFromImageCapture()
+    }
+    
+    func didSuccessfullyTakeImage() {
+        self.view?.playCameraSound()
+        self.view?.showCameraFlash()
+    }
+    
+    func didFailTakeImage() {
+        self.view?.showFailedImageCapture()
     }
     
     // Mark: FaceTrackerViewPresenterOps

@@ -1,6 +1,6 @@
 //
 //  FaceAnalyzer.swift
-//  Demo
+//  Face Frenzy
 //
 //  Created by Daniel Carmo on 2016-12-31.
 //  Copyright © 2016 ModiFace Inc. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  FaceItemFactory.swift
-//  Demo
+//  Face Frenzy
 //
 //  Created by Daniel Carmo on 2017-01-08.
 //  Copyright © 2017 ModiFace Inc. All rights reserved.

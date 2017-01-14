@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,7 +13,7 @@
         <!--Face Tracker View-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="FaceTrackerView" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="FaceTrackerView" customModule="Face_Frenzy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -39,6 +40,19 @@
                                     <segue destination="A57-he-e5a" kind="embed" identifier="embedActionsViewController" id="D2x-Zu-qRH"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IK-jY-cFi">
+                                <rect key="frame" x="309" y="579" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4IK-jY-cFi" secondAttribute="height" multiplier="1:1" id="hxw-fh-Veb"/>
+                                    <constraint firstAttribute="width" constant="50" id="ost-ZS-74W"/>
+                                </constraints>
+                                <color key="tintColor" red="0.45098039215686275" green="0.68627450980392157" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="camera"/>
+                                <connections>
+                                    <action selector="clickTakePicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XpJ-yh-8ze"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -49,6 +63,8 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4WN-gv-Ukf" secondAttribute="bottom" id="Dvd-OC-nPE"/>
                             <constraint firstItem="u2c-sA-lHZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RJh-yA-D8b"/>
                             <constraint firstItem="1kg-hm-NTD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VDd-T6-35N"/>
+                            <constraint firstItem="1kg-hm-NTD" firstAttribute="top" secondItem="4IK-jY-cFi" secondAttribute="bottom" constant="8" id="bBI-MU-hKr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4IK-jY-cFi" secondAttribute="trailing" id="hKv-Pd-XA8"/>
                             <constraint firstAttribute="trailing" secondItem="1kg-hm-NTD" secondAttribute="trailing" id="jDf-eQ-DfB"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1kg-hm-NTD" secondAttribute="top" constant="30" id="m0Z-Tg-PV4"/>
                             <constraint firstItem="4WN-gv-Ukf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="m7T-Yr-OKR"/>
@@ -63,6 +79,7 @@
                         <outlet property="activityIndicator" destination="u2c-sA-lHZ" id="XEv-pU-hmz"/>
                         <outlet property="faceTrackerContainerView" destination="4WN-gv-Ukf" id="cU8-tV-Dqp"/>
                         <outlet property="ibActionMenuTopToContainerConstraint" destination="m0Z-Tg-PV4" id="QQJ-eP-RcI"/>
+                        <outlet property="ibTakePictureButton" destination="4IK-jY-cFi" id="XBF-cg-PSO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -90,7 +107,7 @@
         <!--Actions View-->
         <scene sceneID="OI3-Sw-ACT">
             <objects>
-                <viewController id="A57-he-e5a" customClass="ActionsView" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A57-he-e5a" customClass="ActionsView" customModule="Face_Frenzy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Ba-30-TQh"/>
                         <viewControllerLayoutGuide type="bottom" id="FWU-RS-xf9"/>
@@ -113,68 +130,32 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2Rp-MM-w0K">
                                 <rect key="frame" x="16" y="38" width="343" height="74"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGI-sB-PaI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNp-qG-ytn">
                                         <rect key="frame" x="0.0" y="0.0" width="114.5" height="74"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNp-qG-ytn">
-                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="74"/>
-                                                <color key="tintColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" image="ic_info_outline_white"/>
-                                                <connections>
-                                                    <action selector="toggleFacePointsClick:" destination="A57-he-e5a" eventType="touchUpInside" id="5gH-7m-ecc"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="NNp-qG-ytn" firstAttribute="leading" secondItem="GGI-sB-PaI" secondAttribute="leading" id="5sJ-mC-Gcd"/>
-                                            <constraint firstAttribute="bottom" secondItem="NNp-qG-ytn" secondAttribute="bottom" id="H7a-bQ-UGi"/>
-                                            <constraint firstAttribute="trailing" secondItem="NNp-qG-ytn" secondAttribute="trailing" id="Yfq-Pv-RQd"/>
-                                            <constraint firstItem="NNp-qG-ytn" firstAttribute="top" secondItem="GGI-sB-PaI" secondAttribute="top" id="ewB-WH-oCF"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTE-fD-FMC">
+                                        <color key="tintColor" red="0.45098039215686275" green="0.68627450980392157" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="ic_info_outline_white"/>
+                                        <connections>
+                                            <action selector="toggleFacePointsClick:" destination="A57-he-e5a" eventType="touchUpInside" id="5gH-7m-ecc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edx-ej-hmi">
                                         <rect key="frame" x="114.5" y="0.0" width="114" height="74"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edx-ej-hmi">
-                                                <rect key="frame" x="0.0" y="0.0" width="114" height="74"/>
-                                                <color key="tintColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" image="ic_switch_camera_white"/>
-                                                <connections>
-                                                    <action selector="swapCameraClick:" destination="A57-he-e5a" eventType="touchUpInside" id="kVE-Mf-ptk"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="edx-ej-hmi" firstAttribute="leading" secondItem="ZTE-fD-FMC" secondAttribute="leading" id="05w-GF-37s"/>
-                                            <constraint firstAttribute="bottom" secondItem="edx-ej-hmi" secondAttribute="bottom" id="8ZO-ys-2KY"/>
-                                            <constraint firstAttribute="trailing" secondItem="edx-ej-hmi" secondAttribute="trailing" id="Tj3-nU-WCl"/>
-                                            <constraint firstItem="edx-ej-hmi" firstAttribute="top" secondItem="ZTE-fD-FMC" secondAttribute="top" id="oHh-mU-wbt"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40e-Lh-cth">
+                                        <color key="tintColor" red="0.45098039215686275" green="0.68627450980392157" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="ic_switch_camera_white"/>
+                                        <connections>
+                                            <action selector="swapCameraClick:" destination="A57-he-e5a" eventType="touchUpInside" id="kVE-Mf-ptk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vM-RX-YKd">
                                         <rect key="frame" x="228.5" y="0.0" width="114.5" height="74"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vM-RX-YKd">
-                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="74"/>
-                                                <color key="tintColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" image="ic_clear_white">
-                                                    <color key="titleColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="clearSelectionClick:" destination="A57-he-e5a" eventType="touchUpInside" id="G0z-9H-bDO"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="5vM-RX-YKd" firstAttribute="top" secondItem="40e-Lh-cth" secondAttribute="top" id="6vz-xj-yUf"/>
-                                            <constraint firstItem="5vM-RX-YKd" firstAttribute="leading" secondItem="40e-Lh-cth" secondAttribute="leading" id="7ck-xp-hJO"/>
-                                            <constraint firstAttribute="trailing" secondItem="5vM-RX-YKd" secondAttribute="trailing" id="anl-oc-2te"/>
-                                            <constraint firstAttribute="bottom" secondItem="5vM-RX-YKd" secondAttribute="bottom" id="hc7-MZ-FSu"/>
-                                        </constraints>
-                                    </view>
+                                        <color key="tintColor" red="0.45098039215686275" green="0.68627450980392157" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="ic_clear_white">
+                                            <color key="titleColor" red="0.0" green="0.73144302940000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearSelectionClick:" destination="A57-he-e5a" eventType="touchUpInside" id="G0z-9H-bDO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LNJ-5l-RbW">
@@ -190,7 +171,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="GAv-fD-QHq" customClass="FaceItemCollectionViewCell" customModule="Demo" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="GAv-fD-QHq" customClass="FaceItemCollectionViewCell" customModule="Face_Frenzy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -240,6 +221,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" width="25" height="25"/>
         <image name="heart" width="31" height="28"/>
         <image name="ic_clear_white" width="48" height="48"/>
         <image name="ic_info_outline_white" width="48" height="48"/>
