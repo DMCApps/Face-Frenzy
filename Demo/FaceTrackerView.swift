@@ -136,18 +136,20 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     // MARK: <FaceTrackerViewOps>
     
     func loadFaceTrackerViewController() {
-        self.faceTrackerViewController = self.storyboard?.instantiateViewController(withIdentifier: "FaceTrackerViewControllerId") as! FaceTrackerViewController
+        self.faceTrackerViewController = self.storyboard?.instantiateViewController(withIdentifier: "FaceTrackerViewControllerId") as? FaceTrackerViewController
         
-        self.addChildViewController(self.faceTrackerViewController!)
-        self.faceTrackerViewController!.view.frame = CGRect(x: 0,
-                                                            y: 0,
-                                                            width: self.faceTrackerContainerView.frame.size.width,
-                                                            height: self.faceTrackerContainerView.frame.size.height);
-        self.faceTrackerContainerView.addSubview(self.faceTrackerViewController!.view)
-        self.faceTrackerViewController!.didMove(toParentViewController: self)
-        self.faceTrackerViewController!.delegate = self
+        guard let faceTrackerViewController = self.faceTrackerViewController else { fatalError() }
         
-        faceTrackerViewController!.startTracking { () -> Void in
+        self.addChildViewController(faceTrackerViewController)
+        faceTrackerViewController.view.frame = CGRect(x: 0,
+                                                      y: 0,
+                                                      width: self.faceTrackerContainerView.frame.size.width,
+                                                      height: self.faceTrackerContainerView.frame.size.height);
+        self.faceTrackerContainerView.addSubview(faceTrackerViewController.view)
+        faceTrackerViewController.didMove(toParentViewController: self)
+        faceTrackerViewController.delegate = self
+        
+        faceTrackerViewController.startTracking { () -> Void in
             self.presenter.faceTrackerDidFinishLoading()
         }
     }
