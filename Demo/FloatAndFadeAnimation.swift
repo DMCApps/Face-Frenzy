@@ -15,9 +15,9 @@ class FloatAndFadeAnimation: Animatable {
     
     let id: String = UUID().uuidString
     var isAnimating: Bool = false
+    var faceAnalyzer:FaceAnalyzer?
     
     weak var view:UIView?
-    var faceAnalyzer:FaceAnalyzer?
     var animatedHeartsTimer:Timer?
     
     var imageName:String
@@ -44,9 +44,7 @@ class FloatAndFadeAnimation: Animatable {
             return
         }
         
-        guard let faceAnalyzer = self.faceAnalyzer else {
-            return
-        }
+        guard let faceAnalyzer = self.faceAnalyzer else { return }
         
         guard let image = UIImage(named: self.imageName) else {
             print("FloatAndFadeAnimation - cannot find image named: \(self.imageName)")
@@ -79,6 +77,9 @@ class FloatAndFadeAnimation: Animatable {
                                              width: image.size.width,
                                              height: image.size.height)
             break
+        default:
+            print("Unsupported Float and Fade Animation Start Point!")
+            return
         }
         
         animatedImageView.alpha = 1.0

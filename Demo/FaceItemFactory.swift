@@ -67,7 +67,8 @@ class FaceItemFactory {
         case .none:
             return FaceItem(position: .none,
                             anchorPoint: CGPoint(x:0.5, y: 1),
-                            imageName: imageName)
+                            imageName: imageName,
+                            animations: animations)
         }
     }
     

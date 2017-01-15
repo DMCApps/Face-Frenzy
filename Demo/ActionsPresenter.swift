@@ -24,8 +24,7 @@ class ActionsPresenter: ActionsViewPresenterOps, ActionsModelPresenterOps {
         self.model.toggleMenuState()
         if self.model.isMenuOpen {
             self.view?.openActionsMenu()
-        }
-        else {
+        } else {
             self.view?.closeActionsMenu()
         }
     }
@@ -38,8 +37,7 @@ class ActionsPresenter: ActionsViewPresenterOps, ActionsModelPresenterOps {
         self.model.toggleFacePointsState()
         if self.model.areFacePointsShown {
             self.view?.showFacePoints()
-        }
-        else {
+        } else {
             self.view?.hideFacePoints()
         }
     }

@@ -13,6 +13,9 @@ enum AnimationStartPoint {
     case forehead
     case leftNostral
     case rightNostral
+    case leftEye
+    case rightEye
+    case mouth
 }
 
 enum AnimationEndPoint {
@@ -33,6 +36,7 @@ enum AnimationCondition {
 // http://stackoverflow.com/questions/31921972/swift-protocol-implements-equatable
 // Greate Explanation of Equatable use.
 // I went with method 3 as I don't have a reaquirement for the Equatable and would like to be able to have a generic list of Animatable
+// Although it does suck to have lost out on the Equatable extensions for Arrays :(
 protocol Animatable {
     
     var id: String { get }

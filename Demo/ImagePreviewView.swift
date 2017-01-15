@@ -80,9 +80,7 @@ class ImagePreviewView: UIViewController, ImagePreviewViewOps {
     // MARK: <ImagePreviewViewOps>
     
     func showActionChoices() {
-        guard let image = self.ibImagePreviewImageView.image else {
-            return
-        }
+        guard let image = self.ibImagePreviewImageView.image else { return }
         
         let objectsToShare = [image]
         let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

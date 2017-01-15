@@ -12,15 +12,20 @@ import UIKit
 class FaceItemProvider {
     
     static let items = [
+        FaceItemFactory.build(forFacePosition: .none,
+                              imageName: "laser_beam",
+                              animations: [LaserBeamShake(startPoint: .leftEye),
+                                           LaserBeamShake(startPoint: .rightEye),
+                                           LaserBeamShake(startPoint: .mouth)]),
         FaceItemFactory.build(forFacePosition: .head, imageName: "hat"),
         FaceItemFactory.build(forFacePosition: .head,
                               imageName: "horns",
                               animations:[FloatAndFadeAnimation(imageName: "smoke",
-                                                                frequency:0.5,
+                                                                frequency:1.0,
                                                                 animationStartPoint: .leftNostral,
                                                                 animationEndPoint: .belowLeft(100, 50)),
                                           FloatAndFadeAnimation(imageName: "smoke",
-                                                                frequency:0.5,
+                                                                frequency:1.0,
                                                                 animationStartPoint: .rightNostral,
                                                                 animationEndPoint: .belowRight(100, 50))]),
         FaceItemFactory.build(forFacePosition: .head, imageName: "light"),

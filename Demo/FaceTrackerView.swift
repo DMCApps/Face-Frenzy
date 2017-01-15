@@ -157,9 +157,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             let pointSize: CGFloat = 4
             
             // at some points in presentation the points are Nan ... return if they are
-            guard !point.x.isNaN || !point.y.isNaN else {
-                return
-            }
+            guard !point.x.isNaN || !point.y.isNaN else { return }
             
             pointView.frame = CGRect(x: point.x - pointSize / 2,
                                      y: point.y - pointSize / 2,
@@ -221,9 +219,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
                         imageCaptureFlashView.alpha = 1
         },
                        completion:  { [weak self] (complete) in
-                        guard let `self` = self else {
-                            return
-                        }
+                        guard let `self` = self else { return }
                         
                         if complete {
                             imageCaptureFlashView.removeFromSuperview()
@@ -426,9 +422,7 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func didTranslateBy(_ translation: CGFloat) {
-        guard let startTranslationConstraintConstant = self.startTranslationConstraintConstant else {
-            return
-        }
+        guard let startTranslationConstraintConstant = self.startTranslationConstraintConstant else { return }
         
         var newConstraintConstant = startTranslationConstraintConstant + translation
         newConstraintConstant = newConstraintConstant.clamp(to: (30 ... 190))

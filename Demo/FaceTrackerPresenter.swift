@@ -295,40 +295,35 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
             if let headFaceItem = self.model.headFaceItem {
                 self.view?.showHeadView()
                 self.view?.repositionHeadView(usingAnalyzer: faceAnalyzer, andFaceItem:headFaceItem)
-            }
-            else {
+            } else {
                 self.view?.hideHeadView()
             }
             
             if let leftEyeFaceItem = self.model.leftEyeFaceItem {
                 self.view?.showLeftEyeView()
                 self.view?.repositionLeftEyeView(usingAnalyzer: faceAnalyzer, andFaceItem: leftEyeFaceItem)
-            }
-            else {
+            } else {
                 self.view?.hideLeftEyeView()
             }
             
             if let rightEyeFaceItem = self.model.leftEyeFaceItem {
                 self.view?.showRightEyeView()
                 self.view?.repositionRightEyeView(usingAnalyzer: faceAnalyzer, andFaceItem: rightEyeFaceItem)
-            }
-            else {
+            } else {
                 self.view?.hideRightEyeView()
             }
             
             if let noseFaceItem = self.model.noseFaceItem {
                 self.view?.showNoseView()
                 self.view?.repositionNoseView(usingAnalyzer: faceAnalyzer, andFaceItem:noseFaceItem)
-            }
-            else {
+            } else {
                 self.view?.hideNoseView()
             }
             
             if let lipFaceItem = self.model.lipFaceItem {
                 self.view?.showLipView()
                 self.view?.repositionLipView(usingAnalyzer: faceAnalyzer, andFaceItem:lipFaceItem)
-            }
-            else {
+            } else {
                 self.view?.hideLipView()
             }
             
@@ -342,20 +337,17 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
                 } else {
                     self.view?.hideMouthView()
                 }
-            }
-            else {
+            } else {
                 self.view?.hideMouthView()
             }
             
             if self.model.areFacePointsShown {
                 self.view?.positionFaceAnalyzerPoints(points)
                 self.view?.showFacePoints()
-            }
-            else {
+            } else {
                 self.view?.hideFacePoints()
             }
-        }
-        else {
+        } else {
             self.view?.hideFacePoints()
             self.view?.hideHeadView()
             self.view?.hideEyesView()

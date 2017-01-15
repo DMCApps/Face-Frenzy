@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1741423F1E229ADC0044E485 /* FaceItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741423E1E229ADC0044E485 /* FaceItemFactory.swift */; };
+		175B35B31E2BB1E1001878A5 /* LaserBeamShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175B35B21E2BB1E1001878A5 /* LaserBeamShakeAnimation.swift */; };
 		176699331E16C07C0026F471 /* UIAlertController+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176699321E16C07C0026F471 /* UIAlertController+Builder.swift */; };
 		176699391E16C28D0026F471 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 176699371E16C28D0026F471 /* Localizable.strings */; };
 		1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766993E1E16C5410026F471 /* FaceTrackerPresenter.swift */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		1741423E1E229ADC0044E485 /* FaceItemFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItemFactory.swift; sourceTree = "<group>"; };
+		175B35B21E2BB1E1001878A5 /* LaserBeamShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaserBeamShakeAnimation.swift; sourceTree = "<group>"; };
 		176699321E16C07C0026F471 /* UIAlertController+Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Builder.swift"; sourceTree = "<group>"; };
 		176699381E16C28D0026F471 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1766993E1E16C5410026F471 /* FaceTrackerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceTrackerPresenter.swift; sourceTree = "<group>"; };
@@ -160,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				17D5C7451E19841F00B44E24 /* Face Item */,
-				176EF7841E197C0500FB5B86 /* Animations */,
 				176EF77F1E186AEF00FB5B86 /* Face Analyzer */,
+				176EF7841E197C0500FB5B86 /* Animations */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -180,6 +182,7 @@
 			children = (
 				176EF7821E197BAB00FB5B86 /* Animatable.swift */,
 				176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */,
+				175B35B21E2BB1E1001878A5 /* LaserBeamShakeAnimation.swift */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				1766994E1E16DC210026F471 /* ActionsPresenter.swift in Sources */,
 				176699451E16D71C0026F471 /* CGPoint+Calculations.swift in Sources */,
 				17D5C7441E19841300B44E24 /* FaceItemsProvider.swift in Sources */,
+				175B35B31E2BB1E1001878A5 /* LaserBeamShakeAnimation.swift in Sources */,
 				176EF7811E186B1000FB5B86 /* FaceItem.swift in Sources */,
 				CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */,
 				CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */,
