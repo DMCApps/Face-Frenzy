@@ -57,7 +57,7 @@ class LaserBeamShake: Animatable {
             let beamImage = UIImage(named:"laser_beam")!
             self.beamSize = beamImage.size
             self.laserImageView = UIImageView()
-            self.laserImageView?.translatesAutoresizingMaskIntoConstraints = false
+            self.laserImageView!.translatesAutoresizingMaskIntoConstraints = false
             self.laserImageView!.image = beamImage
             self.laserImageView!.contentMode = .scaleAspectFit
             view.insertSubview(self.laserImageView!, at: 9999)

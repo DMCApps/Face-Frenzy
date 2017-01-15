@@ -10,5 +10,8 @@
 * The view controller provides a protocol called *FaceTrackerViewControllerDelegate* which notifies the delegate whenever the face points have changed.
 * The delegate can use the returned face points to adjust the positioning of the views in the app.
 
-# Demo App
-A demo app has been included that shows an example of how to use the face tracker framework.
+# Icon Image
+The icon image was provided by http://classroomclipart.com
+
+# Other Images
+Other images were provided by https://openclipart.org
