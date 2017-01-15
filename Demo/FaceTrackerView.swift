@@ -31,11 +31,11 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     var lipImageView = UIImageView()
     let mouthImageView = UIImageView()
     
-    let imageCaptureFlashView = UIView()
-    
     var pointViews = [UIView]()
     
     var startTranslationConstraintConstant:CGFloat?
+    
+    var screenCapture:UIImage?
     
     private var presenter:FaceTrackerViewPresenterOps = FaceTrackerPresenter()
     
@@ -53,10 +53,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         self.presenter.viewDidLoad(withView:self)
         
         self.ibTakePictureButton.layer.cornerRadius = 25.0
-        
-        imageCaptureFlashView.alpha = 0
-        imageCaptureFlashView.backgroundColor = UIColor.black
-        self.view.insertSubview(imageCaptureFlashView, aboveSubview: faceTrackerContainerView)
         
         self.view.insertSubview(headImageView, aboveSubview: faceTrackerContainerView)
         self.view.insertSubview(leftEyeImageView, aboveSubview: faceTrackerContainerView)
@@ -96,10 +92,15 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         if segue.identifier == "embedFaceTrackerViewController" {
             faceTrackerViewController = segue.destination as? FaceTrackerViewController
             faceTrackerViewController!.delegate = self
-        }
-        else if segue.identifier == "embedActionsViewController" {
+        } else if segue.identifier == "embedActionsViewController" {
             actionsView = segue.destination as? ActionsView
             actionsView!.delegate = self.presenter
+        } else if segue.identifier == "ImagePreviewViewSegue",
+            let navController = segue.destination as? UINavigationController,
+            let previewImageView = navController.viewControllers.first as? ImagePreviewView,
+            let image = self.screenCapture {
+            
+            previewImageView.image = image
         }
     }
     
@@ -120,15 +121,6 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         
         UIView.animate(withDuration: duration) {
             self.view.layoutIfNeeded()
-        }
-    }
-    
-    func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            print(error)
-            self.presenter.didFailTakeImage()
-        } else {
-            self.presenter.didSuccessfullyTakeImage()
         }
     }
     
@@ -162,6 +154,11 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
             let pointView = self.pointViews[index]
             let pointSize: CGFloat = 4
             
+            // at some points in presentation the points are Nan ... return if they are
+            guard !point.x.isNaN || !point.y.isNaN else {
+                return
+            }
+            
             pointView.frame = CGRect(x: point.x - pointSize / 2,
                                      y: point.y - pointSize / 2,
                                      width: pointSize,
@@ -186,10 +183,14 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     func captureCurrentImage() {
         UIGraphicsBeginImageContext(self.view.bounds.size)
         self.view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-        let screenCap = UIGraphicsGetImageFromCurrentImageContext()!
+        self.screenCapture = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        UIImageWriteToSavedPhotosAlbum(screenCap, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        if self.screenCapture != nil {
+            self.presenter.didSuccessfullyTakeImage()
+        } else {
+            self.presenter.didFailTakeImage()
+        }
     }
     
     func showFailedImageCapture() {
@@ -205,13 +206,28 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     func showCameraFlash() {
-        UIView.animate(withDuration: 0.1, delay: 0, options: .autoreverse, animations: { [weak self] () -> Void in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.imageCaptureFlashView.alpha = 1
-        }, completion: nil)
+        let imageCaptureFlashView = UIView()
+        imageCaptureFlashView.frame = self.view.frame
+        imageCaptureFlashView.alpha = 0
+        imageCaptureFlashView.backgroundColor = UIColor.white
+        self.view.insertSubview(imageCaptureFlashView, at: 9999)
+        
+        UIView.animate(withDuration: 0.1,
+                       delay: 0,
+                       options: .curveLinear,
+                       animations: { () -> Void in
+                        imageCaptureFlashView.alpha = 1
+        },
+                       completion:  { [weak self] (complete) in
+                        guard let `self` = self else {
+                            return
+                        }
+                        
+                        if complete {
+                            imageCaptureFlashView.removeFromSuperview()
+                            self.performSegue(withIdentifier: "ImagePreviewViewSegue", sender: self)
+                        }
+        })
     }
     
     func runAnimations(_ animations: [Animatable]?) {

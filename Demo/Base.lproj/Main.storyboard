@@ -80,6 +80,7 @@
                         <outlet property="faceTrackerContainerView" destination="4WN-gv-Ukf" id="cU8-tV-Dqp"/>
                         <outlet property="ibActionMenuTopToContainerConstraint" destination="m0Z-Tg-PV4" id="QQJ-eP-RcI"/>
                         <outlet property="ibTakePictureButton" destination="4IK-jY-cFi" id="XBF-cg-PSO"/>
+                        <segue destination="jdh-Ip-3z0" kind="presentation" identifier="ImagePreviewViewSegue" id="bcW-vk-vUM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -103,6 +104,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b4S-Y2-CdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="954" y="-223"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8Yd-QC-vIM">
+            <objects>
+                <navigationController id="jdh-Ip-3z0" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J1q-bL-o91">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Iog-IX-rdU" kind="relationship" relationship="rootViewController" id="1Rx-AR-tth"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PNK-b4-lra" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1766" y="134"/>
+        </scene>
+        <!--Image Preview-->
+        <scene sceneID="aGN-zr-IkV">
+            <objects>
+                <viewController id="Iog-IX-rdU" customClass="ImagePreviewView" customModule="Face_Frenzy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="obf-9V-fHA"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hmp-8I-KMr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dhu-By-JBx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eX1-Qb-zAh">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hmp-8I-KMr" firstAttribute="top" secondItem="eX1-Qb-zAh" secondAttribute="bottom" id="6bZ-YW-LLa"/>
+                            <constraint firstItem="eX1-Qb-zAh" firstAttribute="leading" secondItem="Dhu-By-JBx" secondAttribute="leading" id="aZA-yh-Wgo"/>
+                            <constraint firstAttribute="trailing" secondItem="eX1-Qb-zAh" secondAttribute="trailing" id="r6T-l6-Gpt"/>
+                            <constraint firstItem="eX1-Qb-zAh" firstAttribute="top" secondItem="obf-9V-fHA" secondAttribute="bottom" id="yHP-At-JhR"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Image Preview" id="qD3-Xr-t3d">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="vv8-oI-mUy">
+                            <connections>
+                                <action selector="clickTrash:" destination="Iog-IX-rdU" id="KUd-hC-fvc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Dbj-ZY-PKH">
+                            <connections>
+                                <action selector="clickAction:" destination="Iog-IX-rdU" id="ydq-cl-KQe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ibActionBarButtonItem" destination="Dbj-ZY-PKH" id="8EL-If-HYm"/>
+                        <outlet property="ibImagePreviewImageView" destination="eX1-Qb-zAh" id="YLR-aX-Acm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F9s-ay-RvB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2660" y="134"/>
         </scene>
         <!--Actions View-->
         <scene sceneID="OI3-Sw-ACT">
