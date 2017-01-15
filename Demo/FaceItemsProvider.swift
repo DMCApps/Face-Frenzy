@@ -15,11 +15,10 @@ class FaceItemProvider {
         FaceItemFactory.build(forFacePosition: .none,
                               imageName: "laser_beam",
                               animations: [
-//                                LaserBeamShake(startPoint: .leftEye) { $0.isLeftEyeOpen() },
-                                LaserBeamShake(startPoint: .rightEye) { $0.isRightEyeOpen() },
-//                                LaserBeamShake(startPoint: .mouth) { $0.isMouthOpen() }
-            ]),
-                                
+                                LaserBeamShake(startPoint: .leftEye) { $0.isLeftEyeWideOpen() },
+                                LaserBeamShake(startPoint: .rightEye) { $0.isRightEyeWideOpen() },
+                                LaserBeamShake(startPoint: .mouth) { $0.isMouthOpen() }
+            ]),         
         FaceItemFactory.build(forFacePosition: .head, imageName: "hat"),
         FaceItemFactory.build(forFacePosition: .head,
                               imageName: "horns",

@@ -25,3 +25,12 @@
 
 /* Title of alert shown when the image shares successfully */
 "image_preview_alert_did_successfully_share_image_title" = "Image Shared";
+
+/* Title of alert shown when the user does not enable the camera */
+"face_tracker_alert_camera_disabled_title" = "Camera Disabled";
+
+/* Message of alert shown when the user does not enable the camera */
+"face_tracker_alert_camera_disabled_msg" = "In order to have a Frenzy on your Face you must enable the camera!";
+
+/* Title of alert button shown when the user does not enable the camera */
+"face_tracker_alert_camera_disabled_open_settings_title" = "Settings";

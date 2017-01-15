@@ -66,6 +66,8 @@ protocol FaceAnalyzer {
     func isMouthOpen() -> Bool
     func isLeftEyeOpen() -> Bool
     func isRightEyeOpen() -> Bool
+    func isLeftEyeWideOpen() -> Bool
+    func isRightEyeWideOpen() -> Bool
 }
 
 // Used Extensions instead of the below but leaving the below in here for future reference

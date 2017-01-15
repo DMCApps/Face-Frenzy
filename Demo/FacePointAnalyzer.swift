@@ -12,6 +12,7 @@ import FaceTracker
 struct Threshold {
     static let mouthOpen:CGFloat = 15
     static let eyeOpen:CGFloat = 15
+    static let eyeWideOpen:CGFloat = 25
 }
 
 extension FacePoints: FaceAnalyzerPoints {}
@@ -324,22 +325,38 @@ class FacePointAnalyzer: FaceAnalyzer {
     }
     
     func isLeftEyeOpen() -> Bool {
-        let leftEyeYPositions = self.points.leftEye.map { $0.y }
-        guard let lowestLeftEyeY = leftEyeYPositions.min(), let highestLeftEyeY = leftEyeYPositions.max() else {
-            return false
-        }
-        return (highestLeftEyeY - lowestLeftEyeY) > Threshold.eyeOpen
+        return leftEyeCurrentHeight() > Threshold.eyeOpen
     }
     
     func isRightEyeOpen() -> Bool {
-        let rightEyeYPositions = self.points.rightEye.map { $0.y }
-        guard let lowestRightEyeY = rightEyeYPositions.min(), let highestRightEyeY = rightEyeYPositions.max() else {
-            return false
-        }
-        return (highestRightEyeY - lowestRightEyeY) > Threshold.eyeOpen
+        return rightEyeCurrentHeight() > Threshold.eyeOpen
+    }
+    
+    func isLeftEyeWideOpen() -> Bool {
+        return leftEyeCurrentHeight() > Threshold.eyeWideOpen
+    }
+    
+    func isRightEyeWideOpen() -> Bool {
+        return rightEyeCurrentHeight() > Threshold.eyeWideOpen
     }
     
     // MARK: Private
+    
+    private func leftEyeCurrentHeight() -> CGFloat {
+        let leftEyeYPositions = self.points.leftEye.map { $0.y }
+        guard let lowestLeftEyeY = leftEyeYPositions.min(), let highestLeftEyeY = leftEyeYPositions.max() else {
+            return 0
+        }
+        return (highestLeftEyeY - lowestLeftEyeY)
+    }
+    
+    private func rightEyeCurrentHeight() -> CGFloat {
+        let rightEyeYPositions = self.points.rightEye.map { $0.y }
+        guard let lowestRightEyeY = rightEyeYPositions.min(), let highestRightEyeY = rightEyeYPositions.max() else {
+            return 0.0
+        }
+        return (highestRightEyeY - lowestRightEyeY)
+    }
     
     // MAKR: <ProtocolName>
     

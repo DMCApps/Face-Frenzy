@@ -12,6 +12,7 @@ class FaceTrackerModel: FaceTrackerModelOps {
     
     // MARK: Properties
     
+    var didStartFaceTracker: Bool = false
     var areFacePointsShown:Bool = true
     var headFaceItem:FaceItem? = nil
     var leftEyeFaceItem:FaceItem? = nil

@@ -24,9 +24,6 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4WN-gv-Ukf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <connections>
-                                    <segue destination="8Z0-21-wTe" kind="embed" identifier="embedFaceTrackerViewController" id="91t-0T-LNy"/>
-                                </connections>
                             </containerView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="u2c-sA-lHZ">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
@@ -90,7 +87,7 @@
         <!--Face Tracker View Controller-->
         <scene sceneID="tMQ-vQ-PVF">
             <objects>
-                <viewController id="8Z0-21-wTe" customClass="FaceTrackerViewController" customModule="FaceTracker" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FaceTrackerViewControllerId" id="8Z0-21-wTe" customClass="FaceTrackerViewController" customModule="FaceTracker" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GEZ-a9-DmX"/>
                         <viewControllerLayoutGuide type="bottom" id="q51-mN-gqp"/>
@@ -109,7 +106,7 @@
         <scene sceneID="8Yd-QC-vIM">
             <objects>
                 <navigationController id="jdh-Ip-3z0" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J1q-bL-o91">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J1q-bL-o91">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.45098039220000002" green="0.68627450980000004" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>

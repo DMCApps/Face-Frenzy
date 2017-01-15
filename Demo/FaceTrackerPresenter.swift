@@ -17,6 +17,8 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     
     private let faceAnalyzer:FaceAnalyzer = FacePointAnalyzer()
     
+    private var cameraPermissionTimer:Timer?
+    
     // MARK: Private
     
     func manageAnimations(for faceItem:FaceItem, previousFaceItem:FaceItem?) {
@@ -277,6 +279,10 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         self.view?.showFailedImageCapture()
     }
     
+    @objc func checkCameraPermission() {
+        self.view?.checkCameraPermission()
+    }
+    
     // Mark: FaceTrackerViewPresenterOps
     
     func faceTrackerDidFinishLoading() {
@@ -286,6 +292,49 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
     func viewDidLoad(withView view:FaceTrackerViewOps) {
         self.view = view
         self.model = FaceTrackerModel(presenter: self)
+    }
+    
+    func viewWillAppear() {
+        // Have to check the camera permissions in a timer because the FaceTrackerViewController seems to ask
+        // for the permissions for us but it doesn't delegate the result back to us to handle.
+        // Also the completion method for the loading of the FaceTrackerViewController is independent of the 
+        // permissions being accepted.
+        self.cameraPermissionTimer = Timer.scheduledTimer(timeInterval: 0.5,
+                                                          target: self,
+                                                          selector: #selector(checkCameraPermission),
+                                                          userInfo: nil,
+                                                          repeats: true)
+    }
+    
+    func viewWillDisappear() {
+        self.cameraPermissionTimer?.invalidate()
+        self.cameraPermissionTimer = nil
+    }
+    
+    func didClickOpenSettings() {
+        self.view?.openDeviceSettings()
+    }
+    
+    func cameraIsAuthorized() {
+        if !self.model.didStartFaceTracker {
+            self.model.didStartFaceTracker = true
+            self.view?.loadFaceTrackerViewController()
+        }
+        self.cameraPermissionTimer?.invalidate()
+        self.cameraPermissionTimer = nil
+    }
+    
+    func cameraIsNotAuthorized() {
+        self.cameraPermissionTimer?.invalidate()
+        self.cameraPermissionTimer = nil
+        self.view?.showCameraMustBeEnabled()
+    }
+    
+    func cameraAuthorizationIsUnknown() {
+        if !self.model.didStartFaceTracker {
+            self.model.didStartFaceTracker = true
+            self.view?.loadFaceTrackerViewController()
+        }
     }
     
     func didReceiveFaceAnalyzerPoints(_ points:FaceAnalyzerPoints?) {

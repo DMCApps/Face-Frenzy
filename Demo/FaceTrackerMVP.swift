@@ -11,6 +11,7 @@ import FaceTracker
 
 protocol FaceTrackerViewOps: NSObjectProtocol {
     
+    func loadFaceTrackerViewController()
     func stopLoadingAnimation()
     
     func positionFaceAnalyzerPoints(_ points:FaceAnalyzerPoints)
@@ -59,7 +60,11 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
     func openActionsMenu()
     func closeActionsMenu()
     
+    func checkCameraPermission()
+    func showCameraMustBeEnabled()
     func swapCamera()
+    
+    func openDeviceSettings()
     
     func prepareViewForImageCapture()
     func captureCurrentImage()
@@ -77,10 +82,18 @@ protocol FaceTrackerViewOps: NSObjectProtocol {
 protocol FaceTrackerViewPresenterOps: ActionsDelegate {
     
     func viewDidLoad(withView view:FaceTrackerViewOps)
+    func viewWillAppear()
+    func viewWillDisappear()
     
     func didReceiveFaceAnalyzerPoints(_ points:FaceAnalyzerPoints?)
     
     func faceTrackerDidFinishLoading()
+    
+    func cameraIsAuthorized()
+    func cameraIsNotAuthorized()
+    func cameraAuthorizationIsUnknown()
+    
+    func didClickOpenSettings()
     
     func didClickTakePicture()
     func didSuccessfullyTakeImage()
@@ -100,6 +113,7 @@ enum TranslationDirection {
 
 protocol FaceTrackerModelOps {
     
+    var didStartFaceTracker:Bool { get set }
     var areFacePointsShown:Bool { get set }
     var headFaceItem:FaceItem? { get set }
     var leftEyeFaceItem:FaceItem? { get set }

@@ -23,6 +23,8 @@ class LaserBeamShake: Animatable {
     let startPoint:AnimationStartPoint
     let condition:((FaceAnalyzer) -> Bool)?
     
+    var beamSize:CGSize = CGSize(width: 0, height: 0)
+    
     var animationTimer:Timer?
     
     // MARK: init
@@ -51,6 +53,16 @@ class LaserBeamShake: Animatable {
             return
         }
         
+        if self.laserImageView == nil {
+            let beamImage = UIImage(named:"laser_beam")!
+            self.beamSize = beamImage.size
+            self.laserImageView = UIImageView()
+            self.laserImageView?.translatesAutoresizingMaskIntoConstraints = false
+            self.laserImageView!.image = beamImage
+            self.laserImageView!.contentMode = .scaleAspectFit
+            view.insertSubview(self.laserImageView!, at: 9999)
+        }
+        
         var center = CGPoint.zero
         var angle = CGFloat(0)
         switch self.startPoint {
@@ -71,28 +83,16 @@ class LaserBeamShake: Animatable {
             return
         }
         
-        let beamImage = UIImage(named:"laser_beam")!
-        let beamHeight:CGFloat = beamImage.size.height
-        let beamWidth:CGFloat = beamImage.size.width
-        if self.laserImageView == nil {
-            self.laserImageView = UIImageView()
-            self.laserImageView?.translatesAutoresizingMaskIntoConstraints = false
-            self.laserImageView!.image = beamImage
-            self.laserImageView!.contentMode = .scaleAspectFit
-            view.insertSubview(self.laserImageView!, at: 9999)
-        }
-        
         guard let laserImageView = self.laserImageView else { return }
-        
         laserImageView.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5);
         laserImageView.frame = CGRect(x: center.x - 20,
-                                      y: center.y - (beamHeight / 2),
-                                      width: beamWidth,
-                                      height: beamHeight)
+                                      y: center.y - (self.beamSize.height / 2),
+                                      width: self.beamSize.width,
+                                      height: self.beamSize.height)
         laserImageView.bounds = CGRect(x: 0,
                                        y: 0,
-                                       width: beamWidth,
-                                       height: beamHeight)
+                                       width: self.beamSize.width,
+                                       height: self.beamSize.height)
         
         laserImageView.transform = CGAffineTransform.identity
         laserImageView.transform = CGAffineTransform(rotationAngle: angle)
@@ -102,9 +102,10 @@ class LaserBeamShake: Animatable {
         
         let shake = CABasicAnimation(keyPath: "position")
         shake.duration = 0.1
-        shake.fromValue = CGPoint(x: laserImageView.center.x - xTranslation, y: laserImageView.center.y - yTranslation)
-        shake.toValue = CGPoint(x: laserImageView.center.x + xTranslation, y: laserImageView.center.y + yTranslation)
-        
+        shake.fromValue = CGPoint(x: laserImageView.center.x - xTranslation,
+                                  y: laserImageView.center.y - yTranslation)
+        shake.toValue = CGPoint(x: laserImageView.center.x + xTranslation,
+                                y: laserImageView.center.y + yTranslation)
         laserImageView.layer.add(shake, forKey: "position")
     }
     

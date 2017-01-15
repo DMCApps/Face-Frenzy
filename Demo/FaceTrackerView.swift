@@ -9,6 +9,7 @@
 import UIKit
 import FaceTracker
 import AudioToolbox
+import AVFoundation
 
 class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewControllerDelegate {
     
@@ -66,18 +67,16 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.presenter.viewWillAppear()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        faceTrackerViewController!.startTracking { () -> Void in
-            self.presenter.faceTrackerDidFinishLoading()
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.presenter.viewWillDisappear()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -135,6 +134,57 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     }
     
     // MARK: <FaceTrackerViewOps>
+    
+    func loadFaceTrackerViewController() {
+        self.faceTrackerViewController = self.storyboard?.instantiateViewController(withIdentifier: "FaceTrackerViewControllerId") as! FaceTrackerViewController
+        
+        self.addChildViewController(self.faceTrackerViewController!)
+        self.faceTrackerViewController!.view.frame = CGRect(x: 0,
+                                                            y: 0,
+                                                            width: self.faceTrackerContainerView.frame.size.width,
+                                                            height: self.faceTrackerContainerView.frame.size.height);
+        self.faceTrackerContainerView.addSubview(self.faceTrackerViewController!.view)
+        self.faceTrackerViewController!.didMove(toParentViewController: self)
+        self.faceTrackerViewController!.delegate = self
+        
+        faceTrackerViewController!.startTracking { () -> Void in
+            self.presenter.faceTrackerDidFinishLoading()
+        }
+    }
+    
+    func checkCameraPermission() {
+        let mediaType = AVMediaTypeVideo
+        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: mediaType)
+        switch authStatus {
+        case.authorized:
+            print("Camera Permission Authorized!")
+            self.presenter.cameraIsAuthorized()
+        case .denied:
+            print("Camera Permission Not Authorized!")
+            self.presenter.cameraIsNotAuthorized()
+        default:
+            print("Camera Permission Not Authorized!")
+            self.presenter.cameraAuthorizationIsUnknown()
+        }
+    }
+    
+    func showCameraMustBeEnabled() {
+        UIAlertController.Builder()
+            .withTitle("face_tracker_alert_camera_disabled_title")
+            .withMessage("face_tracker_alert_camera_disabled_msg")
+            .addDefaultActionWithTitle("face_tracker_alert_camera_disabled_open_settings_title") { alert in
+                self.presenter.didClickOpenSettings()
+        }.show(in: self)
+    }
+    
+    func openDeviceSettings() {
+        guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString),
+            UIApplication.shared.canOpenURL(settingsUrl) else {
+                return
+        }
+        
+        UIApplication.shared.openURL(settingsUrl)
+    }
     
     func stopLoadingAnimation() {
         self.activityIndicator.stopAnimating()
