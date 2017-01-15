@@ -109,9 +109,14 @@
         <scene sceneID="8Yd-QC-vIM">
             <objects>
                 <navigationController id="jdh-Ip-3z0" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J1q-bL-o91">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J1q-bL-o91">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.45098039220000002" green="0.68627450980000004" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.45098039220000002" green="0.68627450980000004" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Iog-IX-rdU" kind="relationship" relationship="rootViewController" id="1Rx-AR-tth"/>

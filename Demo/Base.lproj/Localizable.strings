@@ -11,8 +11,17 @@
 "Cancel" = "Cancel";
 "Delete" = "Delete";
 
-/* Title shown when the image capture fails */
+/* Title of alert shown when the image capture fails */
 "face_tracker_alert_failed_image_capture_title" = "Failed Image Capture";
 
-/* Message shown when the image capture fails */
+/* Message of alert shown when the image capture fails */
 "face_tracker_alert_failed_image_capture_msg" = "We were unable to capture the image for you at this time.";
+
+/* Title of alert shown when the image fails to share */
+"image_preview_alert_did_fail_share_image_title" = "Failed to Share Image";
+
+/* Message of alert shown when the image fails to share */
+"image_preview_alert_did_fail_share_image_msg" = "We were unable to share your image at this time!";
+
+/* Title of alert shown when the image shares successfully */
+"image_preview_alert_did_successfully_share_image_title" = "Image Shared";

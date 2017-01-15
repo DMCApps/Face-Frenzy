@@ -12,6 +12,9 @@ protocol ImagePreviewViewOps: NSObjectProtocol {
     
     func showActionChoices()
     
+    func showFailedToShareImage()
+    func showSuccessfullySharedImage()
+    
     func dismissView()
     
 }
@@ -23,6 +26,9 @@ protocol ImagePreviewViewPresenterOps {
     func didClickTrash()
     func didClickAction()
     
+    func didFailToShareImage()
+    func didSuccessfullyShareImage()
+
 }
 
 protocol ImagePreviewModelPresenterOps {

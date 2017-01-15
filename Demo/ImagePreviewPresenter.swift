@@ -20,8 +20,6 @@ class ImagePreviewPresenter: ImagePreviewViewPresenterOps, ImagePreviewModelPres
         self.model = ImagePreviewModel(presenter: self)
     }
     
-    // Mark: ImagePreviewModelPresenterOps
-    
     func didClickAction() {
         self.view?.showActionChoices()
     }
@@ -29,5 +27,15 @@ class ImagePreviewPresenter: ImagePreviewViewPresenterOps, ImagePreviewModelPres
     func didClickTrash() {
         self.view?.dismissView()
     }
+    
+    func didSuccessfullyShareImage() {
+        self.view?.showSuccessfullySharedImage()
+    }
+    
+    func didFailToShareImage() {
+        self.view?.showFailedToShareImage()
+    }
+    
+    // Mark: ImagePreviewModelPresenterOps
     
 }

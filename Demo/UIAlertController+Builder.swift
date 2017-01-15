@@ -106,10 +106,11 @@ extension UIAlertController {
         }
         
         private func unwrapStringAndLocalize(_ value:String?) -> String? {
-            if var value = value {
-                value = NSLocalizedString(value, comment: "")
+            guard let value = value else {
+                return nil
             }
-            return value
+            
+            return NSLocalizedString(value, comment: "")
         }
     }
 }

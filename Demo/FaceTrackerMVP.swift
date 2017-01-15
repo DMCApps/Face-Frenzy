@@ -84,7 +84,7 @@ protocol FaceTrackerViewPresenterOps: ActionsDelegate {
     
     func didClickTakePicture()
     func didSuccessfullyTakeImage()
-    func didFailTakeImage()
+    func didFailToTakeImage()
     
 }
 

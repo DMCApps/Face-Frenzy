@@ -87,7 +87,37 @@ class ImagePreviewView: UIViewController, ImagePreviewViewOps {
         let objectsToShare = [image]
         let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.barButtonItem = self.ibActionBarButtonItem
+        activityViewController.completionWithItemsHandler = { [weak self] (activity, success, items, error) in
+            guard let `self` = self else {
+                return
+            }
+            
+            guard success else {
+                // If this is nil then it was a user cancel that caused the succes = false
+                if error != nil {
+                    self.presenter.didFailToShareImage()
+                }
+                return
+            }
+            
+            self.presenter.didSuccessfullyShareImage()
+        }
         present(activityViewController, animated: true, completion: nil)
+    }
+    
+    func showFailedToShareImage() {
+        // Note for the assignment we need to use our own code per coursera requirements.
+        // I'd rather show SVProgressHUD (https://cocoapods.org/pods/SVProgressHUD) for these smaller messages
+        UIAlertController.okAlert(withTitle: "image_preview_alert_did_fail_share_image_title",
+                                  withMessage: "image_preview_alert_did_fail_share_image_msg")
+            .show(in: self)
+    }
+    
+    func showSuccessfullySharedImage() {
+        // Note for the assignment we need to use our own code per coursera requirements. 
+        // I'd rather show SVProgressHUD (https://cocoapods.org/pods/SVProgressHUD) for these smaller messages
+        UIAlertController.okAlert(withTitle: "image_preview_alert_did_successfully_share_image_title")
+            .show(in: self)
     }
     
     func dismissView() {

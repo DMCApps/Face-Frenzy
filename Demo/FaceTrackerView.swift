@@ -14,6 +14,8 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
     
     // MARK: Properties
     
+    // Note for the assignment we need to use our own code per coursera requirements.
+    // I'd rather use MMMaterialDesignSpinner (https://cocoapods.org/pods/MMMaterialDesignSpinner)
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var faceTrackerContainerView: UIView!
     @IBOutlet weak var ibActionMenuTopToContainerConstraint: NSLayoutConstraint!
@@ -189,15 +191,15 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         if self.screenCapture != nil {
             self.presenter.didSuccessfullyTakeImage()
         } else {
-            self.presenter.didFailTakeImage()
+            self.presenter.didFailToTakeImage()
         }
     }
     
     func showFailedImageCapture() {
-        UIAlertController.Builder()
-            .withTitle("face_tracker_alert_failed_image_capture_title")
-            .withMessage("face_tracker_alert_failed_image_capture_msg")
-            .addOkAction()
+        // Note for the assignment we need to use our own code per coursera requirements.
+        // I'd rather show SVProgressHUD (https://cocoapods.org/pods/SVProgressHUD) for these smaller messages
+        UIAlertController.okAlert(withTitle: "face_tracker_alert_failed_image_capture_title",
+                                  withMessage: "face_tracker_alert_failed_image_capture_msg")
             .show(in: self)
     }
     

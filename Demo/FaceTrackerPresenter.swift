@@ -273,7 +273,7 @@ class FaceTrackerPresenter: FaceTrackerViewPresenterOps, FaceTrackerModelPresent
         self.view?.showCameraFlash()
     }
     
-    func didFailTakeImage() {
+    func didFailToTakeImage() {
         self.view?.showFailedImageCapture()
     }
     
