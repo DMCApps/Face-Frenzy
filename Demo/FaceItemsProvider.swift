@@ -13,7 +13,7 @@ class FaceItemProvider {
     
     static let items = [
         FaceItemFactory.build(forFacePosition: .none,
-                              imageName: "laser_beam",
+                              imageName: "laser_beam_selection",
                               animations: [
                                 LaserBeamShake(startPoint: .leftEye) { $0.isLeftEyeWideOpen() },
                                 LaserBeamShake(startPoint: .rightEye) { $0.isRightEyeWideOpen() },
