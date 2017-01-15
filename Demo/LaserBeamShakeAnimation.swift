@@ -29,6 +29,7 @@ class LaserBeamShake: Animatable {
     
     init(startPoint:AnimationStartPoint, condition:((FaceAnalyzer) -> Bool)? = nil) {
         self.startPoint = startPoint
+        self.condition = condition
     }
     
     // MARK: Public
@@ -45,8 +46,8 @@ class LaserBeamShake: Animatable {
         guard let faceAnalyzer = self.faceAnalyzer else { return }
         
         if condition != nil && !self.condition!(faceAnalyzer) {
-            laserImageView?.removeFromSuperview()
-            laserImageView = nil
+            self.laserImageView?.removeFromSuperview()
+            self.laserImageView = nil
             return
         }
         
@@ -75,6 +76,7 @@ class LaserBeamShake: Animatable {
         let beamWidth:CGFloat = beamImage.size.width
         if self.laserImageView == nil {
             self.laserImageView = UIImageView()
+            self.laserImageView?.translatesAutoresizingMaskIntoConstraints = false
             self.laserImageView!.image = beamImage
             self.laserImageView!.contentMode = .scaleAspectFit
             view.insertSubview(self.laserImageView!, at: 9999)
@@ -84,23 +86,26 @@ class LaserBeamShake: Animatable {
         
         laserImageView.layer.anchorPoint = CGPoint(x: 0.0, y: 0.5);
         laserImageView.frame = CGRect(x: center.x - 20,
-                                            y: center.y - (beamHeight / 2),
-                                            width: beamWidth,
-                                            height: beamHeight)
+                                      y: center.y - (beamHeight / 2),
+                                      width: beamWidth,
+                                      height: beamHeight)
+        laserImageView.bounds = CGRect(x: 0,
+                                       y: 0,
+                                       width: beamWidth,
+                                       height: beamHeight)
+        
         laserImageView.transform = CGAffineTransform.identity
         laserImageView.transform = CGAffineTransform(rotationAngle: angle)
         
-        let anim = CAKeyframeAnimation(keyPath:"transform")
-        let xTranslation = CGFloat(arc4random_uniform(UInt32(10)))
-        let yTranslation = CGFloat(arc4random_uniform(UInt32(10)))
+        let xTranslation = 5 - CGFloat(arc4random_uniform(UInt32(10)))
+        let yTranslation = 5 - CGFloat(arc4random_uniform(UInt32(10)))
         
-        anim.values = [
-            NSValue(caTransform3D:CATransform3DMakeTranslation(-xTranslation, -yTranslation, 0)),
-            NSValue(caTransform3D:CATransform3DMakeTranslation(xTranslation, yTranslation, 0))
-        ]
-        anim.duration = 0.1
+        let shake = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.1
+        shake.fromValue = CGPoint(x: laserImageView.center.x - xTranslation, y: laserImageView.center.y - yTranslation)
+        shake.toValue = CGPoint(x: laserImageView.center.x + xTranslation, y: laserImageView.center.y + yTranslation)
         
-        laserImageView.layer.add(anim, forKey:nil)
+        laserImageView.layer.add(shake, forKey: "position")
     }
     
     // MARK: <Animatable>

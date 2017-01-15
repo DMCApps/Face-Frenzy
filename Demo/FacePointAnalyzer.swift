@@ -9,8 +9,9 @@
 import Foundation
 import FaceTracker
 
-struct Mouth {
-    static let openThreshold:CGFloat = 20
+struct Threshold {
+    static let mouthOpen:CGFloat = 15
+    static let eyeOpen:CGFloat = 15
 }
 
 extension FacePoints: FaceAnalyzerPoints {}
@@ -317,11 +318,25 @@ class FacePointAnalyzer: FaceAnalyzer {
     }
     
     func isMouthOpen() -> Bool {
-        let mouthYPositions = self.points.innerMouth.map { $0.y }
-        guard let lowestInnerMouthY = mouthYPositions.min(), let highestInnerMouthY = mouthYPositions.max() else {
+        let mouthMiddleTopYValue = self.points.innerMouth[5].y
+        let mouthMiddleBottomYValue = self.points.innerMouth[2].y
+        return (mouthMiddleTopYValue - mouthMiddleBottomYValue) > Threshold.mouthOpen
+    }
+    
+    func isLeftEyeOpen() -> Bool {
+        let leftEyeYPositions = self.points.leftEye.map { $0.y }
+        guard let lowestLeftEyeY = leftEyeYPositions.min(), let highestLeftEyeY = leftEyeYPositions.max() else {
             return false
         }
-        return (highestInnerMouthY - lowestInnerMouthY) > Mouth.openThreshold
+        return (highestLeftEyeY - lowestLeftEyeY) > Threshold.eyeOpen
+    }
+    
+    func isRightEyeOpen() -> Bool {
+        let rightEyeYPositions = self.points.rightEye.map { $0.y }
+        guard let lowestRightEyeY = rightEyeYPositions.min(), let highestRightEyeY = rightEyeYPositions.max() else {
+            return false
+        }
+        return (highestRightEyeY - lowestRightEyeY) > Threshold.eyeOpen
     }
     
     // MARK: Private

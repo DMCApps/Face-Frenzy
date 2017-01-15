@@ -64,6 +64,8 @@ protocol FaceAnalyzer {
     func topLipCenter() -> CGPoint
     
     func isMouthOpen() -> Bool
+    func isLeftEyeOpen() -> Bool
+    func isRightEyeOpen() -> Bool
 }
 
 // Used Extensions instead of the below but leaving the below in here for future reference

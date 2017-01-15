@@ -14,9 +14,12 @@ class FaceItemProvider {
     static let items = [
         FaceItemFactory.build(forFacePosition: .none,
                               imageName: "laser_beam",
-                              animations: [LaserBeamShake(startPoint: .leftEye),
-                                           LaserBeamShake(startPoint: .rightEye),
-                                           LaserBeamShake(startPoint: .mouth)]),
+                              animations: [
+//                                LaserBeamShake(startPoint: .leftEye) { $0.isLeftEyeOpen() },
+                                LaserBeamShake(startPoint: .rightEye) { $0.isRightEyeOpen() },
+//                                LaserBeamShake(startPoint: .mouth) { $0.isMouthOpen() }
+            ]),
+                                
         FaceItemFactory.build(forFacePosition: .head, imageName: "hat"),
         FaceItemFactory.build(forFacePosition: .head,
                               imageName: "horns",
