@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+enum PunchDirection: Int {
+    case fromLeft = 0
+    case fromRight = 1
+}
+
 class BoxingAnimation: Animatable {
     
     // MARK: Properties
@@ -41,23 +46,43 @@ class BoxingAnimation: Animatable {
         self.animationStartTimer?.invalidate()
         self.animationStartTimer = nil
         
-        let image = UIImage(named: "boxing_glove_left")!
+        let random = arc4random_uniform(UInt32(2))
+        let direction = PunchDirection(rawValue: Int(random))!
         
+        var image:UIImage!
         self.boxingGloveImageView = UIImageView()
         view.insertSubview(self.boxingGloveImageView!, at: 9999)
+        var endCenter:CGPoint = .zero
+        
+        switch direction {
+        case .fromLeft:
+            image = UIImage(named: "boxing_glove_left")!
+            self.boxingGloveImageView?.frame = CGRect(x: -image.size.width,
+                                                      y: faceAnalyzer.noseCenter().y,
+                                                      width:image.size.width,
+                                                      height: image.size.height)
+            
+            endCenter = CGPoint(x: faceAnalyzer.noseCenter().x - (image.size.width / 2),
+                                y: faceAnalyzer.noseCenter().y)
+        case .fromRight:
+            image = UIImage(named: "boxing_glove_right")!
+            self.boxingGloveImageView?.frame = CGRect(x: view.frame.size.width + image.size.width,
+                                                      y: faceAnalyzer.noseCenter().y,
+                                                      width:image.size.width,
+                                                      height: image.size.height)
+            
+            endCenter = CGPoint(x: faceAnalyzer.noseCenter().x + (image.size.width / 2),
+                                y: faceAnalyzer.noseCenter().y)
+        }
+        
         self.boxingGloveImageView?.image = image
-        self.boxingGloveImageView?.frame = CGRect(x: -image.size.width,
-                                                  y: faceAnalyzer.noseCenter().y,
-                                                  width:image.size.width,
-                                                  height: image.size.height)
         
         UIView.animate(withDuration: 1.0,
                        delay: 0,
                        options: .curveEaseIn,
                        animations: { [weak self] in
                         guard let `self` = self else { return }
-                        self.boxingGloveImageView?.center = CGPoint(x: faceAnalyzer.noseCenter().x - (image.size.width / 2),
-                                                                    y: faceAnalyzer.noseCenter().y)
+                        self.boxingGloveImageView?.center = endCenter
         }) { [weak self] (complete) in
             guard let `self` = self else { return }
             
