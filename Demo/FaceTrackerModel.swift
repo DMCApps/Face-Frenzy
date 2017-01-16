@@ -13,7 +13,7 @@ class FaceTrackerModel: FaceTrackerModelOps {
     // MARK: Properties
     
     var didStartFaceTracker: Bool = false
-    var areFacePointsShown:Bool = true
+    var areFacePointsShown:Bool = false
     var headFaceItem:FaceItem? = nil
     var leftEyeFaceItem:FaceItem? = nil
     var rightEyeFaceItem:FaceItem? = nil
