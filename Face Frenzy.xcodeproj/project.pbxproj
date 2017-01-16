@@ -27,6 +27,7 @@
 		176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7821E197BAB00FB5B86 /* Animatable.swift */; };
 		176EF7861E197C1700FB5B86 /* FloatAndFadeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */; };
 		17A689A71E2C4D8200197608 /* BoxingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A689A61E2C4D8100197608 /* BoxingAnimation.swift */; };
+		17A689A91E2C637C00197608 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A689A81E2C637C00197608 /* UIColor+AppColors.swift */; };
 		17D143A61E2AE4200027889C /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D143A51E2AE4200027889C /* ImagePreviewView.swift */; };
 		17D143A81E2AE4510027889C /* ImagePreviewMVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D143A71E2AE4510027889C /* ImagePreviewMVP.swift */; };
 		17D143AA1E2AE46D0027889C /* ImagePreviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D143A91E2AE46D0027889C /* ImagePreviewPresenter.swift */; };
@@ -78,6 +79,7 @@
 		176EF7821E197BAB00FB5B86 /* Animatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatAndFadeAnimation.swift; sourceTree = "<group>"; };
 		17A689A61E2C4D8100197608 /* BoxingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxingAnimation.swift; sourceTree = "<group>"; };
+		17A689A81E2C637C00197608 /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		17D143A51E2AE4200027889C /* ImagePreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
 		17D143A71E2AE4510027889C /* ImagePreviewMVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewMVP.swift; sourceTree = "<group>"; };
 		17D143A91E2AE46D0027889C /* ImagePreviewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewPresenter.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				176699441E16D71C0026F471 /* CGPoint+Calculations.swift */,
 				176699461E16D8F70026F471 /* UIView+Anchor.swift */,
 				176699511E16EAFA0026F471 /* Comparable+Clamp.swift */,
+				17A689A81E2C637C00197608 /* UIColor+AppColors.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */,
 				1766993F1E16C5410026F471 /* FaceTrackerPresenter.swift in Sources */,
 				176EF7861E197C1700FB5B86 /* FloatAndFadeAnimation.swift in Sources */,
+				17A689A91E2C637C00197608 /* UIColor+AppColors.swift in Sources */,
 				176699521E16EAFA0026F471 /* Comparable+Clamp.swift in Sources */,
 				17D143A81E2AE4510027889C /* ImagePreviewMVP.swift in Sources */,
 				17D5C7421E19828500B44E24 /* FaceItemsDataSource.swift in Sources */,

@@ -154,6 +154,8 @@ class ActionsView: UIViewController, ActionsViewOps {
     
     func clearAllFaceItems() {
         self.delegate.clearAllFaceItems()
+        self.faceItemDataSource.activeItems = []
+        self.ibFaceItemCollectionsView.reloadData()
     }
     
 }
