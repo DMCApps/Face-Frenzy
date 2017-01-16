@@ -11,8 +11,8 @@ import FaceTracker
 
 struct Threshold {
     static let mouthOpen:CGFloat = 15
-    static let eyeOpen:CGFloat = 15
-    static let eyeWideOpen:CGFloat = 25
+    static let eyeOpen:CGFloat = 10
+    static let eyeWideOpen:CGFloat = 20
 }
 
 extension FacePoints: FaceAnalyzerPoints {}
