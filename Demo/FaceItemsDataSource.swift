@@ -60,13 +60,20 @@ class FaceItemsDataSource: NSObject, UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! FaceItemCollectionViewCell
         
+        var updateIndexes = [indexPath]
         if let index = activeItems.index(of: cell.faceItem) {
             activeItems.remove(at: index)
+        } else if (cell.faceItem.position != .none && activeItems.contains { $0.position == cell.faceItem.position }) {
+            let itemAtFacePosition = activeItems.filter { $0.position == cell.faceItem.position }.first!
+            activeItems.remove(at: activeItems.index(of: itemAtFacePosition)!)
+            activeItems.append(cell.faceItem)
+            
+            updateIndexes.append(IndexPath(row: self.dataSource.index(of: itemAtFacePosition)!, section: 0))
         } else {
             activeItems.append(cell.faceItem)
         }
         
-        collectionView.reloadItems(at: [indexPath])
+        collectionView.reloadItems(at: updateIndexes)
         self.delegate.didSelectFaceItem(cell.faceItem)
     }
     

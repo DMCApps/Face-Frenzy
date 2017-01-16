@@ -13,7 +13,7 @@ class ActionsModel: ActionsModelOps {
     // MARK: Properties
     
     var isMenuOpen:Bool = false
-    var areFacePointsShown:Bool = true
+    var areFacePointsShown:Bool = false
     
     private let presenter:ActionsModelPresenterOps
     
