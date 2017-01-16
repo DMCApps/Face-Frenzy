@@ -45,7 +45,7 @@ class LaserBeamShake: Animatable {
             return
         }
         
-        guard let faceAnalyzer = self.faceAnalyzer else { return }
+        guard let faceAnalyzer = self.faceAnalyzer, faceAnalyzer.isReady() else { return }
         
         if condition != nil && !self.condition!(faceAnalyzer) {
             self.laserImageView?.removeFromSuperview()

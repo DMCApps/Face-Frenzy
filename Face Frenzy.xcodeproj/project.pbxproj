@@ -26,6 +26,7 @@
 		176EF7811E186B1000FB5B86 /* FaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7801E186B1000FB5B86 /* FaceItem.swift */; };
 		176EF7831E197BAB00FB5B86 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7821E197BAB00FB5B86 /* Animatable.swift */; };
 		176EF7861E197C1700FB5B86 /* FloatAndFadeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */; };
+		17A689A71E2C4D8200197608 /* BoxingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A689A61E2C4D8100197608 /* BoxingAnimation.swift */; };
 		17D143A61E2AE4200027889C /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D143A51E2AE4200027889C /* ImagePreviewView.swift */; };
 		17D143A81E2AE4510027889C /* ImagePreviewMVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D143A71E2AE4510027889C /* ImagePreviewMVP.swift */; };
 		17D143AA1E2AE46D0027889C /* ImagePreviewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D143A91E2AE46D0027889C /* ImagePreviewPresenter.swift */; };
@@ -76,6 +77,7 @@
 		176EF7801E186B1000FB5B86 /* FaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceItem.swift; sourceTree = "<group>"; };
 		176EF7821E197BAB00FB5B86 /* Animatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatAndFadeAnimation.swift; sourceTree = "<group>"; };
+		17A689A61E2C4D8100197608 /* BoxingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxingAnimation.swift; sourceTree = "<group>"; };
 		17D143A51E2AE4200027889C /* ImagePreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
 		17D143A71E2AE4510027889C /* ImagePreviewMVP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewMVP.swift; sourceTree = "<group>"; };
 		17D143A91E2AE46D0027889C /* ImagePreviewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewPresenter.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				176EF7821E197BAB00FB5B86 /* Animatable.swift */,
 				176EF7851E197C1700FB5B86 /* FloatAndFadeAnimation.swift */,
 				175B35B21E2BB1E1001878A5 /* LaserBeamShakeAnimation.swift */,
+				17A689A61E2C4D8100197608 /* BoxingAnimation.swift */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				17D5C7441E19841300B44E24 /* FaceItemsProvider.swift in Sources */,
 				175B35B31E2BB1E1001878A5 /* LaserBeamShakeAnimation.swift in Sources */,
 				176EF7811E186B1000FB5B86 /* FaceItem.swift in Sources */,
+				17A689A71E2C4D8200197608 /* BoxingAnimation.swift in Sources */,
 				CECE81071C7E17E6007345D1 /* FaceTrackerView.swift in Sources */,
 				CECE81051C7E17E6007345D1 /* AppDelegate.swift in Sources */,
 				176EF77E1E184CB900FB5B86 /* FaceAnalyzer.swift in Sources */,

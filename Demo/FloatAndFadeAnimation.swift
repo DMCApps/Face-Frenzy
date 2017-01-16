@@ -44,7 +44,7 @@ class FloatAndFadeAnimation: Animatable {
             return
         }
         
-        guard let faceAnalyzer = self.faceAnalyzer else { return }
+        guard let faceAnalyzer = self.faceAnalyzer, faceAnalyzer.isReady() else { return }
         
         guard let image = UIImage(named: self.imageName) else {
             print("FloatAndFadeAnimation - cannot find image named: \(self.imageName)")

@@ -18,7 +18,12 @@ class FaceItemProvider {
                                 LaserBeamShake(startPoint: .leftEye) { $0.isLeftEyeWideOpen() },
                                 LaserBeamShake(startPoint: .rightEye) { $0.isRightEyeWideOpen() },
                                 LaserBeamShake(startPoint: .mouth) { $0.isMouthOpen() }
-            ]),         
+            ]),
+        FaceItemFactory.build(forFacePosition: .none,
+                              imageName: "boxing_glove_left",
+                              animations: [
+                                BoxingAnimation()
+            ]),
         FaceItemFactory.build(forFacePosition: .head, imageName: "hat"),
         FaceItemFactory.build(forFacePosition: .head,
                               imageName: "horns",
