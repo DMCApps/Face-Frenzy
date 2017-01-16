@@ -142,6 +142,7 @@ class FloatAndFadeAnimation: Animatable {
         self.animatedHeartsTimer = nil
         self.view = nil
         self.isAnimating = false
+        self.faceAnalyzer = nil
     }
 
 }

@@ -175,6 +175,7 @@ class BoxingAnimation: Animatable {
         self.boxingGloveImageView?.removeFromSuperview()
         self.powImageView?.removeFromSuperview()
         
+        self.faceAnalyzer = nil
         self.view = nil
         self.isAnimating = false
     }

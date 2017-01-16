@@ -131,6 +131,7 @@ class LaserBeamShake: Animatable {
         self.animationTimer = nil
         self.view = nil
         self.laserImageView = nil
+        self.faceAnalyzer = nil
         self.isAnimating = false
     }
     
