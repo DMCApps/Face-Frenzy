@@ -46,7 +46,9 @@ class BoxingAnimation: Animatable {
         self.animationStartTimer?.invalidate()
         self.animationStartTimer = nil
         
-        let random = arc4random_uniform(UInt32(2))
+        // I feel like the arc4random_uniform has a possibility of activing differently on different systems
+        // so let's clamp the value just to make sure
+        let random = arc4random_uniform(UInt32(2)).clamp(to: (0 ... 1))
         let direction = PunchDirection(rawValue: Int(random))!
         
         var image:UIImage!
