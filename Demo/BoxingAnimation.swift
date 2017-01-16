@@ -141,7 +141,7 @@ class BoxingAnimation: Animatable {
         guard let faceAnalyzer = self.faceAnalyzer, faceAnalyzer.isReady() else { return }
         
         self.dazedStarsAnimation = FloatAndFadeAnimation(imageName: "star",
-                                                         frequency: 0.1,
+                                                         frequency: 0.3,
                                                          animationStartPoint: .forehead,
                                                          animationEndPoint: .above(100))
         
