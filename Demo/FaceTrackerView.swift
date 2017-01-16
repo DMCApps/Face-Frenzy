@@ -56,6 +56,10 @@ class FaceTrackerView: UIViewController, FaceTrackerViewOps, FaceTrackerViewCont
         self.presenter.viewDidLoad(withView:self)
         
         self.ibTakePictureButton.layer.cornerRadius = 25.0
+        self.ibTakePictureButton.layer.shadowColor = UIColor.gray.cgColor
+        self.ibTakePictureButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.ibTakePictureButton.layer.shadowOpacity = 0.6
+        self.ibTakePictureButton.layer.shadowRadius = 2.0
         
         self.view.insertSubview(headImageView, aboveSubview: faceTrackerContainerView)
         self.view.insertSubview(leftEyeImageView, aboveSubview: faceTrackerContainerView)
